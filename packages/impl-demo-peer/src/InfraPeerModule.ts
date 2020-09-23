@@ -1,5 +1,5 @@
 import {LocalPeerFactorySymbol} from '@dorders/model-peer';
-import {InMemoryLocalPeerFactory} from './InMemoryLocalPeerFactory';
+import {SimpleLocalPeerFactory} from './SimpleLocalPeerFactory';
 import {AbstractModule, LoggerFactory, LoggerFactorySymbol} from '@dorders/framework';
 
 export class InfraPeerModule extends AbstractModule {
@@ -10,7 +10,7 @@ export class InfraPeerModule extends AbstractModule {
 
     this.registry.registerFactory(
       LocalPeerFactorySymbol,
-      registry => new InMemoryLocalPeerFactory(
+      registry => new SimpleLocalPeerFactory(
         registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {

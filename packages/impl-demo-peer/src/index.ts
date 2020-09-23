@@ -1,3 +1,3 @@
 export * from './InfraPeerModule';
-export * from './InMemoryLocalPeer';
-export * from './InMemoryLocalPeerFactory';
+export * from './SimpleLocalPeer';
+export * from './SimpleLocalPeerFactory';

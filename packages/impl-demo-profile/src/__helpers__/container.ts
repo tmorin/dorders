@@ -1,7 +1,7 @@
 import {startContainers, StartOptions} from '@dorders/infra-test';
-import {ModelPeerModule} from '@dorders/model-peer';
 import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
-import {InfraPeerModule} from '../';
+import {ModelProfileModule} from '@dorders/model-profile';
+import {InfraProfileModule} from '../';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;
 
@@ -10,6 +10,6 @@ export async function startDemoContainers(
   options: Partial<StartOptions> = {}
 ) {
   return await startContainers(numbers, options, () => ([
-    new ModelPeerModule(), new InfraPeerModule(),
+    new ModelProfileModule(), new InfraProfileModule(),
   ]))
 }

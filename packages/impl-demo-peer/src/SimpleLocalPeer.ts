@@ -2,9 +2,9 @@ import * as uuid from 'uuid';
 import {LocalPeer, LocalPeerStarted, LocalPeerStopped, PeerId} from '@dorders/model-peer';
 import {Logger, LoggerFactory} from '@dorders/framework';
 
-export class InMemoryLocalPeer implements LocalPeer {
+export class SimpleLocalPeer implements LocalPeer {
 
-  private readonly logger: Logger = this.loggerFactory.create(`profile/${InMemoryLocalPeer.name}`);
+  private readonly logger: Logger = this.loggerFactory.create(`peer/${SimpleLocalPeer.name}`);
 
   constructor(
     private readonly loggerFactory: LoggerFactory,

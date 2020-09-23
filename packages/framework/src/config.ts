@@ -19,7 +19,7 @@ export interface ConfigProvider {
    * @param scope the scope
    * @param defaultConfig returned when no config found for the given scope
    */
-  get<C extends Config>(scope: ConfigScope, defaultConfig?: any): C
+  get<C extends Config>(scope: ConfigScope, defaultConfig?: Partial<C>): C
 
   /**
    * Patch an existing scope.

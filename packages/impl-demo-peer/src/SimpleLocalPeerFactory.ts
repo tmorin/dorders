@@ -1,12 +1,12 @@
 import {LocalPeer, LocalPeerFactory} from '@dorders/model-peer';
-import {InMemoryLocalPeer} from './InMemoryLocalPeer';
+import {SimpleLocalPeer} from './SimpleLocalPeer';
 import {LoggerFactory} from '@dorders/framework';
 
-export class InMemoryLocalPeerFactory implements LocalPeerFactory {
+export class SimpleLocalPeerFactory implements LocalPeerFactory {
 
   constructor(
     private readonly loggerFactory: LoggerFactory,
-    private readonly peer = new InMemoryLocalPeer(loggerFactory)
+    private readonly peer = new SimpleLocalPeer(loggerFactory)
   ) {
   }
 

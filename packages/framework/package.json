@@ -12,6 +12,6 @@
     "test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
-    "schema-dts": "^0.6.0"
+    "schema-dts": "^0.7.1"
   }
 }
