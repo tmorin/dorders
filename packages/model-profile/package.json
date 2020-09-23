@@ -1,0 +1,19 @@
+{
+  "name": "@dorders/model-profile",
+  "version": "0.0.0-alpha.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf lib tmp coverage junit.xml"
+  },
+  "dependencies": {
+    "@dorders/framework": "0.0.0-alpha.0",
+    "@dorders/model-peer": "0.0.0-alpha.0",
+    "schema-dts": "^0.6.0"
+  }
+}
