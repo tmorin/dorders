@@ -1,0 +1,26 @@
+{
+  "name": "@dorders/impl-demo-peer",
+  "version": "0.0.0-alpha.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf lib tmp coverage junit.xml",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "dependencies": {
+    "@dorders/framework": "0.0.0-alpha.0",
+    "@dorders/infra-bus-local": "0.0.0-alpha.0",
+    "@dorders/infra-config-inmemory": "0.0.0-alpha.0",
+    "@dorders/infra-logger-console": "0.0.0-alpha.0",
+    "@dorders/model-peer": "0.0.0-alpha.0",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "@dorders/infra-test": "0.0.0-alpha.0",
+    "@types/uuid": "^8.0.0"
+  }
+}
