@@ -1,0 +1,8 @@
+.gdiag/
+.idea/
+dist/
+junit-results.xml
+lib/
+node_modules/
+tmp/
+junit.xml
