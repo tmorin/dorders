@@ -1,5 +1,5 @@
 import {Event} from '@dorders/framework';
-import {LocalMessageBus} from './LocalMessageBus';
+import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
 
 class EventA extends Event {
