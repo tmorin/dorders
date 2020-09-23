@@ -1,0 +1,35 @@
+@startuml design_peer_eventstorming
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package peer {
+  command('StartLocalPeer')
+  command('StopLocalPeer')
+  event('LocalPeerStarted')
+  event('LocalPeerStopped')
+  aggregate('LocalPeer')
+}
+StartLocalPeer --> LocalPeerStarted : publishes
+StopLocalPeer --> LocalPeerStopped : publishes
+StartLocalPeer --> LocalPeer : creates
+StopLocalPeer --> LocalPeer : creates
+LocalPeerStarted -r-> LocalPeer : applied on
+LocalPeerStopped -l-> LocalPeer : applied on
+@enduml
+
+@startuml design_peer_model
+!include common.puml
+skinparam monochrome true
+hide empty members
+interface peer.Peer {
+  peerId
+}
+interface peer.LocalPeer <<RootAggregate>> {
+  applyLocalPeerStarted()
+  applyLocalPeerStopped()
+}
+interface peer.LocalPeerFactory <<Factory>> {
+  create()
+}
+peer.Peer <|-- peer.LocalPeer
+peer.LocalPeerFactory .l.> peer.LocalPeer : <<create>>
+@enduml

@@ -1,0 +1,24 @@
+@startwbs characteristics_elastic_hierarchy_1
+!include common.puml
+skinparam monochrome true
+* <&person> Alice
+** <&phone> Alice Smartphone
+*** <&box> Grocery Profile
+*** <&box> Alice Profile
+** <&laptop> Grocery Laptop
+*** <&box> Grocery Profile
+@endwbs
+
+@startwbs characteristics_elastic_hierarchy_2
+!include common.puml
+skinparam monochrome true
+* <&person> Alice
+** <&phone> Alice Smartphone
+*** <&box> Grocery Profile
+*** <&box> Alice Profile
+** <&phone> Alice Smartphone New
+*** <&box> Grocery Profile
+*** <&box> Alice Profile
+** <&laptop> Grocery Laptop
+*** <&box> Grocery Profile
+@endwbs

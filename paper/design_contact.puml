@@ -1,0 +1,165 @@
+@startuml design_contact_eventstorming_add
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package contact {
+  command('AddContact')
+  aggregate('Contact')
+  event('ContactCreated')
+}
+AddContact -r-> Contact : creates
+AddContact --> ContactCreated : publishes
+ContactCreated -u-> Contact : applied on
+@enduml
+
+@startuml design_contact_eventstorming_rename
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package contact {
+  command('RenameContact')
+  aggregate('Contact')
+  event('ContactRenamed')
+}
+RenameContact -r-> Contact : loads
+RenameContact --> ContactRenamed : publishes
+ContactRenamed -u-> Contact : applied on
+@enduml
+
+@startuml design_contact_eventstorming_remove
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package contact {
+  command('RemoveContact')
+  aggregate('Contact')
+  event('ContactDeleted')
+}
+RemoveContact -r-> Contact : deletes
+RemoveContact --> ContactDeleted : publishes
+ContactDeleted -u-> Contact : applied on
+@enduml
+
+@startuml design_contact_eventstorming_contacts_loader
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  event('ProfileCreated')
+}
+package contact {
+  process('ContactsLoader')
+  aggregate('Contact')
+  event('ContactCreated')
+  event('ContactsLoaded')
+}
+ProfileCreated --> ContactsLoader : triggers
+ContactsLoader -r-> Contact : creates
+ContactsLoader --> ContactCreated : publishes
+ContactCreated -u-> Contact : applied to
+ContactsLoader --> ContactsLoaded : publishes
+@enduml
+
+@startuml design_contact_eventstorming_contacts_loader
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  event('ProfileCreated')
+}
+package contact {
+  process('ContactsLoader')
+  aggregate('Contact')
+  event('ContactCreated')
+  event('ContactsLoaded')
+}
+ProfileCreated --> ContactsLoader : triggers
+ContactsLoader -r-> Contact : creates
+ContactsLoader --> ContactCreated : publishes
+ContactCreated -u-> Contact : applied to
+ContactsLoader --> ContactsLoaded : publishes
+@enduml
+
+@startuml design_contact_eventstorming_contact_synchronizer
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package contact {
+  process('ContactSynchronizer')
+  service('ContactSynchronizationService')
+  event('ContactCreated')
+  event('ContactSynchronized')
+}
+ContactCreated --> ContactSynchronizer : triggers
+ContactSynchronizer -r-> ContactSynchronizationService : monitor the ongoing synchronization
+ContactSynchronizationService --> ContactSynchronized : publishes
+@enduml
+
+@startuml design_contact_eventstorming_contacts_synchronizer
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  event('ProfileSynchronized')
+}
+package contact {
+  process('ContactsSynchronizer')
+  service('ContactSynchronizationService')
+  event('ContactDeleted')
+  event('ContactCreated')
+  event('ContactsSynchronized')
+}
+ProfileSynchronized --> ContactsSynchronizer : triggers
+ContactsSynchronizer -r-> ContactSynchronizationService : check ongoing synchronizations
+ContactSynchronizationService --> ContactCreated : publishes
+ContactSynchronizationService --> ContactDeleted : publishes
+ContactsSynchronizer --> ContactsSynchronized : publishes
+
+@enduml
+
+@startuml design_contact_eventstorming_contacts_clearer
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  event('ProfileDeleted')
+}
+package contact {
+  process('ContactsClearer')
+  aggregate('Contact')
+  event('ContactDeleted')
+  event('ContactsDeleted')
+}
+ProfileDeleted --> ContactsClearer : triggers
+ContactsClearer -r-> Contact : deletes
+ContactDeleted -u-> Contact : applied on
+ContactsClearer --> ContactDeleted : publishes
+ContactsClearer --> ContactsDeleted : publishes
+@enduml
+
+@startuml design_contact_model
+!include common.puml
+skinparam monochrome true
+hide empty members
+interface profile.PublicProfile <<ValueObject>> {
+}
+interface contact.Contact <<RootAggregate>> {
+  profileId
+  contactId
+  name
+  publicProfile
+  applyContactCreated()
+  applyContactRenamed()
+  applyContactDeleted()
+}
+interface contact.ContactFactory <<Factory>> {
+  createFromReference()
+}
+interface contact.ContactRepository <<Repository>> {
+  persist()
+  get()
+  delete()
+  clear()
+  iterate()
+}
+interface contact.ContactSynchronizationService <<Service>> {
+  monitor()
+  check()
+}
+contact.ContactFactory .u.> contact.Contact : <<create>>
+contact.ContactRepository .u.> contact.Contact : <<use>>
+contact.Contact .u.> profile.PublicProfile : <<use>>
+contact.ContactSynchronizationService .u.> contact.Contact : <<use>>
+@enduml

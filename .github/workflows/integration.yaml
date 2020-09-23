@@ -1,0 +1,49 @@
+name: Integration
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@tmorin'
+      - name: cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: install dependencies
+        run: npm ci
+  build-paper:
+    needs: setup
+    runs-on: ubuntu-latest
+    container: asciidoctor/docker-asciidoctor
+    steps:
+      - uses: actions/checkout@v2
+      - name: build paper-website
+        run: |
+          asciidoctor paper/README.adoc -D dist/paper -a toc=left -o index.html
+          cp paper/*.png dist/paper
+          cp paper/*.svg dist/paper
+      - name: build paper-pdf
+        run: asciidoctor-pdf paper/README.adoc -D dist -o dorders-paper.pdf -a pdf-theme=paper/pdf-style/basic-theme.yml
+      - name: upload paper-pdf
+        uses: actions/upload-artifact@v2
+        with:
+          name: paper-pdf
+          path: dist/dorders-paper.pdf
+      - name: upload paper-website
+        uses: actions/upload-artifact@v2
+        with:
+          name: paper-website
+          path: dist/paper

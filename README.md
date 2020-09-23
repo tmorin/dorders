@@ -1,3 +1,3 @@
 # dorders
 
-> A decentralized system helping local shops to handle orders.
+> A system helping two parties to exchange remotely information to fulfilled local deals.

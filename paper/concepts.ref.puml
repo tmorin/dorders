@@ -1,0 +1,110 @@
+!include common.puml
+
+skinparam monochrome true
+skinparam DefaultTextAlignment center
+skinparam WrapWidth 125
+skinparam MaxMessageSize 125
+
+!procedure Actor($id="Actor")
+file $id [
+<b>Actor
+--
+A person, an organization ...
+]
+!endprocedure
+
+!procedure Profile($id="Profile", $name="Profile")
+file $id [
+<b>$name
+--
+It's an entry point and a set of private/public data.
+]
+!endprocedure
+
+!procedure PublicProfile($id="PublicProfile")
+file $id [
+<b>Public Profile
+--
+Presents an actor and lists other public data.
+]
+!endprocedure
+
+!procedure PrivateProfile($id="PrivateProfile")
+file $id [
+<b>Private Profile
+--
+Stores data which cannot be public.
+]
+!endprocedure
+
+!procedure Peer($id="Peer")
+file $id [
+<b>Peer
+--
+A link between the physical world and the virtual one.
+]
+!endprocedure
+
+!procedure Cache($id="Cache")
+file $id [
+<b>Cache
+--
+Public data fetched from other peers and available for others.
+]
+!endprocedure
+
+!procedure Contact($id="Contact")
+file $id [
+<b>Contact
+--
+References a public profile.
+]
+!endprocedure
+
+!procedure Relationship($id="Relationship")
+file $id [
+<b>Relationship
+--
+A link between two profiles to share mutual data.
+]
+!endprocedure
+
+!procedure Catalog($id="Catalog")
+file $id [
+<b>Catalog
+--
+A comprehensive list of products.
+]
+!endprocedure
+
+!procedure Product($id="Product")
+file $id [
+<b>Product
+--
+A comprehensive presentation of a product.
+]
+!endprocedure
+
+!procedure Label($id="Label")
+file $id [
+<b>Label
+--
+A simple way to mark products in order to find them efficiently. 
+]
+!endprocedure
+
+!procedure Order($id="Order")
+file $id [
+<b>Order
+--
+An instruction created by a profile and handled by another one.
+]
+!endprocedure
+
+!procedure OrderItem($id="OrderItem")
+file $id [
+<b>Order Item
+--
+A reference to an existing product with additional data.
+]
+!endprocedure

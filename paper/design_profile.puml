@@ -1,0 +1,134 @@
+@startuml design_profile_eventstorming_load_profiles
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package peer {
+  event('LocalPeerStarted')
+}
+package profile {
+  process('ProfilesLoader')
+  event('ProfileCreated')
+  event('ProfilesLoaded') 
+  aggregate('PrivateProfile')
+}
+LocalPeerStarted --> ProfilesLoader : triggers
+ProfilesLoader -r-> PrivateProfile : creates
+ProfileCreated -u-> PrivateProfile : applied on
+ProfilesLoader --> ProfileCreated : publishes
+ProfilesLoader --> ProfilesLoaded : publishes
+@enduml
+
+@startuml design_profile_eventstorming_synchronize_profiles
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  event('ProfileCreated')
+  event('ProfileSynchronized')
+  aggregate('PrivateProfile')
+  process('ProfilesSynchronizer')
+}
+
+ProfileCreated -d-> ProfilesSynchronizer : triggers
+ProfilesSynchronizer -r-> PrivateProfile : starts the ongoing synchronization
+ProfilesSynchronizer --> ProfileSynchronized : publishes
+ProfileSynchronized -u-> PrivateProfile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_create
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  command('CreateProfile')
+  event('ProfileCreated')
+  aggregate('PrivateProfile')
+}
+CreateProfile --> ProfileCreated : publishes
+CreateProfile -r-> PrivateProfile : creates
+ProfileCreated -u-> PrivateProfile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_import
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  command('ImportProfile')
+  event('ProfileCreated')
+  event('ProfileCardUpdated')
+  aggregate('PrivateProfile')
+}
+ImportProfile --> ProfileCreated : publishes
+ImportProfile --> ProfileCardUpdated : publishes
+ImportProfile -d-> PrivateProfile : creates
+ProfileCreated -r-> PrivateProfile : applied on
+ProfileCardUpdated -l-> PrivateProfile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_delete
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  command('DeleteProfile')
+  event('ProfileDeleted')
+  aggregate('PrivateProfile')
+}
+DeleteProfile --> ProfileDeleted : publishes
+DeleteProfile -r-> PrivateProfile : deletes
+ProfileDeleted -u-> PrivateProfile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_update_profile_card
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  command('UpdateProfileCard')
+  event('ProfileCardUpdated')
+  aggregate('PrivateProfile')
+}
+UpdateProfileCard --> ProfileCardUpdated : publishes
+UpdateProfileCard -r-> PrivateProfile : loads
+ProfileCardUpdated -u-> PrivateProfile : applied on
+@enduml
+
+@startuml design_profile_model
+!include common.puml
+skinparam monochrome true
+hide empty members
+interface profile.Profile {
+  profileId
+  getReference()
+}
+interface profile.ProfileReference {
+  profileId
+  serialize()
+}
+interface profile.PublicProfile <<ValueObject>> {
+  card
+}
+interface profile.PrivateProfile <<RootAggregate>> {
+  publicProfile
+  applyProfileCreated()
+  applyProfileCardUpdated()
+  applyProfilesSynchronized()
+  applyProfileDeleted()
+}
+interface profile.PrivateProfileFactory <<Factory>> {
+  createFromScratch()
+  createFromReference()
+}
+interface profile.PrivateProfileRepository <<Repository>> {
+  add()
+  remove()
+  get()
+  list()
+  iterate()
+}
+interface profile.ProfileSynchronizerService <<Service>> {
+  startOngoingSynchronization()
+}
+profile.Profile <|-- profile.PrivateProfile
+profile.Profile <|-- profile.PublicProfile
+profile.Profile .u.> profile.ProfileReference
+profile.PrivateProfile .r.> profile.PublicProfile : <<use>>
+profile.ProfileSynchronizerService .d.> profile.PrivateProfile : <<use>>
+profile.PrivateProfileFactory .u.> profile.PrivateProfile : <<create>>
+profile.PrivateProfileRepository .u.> profile.PrivateProfile : <<use>>
+@enduml

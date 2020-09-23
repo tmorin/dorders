@@ -1,0 +1,74 @@
+@startuml concepts_actor
+!include ./concepts.ref.puml
+Actor()
+Profile()
+Actor --> Profile : Exists in dorders using many
+@enduml
+
+@startuml concepts_profile
+!include ./concepts.ref.puml
+Profile()
+PublicProfile()
+PrivateProfile()
+Profile --> PublicProfile : Exposes public data with its
+Profile --> PrivateProfile : Manages private data with its
+@enduml
+
+@startuml concepts_peers
+!include ./concepts.ref.puml
+Actor()
+Profile()
+PublicProfile()
+Cache()
+Peer()
+Actor --> Peer : Controls physically many
+Actor --> Profile : Is virtually presented by many
+Peer -> Profile : Hosts data of many
+Peer --> Cache : Exposes public data from its
+Cache -> PublicProfile : Duplicates many
+@enduml
+
+@startuml concepts_contact
+!include ./concepts.ref.puml
+Profile()
+PublicProfile()
+Contact()
+Profile --> Contact : Contains many
+Contact --> PublicProfile : References a
+@enduml
+
+@startuml concepts_relationship
+!include ./concepts.ref.puml
+Relationship()
+Profile('ProfileA', 'Alice Profile')
+Profile('ProfileB', 'Bob Profile')
+Relationship --> ProfileA : A side of the\nrelationship
+Relationship --> ProfileB : And the\nother one
+@enduml
+
+@startuml concepts_catalog
+!include ./concepts.ref.puml
+Profile()
+Catalog()
+Product()
+Label()
+Profile --> Catalog : Manages many
+Catalog --> Product : Presents many
+Catalog --> Label : Uses many
+Product -> Label : Are marked by many
+@enduml
+
+@startuml concepts_order
+!include ./concepts.ref.puml
+Profile('ProfileB', 'Bob Profile')
+Profile('ProfileA', 'Alice Profile')
+Order()
+OrderItem()
+Product()
+Relationship()
+Relationship --> Order : Hosts many
+Order -l-> ProfileB : Is created by
+Order -r-> ProfileA : Is handled by
+Order --> OrderItem : Is composed of many
+OrderItem -> Product : References a
+@enduml

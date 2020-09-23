@@ -1,0 +1,22 @@
+{
+  "name": "dorders",
+  "private": true,
+  "description": "A system helping two parties to exchange remotely information to fulfilled local deals.",
+  "license": "MIT",
+  "author": "Thibault Morin",
+  "homepage": "https://github.com/tmorin/dorders",
+  "bugs": {
+    "url": "https://github.com/tmorin/dorders/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tmorin/dorders.git"
+  },
+  "scripts": {
+    "g:paper": "gdiag -w=paper",
+    "paper:build": "npm run g:paper && ./scripts/generate-paper.sh"
+  },
+  "devDependencies": {
+    "@tmorin/plantuml-libs": "^1.0.2"
+  }
+}

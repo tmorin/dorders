@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="545" height="420">
+
+  <style>
+    svg {
+    background-color: white;
+    }
+    .title {
+    font-size: 20px;
+    font-family: sans-serif;
+    line-height: 20px;
+    }
+    .label {
+    font-size: 15px;
+    font-family: sans-serif;
+    line-height: 15px;
+    }
+    .links.internal {
+    stroke: black;
+    stroke-width: 2;
+    stroke-dasharray: 10;
+    }
+    .links.external {
+    stroke: black;
+    stroke-width: 2;
+    }
+    .surface rect {
+    fill: lightgray;
+    opacity: 0.75;
+    stroke: none;
+    }
+  </style>
+
+  <g class="layers"
+     transform="translate(110,10)">
+
+    <!-- PROFILES -->
+    <g class="layer profiles"
+       transform="translate(0,300)">
+      <g class="surface"
+         transform="skewX(-45)">
+        <rect
+          x="0" y="0"
+          width="425" height="100"
+        />
+      </g>
+      <text x="-75" y="95" class="title">Profiles</text>
+      <g class="links internal">
+        <line x1="50" y1="25" x2="200" y2="75"/>
+      </g>
+      <g class="items">
+        <g id="alice-phone" class="item"
+           transform="translate(50,25)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="-35" y="20" class="label">Grocery</text>
+        </g>
+        <g id="grocery-laptop" class="item"
+           transform="translate(200,75)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="10" y="5" class="label">Bob</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- PEERS -->
+    <g class="layer peers"
+       transform="translate(0,150)">
+      <g class="links external">
+        <line x1="25" y1="50" x2="50" y2="175"/>
+        <line x1="125" y1="25" x2="50" y2="175"/>
+        <line x1="250" y1="75" x2="200" y2="225"/>
+        <line x1="250" y1="75" x2="50" y2="175"/>
+      </g>
+      <g class="surface"
+         transform="skewX(-45)">
+        <rect
+          x="0" y="0"
+          width="425" height="100"
+        />
+      </g>
+      <text x="-75" y="95" class="title">Peers</text>
+      <g class="links internal">
+        <line x1="25" y1="50" x2="125" y2="25"/>
+        <line x1="125" y1="25" x2="250" y2="75"/>
+        <line x1="25" y1="50" x2="250" y2="75"/>
+      </g>
+      <g class="items">
+        <g id="alice-phone" class="item"
+           transform="translate(25,50)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="-65" y="5" class="label">Laptop</text>
+        </g>
+        <g id="grocery-laptop" class="item"
+           transform="translate(125,25)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="10" y="0" class="label">Smartphone</text>
+        </g>
+        <g id="bob-laptop" class="item"
+           transform="translate(250,75)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="10" y="5" class="label">Smartphone</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ACTORS -->
+    <g class="layer actors">
+      <g class="links external">
+        <line x1="100" y1="50" x2="25" y2="200"/>
+        <line x1="100" y1="50" x2="125" y2="175"/>
+        <line x1="275" y1="25" x2="250" y2="225"/>
+      </g>
+      <g class="surface"
+         transform="skewX(-45)">
+        <rect
+          x="0" y="0"
+          width="425" height="100"
+        />
+      </g>
+      <text x="-75" y="95" class="title">Actors</text>
+      <g class="links internal">
+        <line x1="100" y1="50" x2="275" y2="25"/>
+      </g>
+      <g class="items">
+        <g id="alice" class="item"
+           transform="translate(100,50)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="-20" y="-10" class="label">Alice</text>
+        </g>
+        <g id="bob" class="item"
+           transform="translate(275,25)">
+          <ellipse cx="0" cy="0" rx="8" ry="4"/>
+          <text x="-15" y="-10" class="label">Bob</text>
+        </g>
+      </g>
+    </g>
+
+  </g>
+</svg>
