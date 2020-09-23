@@ -1,0 +1,20 @@
+{
+  "name": "@dorders/infra-test",
+  "version": "0.0.0-alpha.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf lib tmp coverage junit.xml",
+    "test": "jest --runInBand --detectOpenHandles"
+  },
+  "dependencies": {
+    "@dorders/framework": "0.0.0-alpha.0",
+    "@dorders/infra-bus-local": "0.0.0-alpha.0",
+    "@dorders/infra-config-inmemory": "0.0.0-alpha.0",
+    "@dorders/infra-logger-console": "0.0.0-alpha.0"
+  }
+}
