@@ -27,37 +27,12 @@ jobs:
           npm ci
           npm run bootstrap
           npm run build
+          npm run jest
       - name: Upload libs
         uses: actions/upload-artifact@v2
         with:
           name: modules-libs
           path: packages/*/lib
-  modules-test:
-    needs: modules-build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@tmorin'
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - name: Download libs
-        uses: actions/download-artifact@v2
-        with:
-          name: modules-libs
-      - name: Test modules
-        run: |
-          npm ci
-          npm run bootstrap
-          npm run jest
       - name: Upload coverage
         uses: actions/upload-artifact@v2
         with:
