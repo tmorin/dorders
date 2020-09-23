@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  setup:
+  modules-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,34 +15,72 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
           scope: '@tmorin'
-      - name: cache node modules
+      - name: Cache node modules
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
           path: ~/.npm
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - name: install dependencies
-        run: npm ci
-  build-paper:
-    needs: setup
+      - name: Build modules
+        run: |
+          npm ci
+          npm run bootstrap
+          npm run build
+      - name: Upload libs
+        uses: actions/upload-artifact@v2
+        with:
+          name: modules-libs
+          path: packages/*/lib
+  modules-test:
+    needs: modules-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@tmorin'
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Download libs
+        uses: actions/download-artifact@v2
+        with:
+          name: modules-libs
+      - name: Test modules
+        run: |
+          npm ci
+          npm run bootstrap
+          npm run jest
+      - name: Upload coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: modules-coverage
+          path: coverage
+  paper-build:
     runs-on: ubuntu-latest
     container: asciidoctor/docker-asciidoctor
     steps:
       - uses: actions/checkout@v2
-      - name: build paper-website
+      - name: Build paper-website
         run: |
           asciidoctor paper/README.adoc -D dist/paper -a toc=left -o index.html
           cp paper/*.png dist/paper
           cp paper/*.svg dist/paper
-      - name: build paper-pdf
+      - name: Build paper-pdf
         run: asciidoctor-pdf paper/README.adoc -D dist -o dorders-paper.pdf -a pdf-theme=paper/pdf-style/basic-theme.yml
-      - name: upload paper-pdf
+      - name: Upload paper-pdf
         uses: actions/upload-artifact@v2
         with:
           name: paper-pdf
           path: dist/dorders-paper.pdf
-      - name: upload paper-website
+      - name: Upload paper-website
         uses: actions/upload-artifact@v2
         with:
           name: paper-website

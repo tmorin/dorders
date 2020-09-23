@@ -13,10 +13,22 @@
     "url": "git@github.com:tmorin/dorders.git"
   },
   "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "clean": "lerna run clean --parallel && rimraf coverage",
     "g:paper": "gdiag -w=paper",
-    "paper:build": "npm run g:paper && ./scripts/generate-paper.sh"
+    "jest": "jest --runInBand --detectOpenHandles --coverage",
+    "paper:build": "npm run g:paper && ./scripts/generate-paper.sh",
+    "test": "lerna run test --stream --concurrency=1"
   },
   "devDependencies": {
-    "@tmorin/plantuml-libs": "^1.0.2"
+    "@tmorin/plantuml-libs": "^1.0.2",
+    "@types/jest": "^26.0.14",
+    "jest": "^26.2.1",
+    "jest-junit": "^11.1.0",
+    "lerna": "^3.22.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.0",
+    "typescript": "^4.0.3"
   }
 }

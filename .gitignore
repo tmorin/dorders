@@ -1,7 +1,7 @@
 .gdiag/
 .idea/
+coverage/
 dist/
-junit-results.xml
 lib/
 node_modules/
 tmp/

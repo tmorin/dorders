@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true
+  },
+  "exclude": [
+    "**/__test__",
+    "**/lib",
+    "**/*.spec.ts",
+    "**/jest-setup.ts"
+  ]
+}
