@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@dorders/infra-test": "0.0.0-alpha.0",
+    "@dorders/validator-peer": "0.0.0-alpha.0",
     "@types/uuid": "^8.0.0"
   }
 }
