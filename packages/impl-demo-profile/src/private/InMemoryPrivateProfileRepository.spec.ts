@@ -41,6 +41,7 @@ describe('InMemoryPrivateProfileRepository', function () {
       let counter = 0;
       for await (const privateProfile of privateProfileRepository0.iterate()) {
         counter++;
+        expect(privateProfile.profileId).toBeTruthy();
       }
       expect(counter).toBe(3);
     }

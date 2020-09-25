@@ -11,7 +11,6 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
 
   async startOngoingSynchronization(profile: PrivateProfile): Promise<void> {
     if (profile instanceof SimplePrivateProfile) {
-
       profile.privateMap.addObserver((newPrivateMap) => {
         profile.privateMap.replaceBy(newPrivateMap);
         this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
@@ -22,6 +21,7 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
         this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
       });
 
+      await this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
     }
   }
 

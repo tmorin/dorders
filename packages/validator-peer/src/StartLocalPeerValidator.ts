@@ -1,4 +1,4 @@
-import {LocalPeerStarted, StartLocalPeer} from '../../model-peer/lib';
+import {LocalPeerStarted, StartLocalPeer} from '@dorders/model-peer';
 import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
 
 export class StartLocalPeerValidator extends AbstractContainedValidator {

@@ -23,7 +23,7 @@ export class InMemoryPrivateProfileRepository implements PrivateProfileRepositor
   }
 
   iterate(): AsyncIterable<PrivateProfile> {
-    const iterator = this.map[Symbol.iterator]();
+    const iterator = this.map.values()[Symbol.iterator]();
     const next = async () => {
       const result = iterator.next();
       if (result.done) {

@@ -24,7 +24,7 @@ export class SimplePrivateProfile implements PrivateProfile {
   }
 
   async getReference(): Promise<PrivateProfileReference> {
-    return new SimplePrivateProfileReference(this.repositoryId, this.profileId);
+    return new SimplePrivateProfileReference(this.profileId);
   }
 
   // EVENTS

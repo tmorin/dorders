@@ -16,7 +16,6 @@ describe('SimplePublicProfileReference', function () {
 
   it('should be serialized and deserialized', async function () {
     const publicProfileReference = new SimplePublicProfileReference(
-      'repositoryId',
       'profileId',
       'name'
     );

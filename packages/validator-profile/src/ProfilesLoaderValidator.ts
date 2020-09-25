@@ -1,0 +1,30 @@
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
+import {CreateProfile, ProfileCreated, ProfilesLoaded} from '@dorders/model-profile';
+import {LocalPeerStarted} from '@dorders/model-peer';
+
+export class ProfilesLoaderValidator extends AbstractContainedValidator {
+
+  constructor(
+    containers: Containers
+  ) {
+    super(containers);
+  }
+
+  async test(): Promise<void> {
+    const [container0] = this.containers.instances;
+
+    await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'profileA'}));
+    await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'profileB'}));
+
+    let cntProfileCreated = 0;
+    container0.messageBus.on(ProfileCreated.EVENT_NAME, () => cntProfileCreated += 1);
+
+    const pWaitForEvents = waitForOnce(container0, ProfilesLoaded.EVENT_NAME);
+
+    await container0.messageBus.publish(new LocalPeerStarted({peerId: 'an identifier'}));
+    await pWaitForEvents;
+
+    expect(cntProfileCreated).toEqual(2);
+  }
+
+}

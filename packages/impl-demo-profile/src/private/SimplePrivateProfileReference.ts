@@ -3,14 +3,12 @@ import {PrivateProfileReference, ProfileId, SerializedPrivateProfileReference} f
 export class SimplePrivateProfileReference implements PrivateProfileReference {
 
   constructor(
-    public readonly repositoryId: string,
     public readonly profileId: ProfileId,
   ) {
   }
 
   async serialize(): Promise<SerializedPrivateProfileReference> {
     return JSON.stringify({
-      repositoryId: this.repositoryId,
       profileId: this.profileId
     });
   }

@@ -1,24 +1,22 @@
-import {Container} from '@dorders/framework';
-import {disposeContainers, waitForOnce} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
 import {
   CreateProfile,
   PrivateProfileRepository,
   PrivateProfileRepositorySymbol,
   ProfileCreated
 } from '@dorders/model-profile';
-import {startDemoContainers} from './__helpers__/container';
 
-describe('CreateProfile', function () {
+export class CreateProfileValidator extends AbstractContainedValidator {
 
-  let container0: Container;
-  beforeEach(async function () {
-    [container0] = await startDemoContainers(1);
-  });
-  afterEach(async function () {
-    await disposeContainers();
-  });
+  constructor(
+    containers: Containers
+  ) {
+    super(containers);
+  }
 
-  it('should succeed', async function () {
+  async test(): Promise<void> {
+    const [container0] = this.containers.instances;
+    
     const pWaitForEvents = waitForOnce(container0, ProfileCreated.EVENT_NAME);
 
     const [profileCreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
@@ -31,6 +29,6 @@ describe('CreateProfile', function () {
     expect(profile0.publicProfile.card).toEqual('ProfileA');
 
     await pWaitForEvents;
-  });
+  }
 
-});
+}

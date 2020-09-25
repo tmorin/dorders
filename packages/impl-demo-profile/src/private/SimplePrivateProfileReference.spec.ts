@@ -16,7 +16,6 @@ describe('SimplePrivateProfileReference', function () {
 
   it('should be serialized and deserialized', async function () {
     const privateProfileReference = new SimplePrivateProfileReference(
-      'repositoryId',
       'profileId'
     );
     const privateProfileReferenceDeserializer = container0.registry.resolve<PrivateProfileReferenceDeserializer>(PrivateProfileReferenceDeserializerSymbol);

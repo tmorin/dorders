@@ -40,7 +40,7 @@ export class SimplePublicProfile implements PublicProfile {
   }
 
   async getReference(): Promise<PublicProfileReference> {
-    return new SimplePublicProfileReference(this.repositoryId, this.profileId, this.name);
+    return new SimplePublicProfileReference(this.profileId, this.name);
   }
 
 }
