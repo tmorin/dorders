@@ -87,4 +87,14 @@ export class Containers {
     await waitFor(waitForAfter);
   }
 
+  static async create(
+    numbers: number,
+    options: Partial<StartOptions> = {},
+    modulesFactory: () => Array<Module> = () => ([])
+  ) {
+    const containers = new Containers();
+    await containers.startContainers(numbers, options, modulesFactory);
+    return containers;
+  }
+
 }
