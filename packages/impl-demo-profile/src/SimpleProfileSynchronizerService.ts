@@ -10,19 +10,19 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
   }
 
   async startOngoingSynchronization(profile: PrivateProfile): Promise<void> {
-    if (profile instanceof SimplePrivateProfile) {
-      profile.privateMap.addObserver((newPrivateMap) => {
-        profile.privateMap.replaceBy(newPrivateMap);
-        this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
-      });
+    const simplePrivateProfile = SimplePrivateProfile.from(profile);
 
-      profile.publicMap.addObserver((newPublicMap) => {
-        profile.publicMap.replaceBy(newPublicMap);
-        this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
-      });
+    simplePrivateProfile.privateMap.addObserver((newPrivateMap) => {
+      simplePrivateProfile.privateMap.replaceBy(newPrivateMap);
+      this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
+    });
 
-      await this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
-    }
+    simplePrivateProfile.publicMap.addObserver((newPublicMap) => {
+      simplePrivateProfile.publicMap.replaceBy(newPublicMap);
+      this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
+    });
+
+    await this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
   }
 
 }

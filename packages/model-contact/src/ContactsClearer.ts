@@ -1,6 +1,5 @@
 import {ProfileDeleted} from '@dorders/model-profile';
 import {ContactsCleared} from './ContactsCleared';
-import {ContactDeleted} from './ContactDeleted';
 import {Component, LoggerFactory, MessageBus} from '@dorders/framework';
 import {ContactRepository} from './ContactRepository';
 

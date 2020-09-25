@@ -54,4 +54,10 @@ export class SimplePrivateProfile implements PrivateProfile {
     this.privateMap.removeObservers();
   }
 
+  static from(privateProfile: PrivateProfile): SimplePrivateProfile {
+    if (privateProfile instanceof SimplePrivateProfile) {
+      return privateProfile;
+    }
+    throw new Error(`PrivateProfile (${privateProfile}) is not a SimplePrivateProfile`);
+  }
 }

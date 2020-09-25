@@ -53,10 +53,8 @@ export class InMemoryPrivateProfileRepository implements PrivateProfileRepositor
 
   async dispose() {
     for (const privateProfile of this.map.values()) {
-      if (privateProfile instanceof SimplePrivateProfile) {
-        await privateProfile.dispose();
-      }
+      await SimplePrivateProfile.from(privateProfile).dispose();
     }
   }
-  
+
 }

@@ -26,9 +26,7 @@ export class ContactsSynchronizer extends Component {
     await this.contactSynchronizationService.check(profileId);
 
     // notify the end of the process
-    await this.messageBus.publish(new ContactsSynchronized({
-      profileId: profileSynchronized.body.profileId
-    }));
+    await this.messageBus.publish(new ContactsSynchronized({profileId}));
   }
 
 }

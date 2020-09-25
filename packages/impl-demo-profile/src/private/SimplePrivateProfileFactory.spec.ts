@@ -35,9 +35,11 @@ describe('SimplePrivateProfileFactory', function () {
 
     expect(privateProfile0A).toBeInstanceOf(SimplePrivateProfile);
     expect(privateProfile1A).toBeInstanceOf(SimplePrivateProfile);
-    if (privateProfile0A instanceof SimplePrivateProfile && privateProfile1A instanceof SimplePrivateProfile) {
-      expect(privateProfile0A.privateMap.get(ProfileMapKey.creationDate)).toBe(privateProfile1A.privateMap.get(ProfileMapKey.creationDate));
-    }
+    expect(
+      SimplePrivateProfile.from(privateProfile0A).privateMap.get(ProfileMapKey.creationDate)
+    ).toBe(
+      SimplePrivateProfile.from(privateProfile1A).privateMap.get(ProfileMapKey.creationDate)
+    );
   })
 
 })

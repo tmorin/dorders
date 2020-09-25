@@ -1,9 +1,10 @@
 import {Container} from '@dorders/framework';
 import {startDemoContainers} from './__helpers__/container';
-import {disposeContainers, waitFor, waitForMany, waitForOnce} from '@dorders/infra-test';
+import {disposeContainers, waitForMany} from '@dorders/infra-test';
 import {
   PrivateProfileFactory,
-  PrivateProfileFactorySymbol, ProfileSynchronized,
+  PrivateProfileFactorySymbol,
+  ProfileSynchronized,
   ProfileSynchronizerService,
   ProfileSynchronizerServiceSymbol
 } from '@dorders/model-profile';
@@ -45,30 +46,29 @@ describe('SimpleProfileSynchronizerService', function () {
 
     const profileSynchronizerService2 = container2.registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol);
     await profileSynchronizerService2.startOngoingSynchronization(privateProfile2A);
-    
-    if (privateProfile0A instanceof SimplePrivateProfile 
-      && privateProfile1A instanceof SimplePrivateProfile 
-      && privateProfile2A instanceof SimplePrivateProfile) {
 
-      expect(privateProfile0A.privateMap.size).toBe(1);
-      expect(privateProfile1A.privateMap.size).toBe(1);
-      expect(privateProfile2A.privateMap.size).toBe(1);
-      
-      privateProfile0A.privateMap.set('valA', 'key0A').set('valB', 'key0A').set('valC', 'key0A');
-      privateProfile0A.privateMap.done();
+    const simplePrivateProfile0A = SimplePrivateProfile.from(privateProfile0A);
+    const simplePrivateProfile1A = SimplePrivateProfile.from(privateProfile1A);
+    const simplePrivateProfile2A = SimplePrivateProfile.from(privateProfile2A);
 
-      expect(privateProfile0A.privateMap.size).toBe(4);
-      expect(privateProfile1A.privateMap.size).toBe(4);
-      expect(privateProfile2A.privateMap.size).toBe(4);
-      
-      privateProfile1A.publicMap.set('valA', 'key1A').set('valB', 'key1A').set('valC', 'key1A');
-      privateProfile1A.publicMap.done();
-      
-      expect(privateProfile0A.publicMap.size).toBe(3);
-      expect(privateProfile1A.publicMap.size).toBe(3);
-      expect(privateProfile2A.publicMap.size).toBe(3);
-    }
-    
+    expect(simplePrivateProfile0A.privateMap.size).toBe(1);
+    expect(simplePrivateProfile1A.privateMap.size).toBe(1);
+    expect(simplePrivateProfile2A.privateMap.size).toBe(1);
+
+    simplePrivateProfile0A.privateMap.set('valA', 'key0A').set('valB', 'key0A').set('valC', 'key0A');
+    simplePrivateProfile0A.privateMap.done();
+
+    expect(simplePrivateProfile0A.privateMap.size).toBe(4);
+    expect(simplePrivateProfile1A.privateMap.size).toBe(4);
+    expect(simplePrivateProfile2A.privateMap.size).toBe(4);
+
+    simplePrivateProfile1A.publicMap.set('valA', 'key1A').set('valB', 'key1A').set('valC', 'key1A');
+    simplePrivateProfile1A.publicMap.done();
+
+    expect(simplePrivateProfile0A.publicMap.size).toBe(3);
+    expect(simplePrivateProfile1A.publicMap.size).toBe(3);
+    expect(simplePrivateProfile2A.publicMap.size).toBe(3);
+
     await waitProfileSynchronized0;
     await waitProfileSynchronized1;
     await waitProfileSynchronized2;

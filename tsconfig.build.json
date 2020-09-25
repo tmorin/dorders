@@ -5,8 +5,9 @@
     "declarationMap": true
   },
   "exclude": [
-    "**/__tests__",
     "**/__helpers__",
+    "**/__mocks__",
+    "**/__tests__",
     "**/lib",
     "**/*.spec.ts",
     "**/jest-setup.ts"
