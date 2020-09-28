@@ -15,5 +15,8 @@
     "@dorders/framework": "0.0.0-alpha.0",
     "@dorders/infra-test": "0.0.0-alpha.0",
     "@dorders/model-peer": "0.0.0-alpha.0"
+  },
+  "peerDependencies": {
+    "jest": "*"
   }
 }
