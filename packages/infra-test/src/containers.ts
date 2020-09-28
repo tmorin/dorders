@@ -1,15 +1,13 @@
 import rimraf from 'rimraf';
-import {ConfigProvider, Container, ContainerBuilder, LoggerFactory, MessageBus, Module} from '@dorders/framework';
+import {Container, ContainerBuilder, Module} from '@dorders/framework';
 import {waitFor} from './utils';
 import {InfraTestModule} from './InfraTestModule';
 import {ConfigsTestProviderModule} from './config';
 
 export type StartOptions = {
+  name?: string
   clean: boolean
   verbose: boolean
-  loggerFactory?: LoggerFactory
-  configProvider?: ConfigProvider
-  messageBus?: MessageBus
 }
 
 export class Containers {
@@ -42,7 +40,8 @@ export class Containers {
     }
 
     return ContainerBuilder.create()
-      .module(new InfraTestModule(options.configProvider, options.loggerFactory, options.messageBus))
+      .name(opt.name)
+      .module(new InfraTestModule())
       .modules(modulesFactory())
       .module(new ConfigsTestProviderModule(index, opt.verbose))
       .build()
@@ -60,7 +59,7 @@ export class Containers {
     for (let index = from; index < to; index++) {
       const container = await this.startContainer(
         index,
-        Object.assign({}, options),
+        {...options, name: `container-${index}`},
         modulesFactory
       );
       this.instances.push(container);

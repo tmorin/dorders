@@ -1,4 +1,4 @@
-import {Component, MessageBus} from '@dorders/framework';
+import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/framework';
 import {LocalPeerStarted} from '@dorders/model-peer';
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileCreated} from './ProfileCreated';
@@ -10,18 +10,24 @@ import {ProfilesLoaded} from './ProfilesLoaded';
  */
 export class ProfilesLoader extends Component {
 
+  private readonly logger: Logger;
+
   constructor(
     private readonly messageBus: MessageBus,
-    private readonly privateProfileRepository: PrivateProfileRepository
+    private readonly privateProfileRepository: PrivateProfileRepository,
+    private readonly loggerFactory: LoggerFactory
   ) {
     super();
+    this.logger = loggerFactory.create(ProfilesLoader.name)
   }
 
   async configure(): Promise<void> {
-    this.messageBus.on(LocalPeerStarted.EVENT_NAME, this.onPeerStarted.bind(this));
+    this.messageBus.on(LocalPeerStarted.EVENT_NAME, this.onLocalPeerStarted.bind(this));
   }
 
-  async onPeerStarted() {
+  async onLocalPeerStarted(localPeerStarted: LocalPeerStarted) {
+    this.logger.debug('on %o', localPeerStarted);
+
     const profiles = this.privateProfileRepository.iterate();
     for await (const profile of profiles) {
       try {

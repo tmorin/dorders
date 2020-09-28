@@ -2,27 +2,32 @@ import {
   ContactCreated,
   ContactDeleted,
   ContactId,
-  ContactsSynchronized,
   ContactSynchronizationService,
   ContactSynchronized
 } from '@dorders/model-contact';
 import {ProfileId} from '@dorders/model-profile';
 import {SimpleContact} from './SimpleContact';
-import {MessageBus} from '@dorders/framework';
+import {Logger, LoggerFactory, MessageBus} from '@dorders/framework';
 import {SimpleContactRepository} from './SimpleContactRepository';
 
 export class SimpleContactSynchronizationService implements ContactSynchronizationService {
 
+  private readonly logger: Logger;
+
   constructor(
     private readonly bus: MessageBus,
     private readonly contactRepository: SimpleContactRepository,
+    private readonly loggerFactory: LoggerFactory
   ) {
+    this.logger = loggerFactory.create(SimpleContactSynchronizationService.name)
   }
 
   async monitor(profileId: ProfileId, contactId: ContactId): Promise<void> {
     const contact = await this.contactRepository.get(profileId, contactId);
     const simpleContact = SimpleContact.from(contact);
+    this.logger.debug('monitor (%s/%s)', profileId, contactId);
     simpleContact.publicProfile.map.addObserver(async (newProfileMap) => {
+      this.logger.debug('public map mutated (%s/%s)', profileId, contactId);
       simpleContact.publicProfile.map.replaceBy(newProfileMap);
       const contactSynchronized = new ContactSynchronized({profileId, contactId})
       await this.bus.publish(contactSynchronized);
@@ -31,6 +36,7 @@ export class SimpleContactSynchronizationService implements ContactSynchronizati
 
   async check(profileId: ProfileId): Promise<void> {
     const {createdContacts, deletedContacts} = await this.contactRepository.checkCache(profileId);
+    this.logger.log("createdContacts: %s - deletedContacts: %s", createdContacts.length, deletedContacts.length);
 
     for (const createdContact of createdContacts) {
       const contactCreated = new ContactCreated({
@@ -47,9 +53,6 @@ export class SimpleContactSynchronizationService implements ContactSynchronizati
       await deletedContact.applyContactDeleted(contactDeleted);
       await this.bus.publish<ContactDeleted>(contactDeleted);
     }
-
-    const contactSynchronized = new ContactsSynchronized({profileId})
-    await this.bus.publish(contactSynchronized);
   }
 
 }

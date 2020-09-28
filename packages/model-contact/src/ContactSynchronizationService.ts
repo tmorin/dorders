@@ -18,7 +18,6 @@ export interface ContactSynchronizationService {
 
   /**
    * Check the current ongoing synchronizations created potential missing and deleted potential orphan ones.
-   * The process publishes the event ContactsSynchronized once the contacts of a profile have been checked.
    * The process may publish the events ContactCreated and ContactDeleted.
    * @param profileId the identifier of a contact
    */

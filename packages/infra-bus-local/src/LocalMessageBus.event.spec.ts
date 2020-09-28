@@ -1,4 +1,4 @@
-import {Event} from '@dorders/framework';
+import {Container, Event} from '@dorders/framework';
 import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
 
@@ -23,7 +23,7 @@ class EventC extends Event {
 describe('LocalMessageBus/event', function () {
 
   it('should react on events', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     const waitForTwoEventA = new Promise(resolve => {
       let cnt = 0;
       bus.on('EventA', () => {
@@ -40,7 +40,7 @@ describe('LocalMessageBus/event', function () {
   });
 
   it('should react once on event', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     let cnt = 0;
     bus.once('EventA', () => cnt += 1);
     const waitForEventB = new Promise(resolve => bus.once('EventB', resolve));
@@ -52,7 +52,7 @@ describe('LocalMessageBus/event', function () {
   });
 
   it('should remove listeners', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
 
     const waitForEventA = new Promise(resolve => bus.on('EventA', resolve));
 

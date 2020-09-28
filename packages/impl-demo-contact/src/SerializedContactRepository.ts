@@ -8,6 +8,7 @@ import {SimpleContact} from './SimpleContact';
 import {ContactMapKey} from './ContactMapKey';
 import {Contact, ContactFactory, ContactRenamed} from '@dorders/model-contact';
 import {SimplePrivateProfile} from '@dorders/impl-demo-profile';
+import {Logger, LoggerFactory} from '@dorders/framework';
 
 export type SerializedContact = {
   name: string
@@ -22,11 +23,15 @@ export const SerializedContactRepositorySymbol = Symbol.for('SerializedContactRe
 
 export class SerializedContactRepository {
 
+  private readonly logger: Logger
+
   public constructor(
     private readonly privateProfileRepository: PrivateProfileRepository,
     private readonly publicProfileReferenceDeserializer: PublicProfileReferenceDeserializer,
-    private readonly contactFactory: ContactFactory
+    private readonly contactFactory: ContactFactory,
+    private readonly loggerFactory: LoggerFactory,
   ) {
+    this.loggerFactory.create(SerializedContactRepository.name);
   }
 
   async persist(contact: SimpleContact) {

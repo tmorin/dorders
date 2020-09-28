@@ -13,7 +13,7 @@ export type ContactRenamedBody = {
  * A contact has been renamed.
  */
 export class ContactRenamed extends Event<ContactRenamedBody> {
-  public static readonly EVENT_NAME = Symbol.for(`profile/${ContactRenamed.name}`);
+  public static readonly EVENT_NAME = Symbol.for(`contact/${ContactRenamed.name}`);
 
   constructor(body: ContactRenamedBody) {
     super(body, ContactRenamed.EVENT_NAME);

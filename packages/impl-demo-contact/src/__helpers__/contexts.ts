@@ -15,7 +15,7 @@ export type ContextA = {
 
 export async function configureContextA(): Promise<ContextA> {
   const containers = new DemoContainers();
-  const [container0, container1] = await containers.startDemoContainers(2);
+  const [container0, container1] = await containers.startContainers(2);
   const profileA = await createPrivateProfile(container0, 'profileA');
   const createdProfiles = [
     await createPrivateProfile(container1, 'profileB'),

@@ -11,7 +11,7 @@ export type ContactDeletedBody = {
  * A contact has been removed.
  */
 export class ContactDeleted extends Event<ContactDeletedBody> {
-  public static readonly EVENT_NAME = Symbol.for(`profile/${ContactDeleted.name}`);
+  public static readonly EVENT_NAME = Symbol.for(`contact/${ContactDeleted.name}`);
 
   constructor(body: ContactDeletedBody) {
     super(body, ContactDeleted.EVENT_NAME);

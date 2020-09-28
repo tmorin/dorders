@@ -1,4 +1,4 @@
-import {Query, QueryHandler, Result} from '@dorders/framework';
+import {Container, Query, QueryHandler, Result} from '@dorders/framework';
 import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
 
@@ -23,14 +23,14 @@ class QueryAHandler extends QueryHandler<QueryA, ResultA> {
 describe('LocalMessageBus/query', function () {
 
   it('should register and call query', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     bus.registerQueryHandler(QueryA.name, new QueryAHandler());
     const resultA = await bus.call(new QueryA());
     expect(resultA.name).toEqual('ResultA');
   });
 
   it('should dispose', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     bus.registerQueryHandler(QueryA.name, new QueryAHandler());
     await bus.dispose();
     await expect(bus.call(new QueryA())).rejects.toThrow('unable to found a command handler for (QueryA)')

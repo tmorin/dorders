@@ -11,7 +11,7 @@ export type ContactSynchronizedBody = {
  * A contact has been synchronized.
  */
 export class ContactSynchronized extends Event<ContactSynchronizedBody> {
-  public static readonly EVENT_NAME = Symbol.for(`profile/${ContactSynchronized.name}`);
+  public static readonly EVENT_NAME = Symbol.for(`contact/${ContactSynchronized.name}`);
 
   constructor(body: ContactSynchronizedBody) {
     super(body, ContactSynchronized.EVENT_NAME);

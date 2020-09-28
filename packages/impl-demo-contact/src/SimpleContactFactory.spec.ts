@@ -10,7 +10,7 @@ describe('SimpleContactFactory', function () {
   let container1: Container;
   beforeEach(async function () {
     containers = new DemoContainers();
-    [container0, container1] = await containers.startDemoContainers(2);
+    [container0, container1] = await containers.startContainers(2);
   });
   afterEach(async function () {
     await containers.disposeContainers();

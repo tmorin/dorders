@@ -488,7 +488,7 @@ So that, I could use the same profile in the other device
 
 The command `ImportProfile` initiates the import of a profile hosted somewhere in `dorders`.
 Its logic creates and persists a new `PrivateProfile` aggregate.
-The publication of the events `ProfileCreated` and `ProfileCardUpdated` indicates the completion of the command.
+The publication of the events `ProfileCreated` indicates the completion of the command.
 
 .EventStorming Diagram of the profile module - import a profile
 image::design_profile_eventstorming_import.png[]

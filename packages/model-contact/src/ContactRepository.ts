@@ -35,7 +35,7 @@ export interface ContactRepository {
    * Clear all contacts related to the provided profileId.
    * @param profileId the identifier of the profile
    */
-  clear(profileId: ProfileId): Promise<void>
+  clear(profileId: ProfileId): Promise<Array<Contact>>
 
   /**
    * Return an asynchronous iterable to iterate over contacts of hosted profile.

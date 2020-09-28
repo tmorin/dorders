@@ -23,14 +23,16 @@ ProfilesLoader --> ProfilesLoaded : publishes
 package profile {
   event('ProfileCreated')
   event('ProfileSynchronized')
+  service('ProfileSynchronizerService')
   aggregate('PrivateProfile')
-  process('ProfilesSynchronizer')
+  process('ProfileSynchronizer')
 }
 
-ProfileCreated -d-> ProfilesSynchronizer : triggers
-ProfilesSynchronizer -r-> PrivateProfile : starts the ongoing synchronization
-ProfilesSynchronizer --> ProfileSynchronized : publishes
-ProfileSynchronized -u-> PrivateProfile : applied on
+ProfileCreated -d-> ProfileSynchronizer : triggers
+ProfileSynchronizer -r-> ProfileSynchronizerService : starts the ongoing synchronization
+ProfileSynchronizerService --> PrivateProfile : loads
+ProfileSynchronizerService --> ProfileSynchronized : publishes
+ProfileSynchronized -r-> PrivateProfile : applied on
 @enduml
 
 @startuml design_profile_eventstorming_create
@@ -52,14 +54,11 @@ ProfileCreated -u-> PrivateProfile : applied on
 package profile {
   command('ImportProfile')
   event('ProfileCreated')
-  event('ProfileCardUpdated')
   aggregate('PrivateProfile')
 }
 ImportProfile --> ProfileCreated : publishes
-ImportProfile --> ProfileCardUpdated : publishes
 ImportProfile -d-> PrivateProfile : creates
 ProfileCreated -r-> PrivateProfile : applied on
-ProfileCardUpdated -l-> PrivateProfile : applied on
 @enduml
 
 @startuml design_profile_eventstorming_delete

@@ -16,15 +16,34 @@ function assert(value: () => any) {
   }
 }
 
+export interface ContainerConfiguration extends ModuleConfiguration {
+  name?: string,
+  modules: Array<Module>
+}
+
+export const ContainerSymbol = Symbol.for('Container');
+
 export class Container {
 
+  private readonly configuration: ContainerConfiguration;
+
+  public readonly registry: Registry;
+
+  private readonly modules: Array<Module>;
+
   constructor(
-    public readonly registry: Registry = new DefaultRegistry(),
-    private readonly modules: Array<Module> = [],
-    private readonly configuration: ModuleConfiguration = {
-      registry: registry
-    }
+    configuration: Partial<ContainerConfiguration> = {}
   ) {
+    const name = configuration.name || `container-${Buffer.from(String(Date.now())).toString('base64')}`;
+    const registry: Registry = configuration.registry || new DefaultRegistry();
+    const modules: Array<Module> = configuration.modules || [];
+    this.configuration = { ...configuration, name, registry, modules};
+    this.registry = this.configuration.registry;
+    this.modules = this.configuration.modules;
+  }
+
+  get name() {
+    return this.configuration.name
   }
 
   get messageBus() {
@@ -40,6 +59,8 @@ export class Container {
   }
 
   async initialize(): Promise<this> {
+    this.registry.registerValue(ContainerSymbol, this);
+    
     for (const module of this.modules) {
       await module.initialize(this.configuration);
     }
@@ -118,12 +139,18 @@ export class ContainerBuilder {
 
   constructor(
     private readonly _modules: Array<Module> = [],
+    private _name: string = undefined,
     private _registry: Registry = new DefaultRegistry()
   ) {
   }
 
-  static create(modules: Array<Module> = []) {
-    return new ContainerBuilder(modules);
+  static create() {
+    return new ContainerBuilder();
+  }
+
+  name(name: string) {
+    this._name = name;
+    return this;
   }
 
   registry(registry: Registry) {
@@ -146,7 +173,11 @@ export class ContainerBuilder {
   }
 
   build(): Container {
-    return new Container(this._registry, this._modules)
+    return new Container({
+      name: this._name,
+      registry: this._registry,
+      modules: this._modules
+    })
   }
 
 }

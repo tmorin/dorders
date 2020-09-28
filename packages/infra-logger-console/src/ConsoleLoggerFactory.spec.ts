@@ -1,16 +1,23 @@
 import {ConsoleLoggerFactory, Level} from '.';
+import {Container} from '@dorders/framework';
 
 describe('ConsoleLoggerFactory', function () {
 
   it('should resolve a logger factory', async function () {
-    const loggerFactory = new ConsoleLoggerFactory();
-    const logger = loggerFactory.create('test');
-    expect(logger).toBeTruthy();
-    logger.debug('message %s', Level.debug);
-    logger.log('message %s', Level.log);
-    logger.info('message %s', Level.info);
-    logger.warn('message %s', Level.warn);
-    logger.error('message %s', Level.error);
+    const containerA = new Container({      name: 'container-test'});
+    const loggerFactoryA = new ConsoleLoggerFactory(containerA);
+    const loggerA = loggerFactoryA.create('test');
+    expect(loggerA).toBeTruthy();
+    loggerA.debug('message %s', Level.debug);
+    loggerA.log('message %s', Level.log);
+    loggerA.info('message %s', Level.info);
+    
+    const containerB = new Container();
+    const loggerFactoryB = new ConsoleLoggerFactory(containerB);
+    const loggerB = loggerFactoryB.create('test');
+    expect(loggerB).toBeTruthy();
+    loggerB.warn('message %s', Level.warn);
+    loggerB.error('message %s', Level.error);
   })
 
 })

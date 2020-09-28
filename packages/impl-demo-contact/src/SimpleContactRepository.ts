@@ -2,13 +2,18 @@ import {Contact, ContactId, ContactRepository} from '@dorders/model-contact';
 import {ProfileId} from '@dorders/model-profile';
 import {SimpleContact} from './SimpleContact';
 import {SerializedContactRepository} from './SerializedContactRepository';
+import {Logger, LoggerFactory} from '@dorders/framework';
 
 export class SimpleContactRepository implements ContactRepository {
 
+  private readonly logger: Logger;
+
   public constructor(
     private readonly serializedContactRepository: SerializedContactRepository,
-    private readonly cache: Map<ProfileId, Map<ContactId, SimpleContact>> = new Map()
+    private readonly loggerFactory: LoggerFactory,
+    public readonly cache: Map<ProfileId, Map<ContactId, SimpleContact>> = new Map()
   ) {
+    this.logger = loggerFactory.create(SimpleContactRepository.name);
   }
 
   async persist(contact: Contact): Promise<void> {
@@ -28,13 +33,18 @@ export class SimpleContactRepository implements ContactRepository {
     this.deleteFromCache(profileId, contactId);
   }
 
-  async clear(profileId: ProfileId): Promise<void> {
+  async clear(profileId: ProfileId): Promise<Array<Contact>> {
+    const contacts: Array<Contact> = [];
     if (this.cache.has(profileId)) {
       for (const contact of this.cache.get(profileId).values()) {
-        await this.delete(contact);
+        const simpleContact = this.getFromCache(profileId, contact.contactId);
+        await simpleContact.dispose();
+        this.deleteFromCache(profileId, contact.contactId);
+        contacts.push(contact);
       }
       this.cache.delete(profileId);
     }
+    return contacts;
   }
 
   iterate(profileId: ProfileId): AsyncIterable<Contact> {
@@ -60,23 +70,36 @@ export class SimpleContactRepository implements ContactRepository {
     createdContacts: Array<Contact>,
     deletedContacts: Array<Contact>,
   }> {
-    const createdContacts: Array<Contact> = [];
-    const deletedContacts: Array<Contact> = [];
+    if (!this.cache.has(profileId)) {
+      this.logger.debug('create cache for profile');
+      this.cache.set(profileId, new Map());
+    }
+
+    const cachedContactIds: Array<ContactId> = Array.from(this.cache.get(profileId).keys());
+    this.logger.debug('cachedContactIds', cachedContactIds);
 
     const newContacts = await this.serializedContactRepository.list(profileId);
     const newContactIds = newContacts.map(contact => contact.contactId);
+    this.logger.debug('newContactIds', newContactIds);
 
-    for (const contact of this.cache.get(profileId).values()) {
-      if (newContactIds.indexOf(contact.contactId) < 0) {
-        await contact.dispose();
-        deletedContacts.push(contact);
-        this.cache.get(profileId).delete(contact.contactId)
-      } else {
-        this.setToCache(contact);
-        createdContacts.push(contact);
-      }
+    const deletedContacts: Array<SimpleContact> = cachedContactIds
+      .filter((cachedContactId) => newContactIds.indexOf(cachedContactId) < 0)
+      .map((cachedContactId) => this.cache.get(profileId).get(cachedContactId));
+
+    for (const deletedContact of deletedContacts) {
+      this.logger.debug('delete contact', deletedContact.contactId);
+      await deletedContact.dispose();
+      this.cache.get(profileId).delete(deletedContact.contactId)
     }
-    
+
+    const createdContacts: Array<SimpleContact> = newContacts
+      .filter(newContact => !this.hasInCache(newContact.profileId, newContact.contactId));
+
+    for (const createdContact of createdContacts) {
+      this.logger.debug('create contact', createdContact.contactId);
+      this.setToCache(createdContact);
+    }
+
     return {createdContacts, deletedContacts};
   }
 
@@ -98,7 +121,7 @@ export class SimpleContactRepository implements ContactRepository {
   }
 
   private deleteFromCache(profileId: ProfileId, contactId: ContactId) {
-    if (this.cache.has(profileId) && this.cache.get(profileId).has(contactId)) {
+    if (this.hasInCache(profileId, contactId)) {
       this.cache.get(profileId).delete(contactId);
     }
   }
@@ -107,10 +130,13 @@ export class SimpleContactRepository implements ContactRepository {
     if (!this.cache.has(contact.profileId)) {
       this.cache.set(contact.profileId, new Map());
     }
-    if (!this.cache.get(contact.profileId).has(contact.contactId)) {
+    if (!this.hasInCache(contact.profileId, contact.contactId)) {
       this.cache.get(contact.profileId).set(contact.contactId, contact);
     }
     return this.cache.get(contact.profileId).get(contact.contactId);
   }
 
+  private hasInCache(profileId: ProfileId, contactId: ContactId): boolean {
+    return this.cache.get(profileId) && this.cache.get(profileId).has(contactId);
+  }
 }

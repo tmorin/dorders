@@ -4,7 +4,7 @@ import {
   ImportProfile,
   PrivateProfileRepository,
   PrivateProfileRepositorySymbol,
-  ProfileCreated
+  ProfileCreated, ProfileSynchronized
 } from '@dorders/model-profile';
 
 export class ImportProfileValidator extends AbstractContainedValidator {
@@ -18,7 +18,7 @@ export class ImportProfileValidator extends AbstractContainedValidator {
   async test(): Promise<void> {
     const [container0, container1] = this.containers.instances;
 
-    const pWaitForEvents = waitForOnce(container1, ProfileCreated.EVENT_NAME);
+    const pWaitForEvents = waitForOnce(container1, ProfileCreated.EVENT_NAME, ProfileSynchronized.EVENT_NAME);
 
     const [profileACreated0] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
     expect(profileACreated0).toBeTruthy();

@@ -1,4 +1,4 @@
-import {Command, CommandHandler, Event} from '@dorders/framework';
+import {Command, CommandHandler, Container, Event} from '@dorders/framework';
 import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
 
@@ -23,7 +23,7 @@ class CommandAHandler extends CommandHandler<CommandA, EventA> {
 describe('LocalMessageBus/command', function () {
 
   it('should register and execute command', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     bus.registerCommandHandler(CommandA.name, new CommandAHandler());
     const waitForEventA = new Promise(resolve => bus.once('EventA', resolve));
     const [eventA] = await bus.execute(new CommandA());
@@ -33,7 +33,7 @@ describe('LocalMessageBus/command', function () {
   });
 
   it('should dispose', async function () {
-    const bus = new LocalMessageBus(new ConsoleLoggerFactory());
+    const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     bus.registerCommandHandler(CommandA.name, new CommandAHandler());
     await bus.dispose();
     await expect(bus.execute(new CommandA())).rejects.toThrow('unable to found a command handler for (CommandA)')

@@ -3,7 +3,7 @@ import {LoggerFactory, LoggerFactorySymbol} from './logger';
 import {ConfigProvider, ConfigProviderSymbol} from './config';
 import {Registry} from './registry';
 
-export type ModuleConfiguration = {
+export interface ModuleConfiguration {
   registry: Registry
 }
 

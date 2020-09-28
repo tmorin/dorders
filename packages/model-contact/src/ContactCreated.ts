@@ -11,7 +11,7 @@ export type ContactAddedBody = {
  * A contact has been added.
  */
 export class ContactCreated extends Event<ContactAddedBody> {
-  public static readonly EVENT_NAME = Symbol.for(`profile/${ContactCreated.name}`);
+  public static readonly EVENT_NAME = Symbol.for(`contact/${ContactCreated.name}`);
 
   constructor(body: ContactAddedBody) {
     super(body, ContactCreated.EVENT_NAME);

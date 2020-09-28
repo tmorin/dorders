@@ -76,7 +76,8 @@ export class ModelContactModule extends AbstractModule {
       ComponentSymbol,
       registry => new ContactsLoader(
         registry.resolve<MessageBus>(MessageBusSymbol),
-        registry.resolve<ContactRepository>(ContactRepositorySymbol)
+        registry.resolve<ContactRepository>(ContactRepositorySymbol),
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {
         singleton: true
@@ -87,7 +88,8 @@ export class ModelContactModule extends AbstractModule {
       ComponentSymbol,
       registry => new ContactsSynchronizer(
         registry.resolve<MessageBus>(MessageBusSymbol),
-        registry.resolve<ContactSynchronizationService>(ContactSynchronizationServiceSymbol)
+        registry.resolve<ContactSynchronizationService>(ContactSynchronizationServiceSymbol),
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {
         singleton: true
@@ -98,7 +100,8 @@ export class ModelContactModule extends AbstractModule {
       ComponentSymbol,
       registry => new ContactSynchronizer(
         registry.resolve<MessageBus>(MessageBusSymbol),
-        registry.resolve<ContactSynchronizationService>(ContactSynchronizationServiceSymbol)
+        registry.resolve<ContactSynchronizationService>(ContactSynchronizationServiceSymbol),
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {
         singleton: true

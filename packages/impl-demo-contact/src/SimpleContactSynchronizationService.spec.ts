@@ -7,7 +7,6 @@ import {
   ContactDeleted,
   ContactRepository,
   ContactRepositorySymbol,
-  ContactsSynchronized,
   ContactSynchronizationService,
   ContactSynchronizationServiceSymbol,
   ContactSynchronized
@@ -27,7 +26,6 @@ describe('SimpleContactSynchronizationService', function () {
   it('should check', async function () {
     const waitContactCreated = waitForMany(ctx.container0, ContactCreated.EVENT_NAME, 1);
     const waitContactDeleted = waitForMany(ctx.container0, ContactDeleted.EVENT_NAME, 1);
-    const waitContactsSynchronized = waitForMany(ctx.container0, ContactsSynchronized.EVENT_NAME, 1);
     const serializedContactRepository0 = ctx.container0.registry.resolve<SerializedContactRepository>(SerializedContactRepositorySymbol);
     const contactRepository0 = ctx.container0.registry.resolve<ContactRepository>(ContactRepositorySymbol);
     // add 4 contacts
@@ -52,7 +50,6 @@ describe('SimpleContactSynchronizationService', function () {
     // wait for side effects
     await waitContactCreated;
     await waitContactDeleted;
-    await waitContactsSynchronized;
   });
 
   it('should monitor', async function () {

@@ -56,25 +56,6 @@ ContactCreated -u-> Contact : applied to
 ContactsLoader --> ContactsLoaded : publishes
 @enduml
 
-@startuml design_contact_eventstorming_contacts_loader
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
-package profile {
-  event('ProfileCreated')
-}
-package contact {
-  process('ContactsLoader')
-  aggregate('Contact')
-  event('ContactCreated')
-  event('ContactsLoaded')
-}
-ProfileCreated --> ContactsLoader : triggers
-ContactsLoader -r-> Contact : creates
-ContactsLoader --> ContactCreated : publishes
-ContactCreated -u-> Contact : applied to
-ContactsLoader --> ContactsLoaded : publishes
-@enduml
-
 @startuml design_contact_eventstorming_contact_synchronizer
 !include common.puml
 !include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml

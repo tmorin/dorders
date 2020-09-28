@@ -1,10 +1,12 @@
 import {Containers, StartOptions} from '@dorders/infra-test';
 import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
-import {Container, Module} from '@dorders/framework';
+import {Container} from '@dorders/framework';
 import {ModelContactModule} from '@dorders/model-contact';
 import {InfraContactModule} from '../InfraContactModule';
 import {ModelProfileModule} from '@dorders/model-profile';
 import {InfraProfileModule} from '@dorders/impl-demo-profile';
+import {ModelPeerModule} from '@dorders/model-peer';
+import {InfraPeerModule} from '@dorders/impl-demo-peer';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;
 
@@ -15,20 +17,20 @@ export class DemoContainers extends Containers {
   }
 
   static async create(
-    numbers: number,
-    options: Partial<StartOptions> = {},
-    modulesFactory: () => Array<Module> = () => ([])
-  ) {
+    numbers: number = 0,
+    options: Partial<StartOptions> = {}
+  ): Promise<DemoContainers> {
     const containers = new DemoContainers();
-    await containers.startDemoContainers(numbers, options);
+    await containers.startContainers(numbers, options);
     return containers;
   }
 
-  startDemoContainers(
+  startContainers(
     numbers: number,
     options?: Partial<StartOptions>
   ): Promise<Array<Container>> {
-    return this.startContainers(numbers, options, () => ([
+    return super.startContainers(numbers, options, () => ([
+      new ModelPeerModule(), new InfraPeerModule(),
       new ModelProfileModule(), new InfraProfileModule(),
       new ModelContactModule(), new InfraContactModule(),
     ]));

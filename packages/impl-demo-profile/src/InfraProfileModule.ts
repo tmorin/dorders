@@ -1,4 +1,12 @@
-import {AbstractModule, ConfigProvider, ConfigProviderSymbol, MessageBus, MessageBusSymbol} from '@dorders/framework';
+import {
+  AbstractModule,
+  ConfigProvider,
+  ConfigProviderSymbol,
+  LoggerFactory,
+  LoggerFactorySymbol,
+  MessageBus,
+  MessageBusSymbol
+} from '@dorders/framework';
 import {
   PrivateProfileFactory,
   PrivateProfileFactorySymbol,
@@ -50,7 +58,8 @@ export class InfraProfileModule extends AbstractModule {
     this.registry.registerFactory<ProfileSynchronizerService>(
       ProfileSynchronizerServiceSymbol,
       (registry) => new SimpleProfileSynchronizerService(
-        registry.resolve<MessageBus>(MessageBusSymbol)
+        registry.resolve<MessageBus>(MessageBusSymbol),
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {singleton: true}
     );

@@ -53,8 +53,8 @@ export class ProfileMap implements Map<string, string> {
     return this.map.delete(key);
   }
 
-  forEach(callbackfn: (value: string, key: string, map: Map<string, string>) => void, thisArg?: any): void {
-    this.map.forEach(callbackfn, thisArg);
+  forEach(callback: (value: string, key: string, map: Map<string, string>) => void, thisArg?: any): void {
+    this.map.forEach(callback, thisArg);
   }
 
   get(key: string): string | undefined {

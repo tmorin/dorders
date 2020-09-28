@@ -73,7 +73,7 @@ describe('SimpleContactRepository', function () {
   });
 
   it('should clear contacts', async function () {
-    const contactRepository0 = ctx.container0.registry.resolve<ContactRepository>(ContactRepositorySymbol);
+    const contactRepository0 = ctx.container0.registry.resolve<SimpleContactRepository>(ContactRepositorySymbol);
     await contactRepository0.persist(ctx.createdContacts[0]);
     await contactRepository0.persist(ctx.createdContacts[1]);
     {
@@ -82,10 +82,8 @@ describe('SimpleContactRepository', function () {
     }
     await contactRepository0.clear(ctx.profileA.profileId);
     await contactRepository0.clear(ctx.profileA.profileId);
-    {
-      const fetchedContacts: Array<Contact> = await toArray(contactRepository0.iterate(ctx.profileA.profileId));
-      expect(fetchedContacts.length).toBe(0);
-    }
+
+    expect(contactRepository0.cache.has(ctx.profileA.profileId)).toBeFalsy();
   });
 
   it('should check cache', async function () {
@@ -115,3 +113,4 @@ describe('SimpleContactRepository', function () {
   });
 
 })
+

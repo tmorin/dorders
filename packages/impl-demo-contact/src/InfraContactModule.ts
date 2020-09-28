@@ -1,4 +1,4 @@
-import {AbstractModule, MessageBus, MessageBusSymbol} from '@dorders/framework';
+import {AbstractModule, LoggerFactory, LoggerFactorySymbol, MessageBus, MessageBusSymbol} from '@dorders/framework';
 import {
   ContactFactory,
   ContactFactorySymbol,
@@ -35,11 +35,13 @@ export class InfraContactModule extends AbstractModule {
     this.registry.registerFactory<SerializedContactRepository>(SerializedContactRepositorySymbol, (registry) => new SerializedContactRepository(
       registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol),
       registry.resolve<PublicProfileReferenceDeserializer>(PublicProfileReferenceDeserializerSymbol),
-      registry.resolve<ContactFactory>(ContactFactorySymbol)
+      registry.resolve<ContactFactory>(ContactFactorySymbol),
+      registry.resolve<LoggerFactory>(LoggerFactorySymbol)
     ), {singleton: true});
 
     this.registry.registerFactory<ContactRepository>(ContactRepositorySymbol, (registry) => new SimpleContactRepository(
-      registry.resolve<SerializedContactRepository>(SerializedContactRepositorySymbol)
+      registry.resolve<SerializedContactRepository>(SerializedContactRepositorySymbol),
+      registry.resolve<LoggerFactory>(LoggerFactorySymbol)
     ), {singleton: true});
 
     // FACTORIES
@@ -53,7 +55,8 @@ export class InfraContactModule extends AbstractModule {
 
     this.registry.registerFactory<ContactSynchronizationService>(ContactSynchronizationServiceSymbol, (registry) => new SimpleContactSynchronizationService(
       registry.resolve<MessageBus>(MessageBusSymbol),
-      registry.resolve<SimpleContactRepository>(ContactRepositorySymbol)
+      registry.resolve<SimpleContactRepository>(ContactRepositorySymbol),
+      registry.resolve<LoggerFactory>(LoggerFactorySymbol)
     ), {singleton: true});
 
   }

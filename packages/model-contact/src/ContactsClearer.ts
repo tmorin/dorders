@@ -2,6 +2,7 @@ import {ProfileDeleted} from '@dorders/model-profile';
 import {ContactsCleared} from './ContactsCleared';
 import {Component, LoggerFactory, MessageBus} from '@dorders/framework';
 import {ContactRepository} from './ContactRepository';
+import {ContactDeleted} from './ContactDeleted';
 
 export class ContactsClearer extends Component {
 
@@ -24,7 +25,17 @@ export class ContactsClearer extends Component {
     this.logger.debug('on %o', event)
 
     // remove them from the repository
-    await this.contactRepository.clear(event.body.profileId);
+    const contacts = await this.contactRepository.clear(event.body.profileId);
+
+    // apply the ContactDeleted events
+    for (const contact of contacts) {
+      const contactDeleted = new ContactDeleted({
+        profileId: event.body.profileId,
+        contactId: contact.contactId
+      });
+      await contact.applyContactDeleted(contactDeleted);
+      await this.messageBus.publish(contactDeleted);
+    }
 
     // notify the ending of the process
     await this.messageBus.publish(new ContactsCleared({

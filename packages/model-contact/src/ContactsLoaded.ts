@@ -9,7 +9,7 @@ export type ContactLoadedBody = {
  * The contacts of a profile have been loaded.
  */
 export class ContactsLoaded extends Event<ContactLoadedBody> {
-  public static readonly EVENT_NAME = Symbol.for(`profile/${ContactsLoaded.name}`);
+  public static readonly EVENT_NAME = Symbol.for(`contact/${ContactsLoaded.name}`);
 
   constructor(body: ContactLoadedBody) {
     super(body, ContactsLoaded.EVENT_NAME);

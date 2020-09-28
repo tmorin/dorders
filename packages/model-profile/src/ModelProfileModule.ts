@@ -1,4 +1,11 @@
-import {AbstractModule, CommandHandlerSymbol, ComponentSymbol, MessageBus, MessageBusSymbol} from '@dorders/framework';
+import {
+  AbstractModule,
+  CommandHandlerSymbol,
+  ComponentSymbol,
+  LoggerFactory, LoggerFactorySymbol,
+  MessageBus,
+  MessageBusSymbol
+} from '@dorders/framework';
 import {CreateProfileHandler} from './CreateProfile';
 import {PrivateProfileFactory, PrivateProfileFactorySymbol} from './PrivateProfileFactory';
 import {PrivateProfileRepository, PrivateProfileRepositorySymbol} from './PrivateProfileRepository';
@@ -68,7 +75,8 @@ export class ModelProfileModule extends AbstractModule {
       ComponentSymbol,
       registry => new ProfilesLoader(
         registry.resolve<MessageBus>(MessageBusSymbol),
-        registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol)
+        registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol),
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {
         singleton: true
@@ -80,7 +88,8 @@ export class ModelProfileModule extends AbstractModule {
       registry => new ProfileSynchronizer(
         registry.resolve<MessageBus>(MessageBusSymbol),
         registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol),
-        registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol)
+        registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol),
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
       ),
       {
         singleton: true

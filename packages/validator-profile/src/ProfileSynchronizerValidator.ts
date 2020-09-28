@@ -3,7 +3,7 @@ import {
   CreateProfile,
   ImportProfile,
   PrivateProfileRepository,
-  PrivateProfileRepositorySymbol,
+  PrivateProfileRepositorySymbol, ProfileCardUpdated,
   ProfileCreated,
   ProfileSynchronized,
   UpdateProfileCard
@@ -29,7 +29,7 @@ export class ProfileSynchronizerValidator extends AbstractContainedValidator {
     await container1.messageBus.execute<ProfileCreated>(new ImportProfile({serializedReference: profileARefAsString}));
     await waitForSynchronization;
 
-    waitForSynchronization = waitForOnce(container1, ProfileSynchronized.EVENT_NAME);
+    waitForSynchronization = waitForOnce(container1, ProfileSynchronized.EVENT_NAME, ProfileCardUpdated.EVENT_NAME);
     await container0.messageBus.execute(new UpdateProfileCard({
       profileId: profileACreated0.body.profileId,
       profileCard: 'profile card bis'
