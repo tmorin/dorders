@@ -64,10 +64,13 @@ package contact {
   service('ContactSynchronizationService')
   event('ContactCreated')
   event('ContactSynchronized')
+  aggregate('Contact')
 }
 ContactCreated --> ContactSynchronizer : triggers
 ContactSynchronizer -r-> ContactSynchronizationService : monitor the ongoing synchronization
 ContactSynchronizationService --> ContactSynchronized : publishes
+ContactSynchronizationService --> Contact : loads
+ContactSynchronized -r-> Contact : applied on
 @enduml
 
 @startuml design_contact_eventstorming_contacts_synchronizer
@@ -82,12 +85,16 @@ package contact {
   event('ContactDeleted')
   event('ContactCreated')
   event('ContactsSynchronized')
+  aggregate('Contact')
 }
 ProfileSynchronized --> ContactsSynchronizer : triggers
 ContactsSynchronizer -r-> ContactSynchronizationService : check ongoing synchronizations
 ContactSynchronizationService --> ContactCreated : publishes
 ContactSynchronizationService --> ContactDeleted : publishes
 ContactsSynchronizer --> ContactsSynchronized : publishes
+ContactSynchronizationService --> Contact : creates or deletes
+ContactCreated -r-> Contact : applied on
+ContactDeleted -l-> Contact : applied on
 
 @enduml
 

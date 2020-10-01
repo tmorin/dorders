@@ -1,6 +1,7 @@
 import {
-  PrivateProfile,
+  PrivateProfileRepository,
   ProfileCardUpdated,
+  ProfileId,
   ProfileSynchronized,
   ProfileSynchronizerService
 } from '@dorders/model-profile';
@@ -14,12 +15,15 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
 
   constructor(
     private readonly bus: MessageBus,
-    private readonly loggerFactory: LoggerFactory
+    private readonly loggerFactory: LoggerFactory,
+    private readonly privateProfileRepository: PrivateProfileRepository
   ) {
     this.logger = loggerFactory.create(SimpleProfileSynchronizerService.name)
   }
 
-  async startOngoingSynchronization(profile: PrivateProfile): Promise<void> {
+  async startOngoingSynchronization(profileId: ProfileId): Promise<void> {
+    const profile = await this.privateProfileRepository.get(profileId);
+
     const simplePrivateProfile = SimplePrivateProfile.from(profile);
 
     simplePrivateProfile.privateMap.addObserver((newPrivateMap) => {
@@ -39,7 +43,7 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
       if (publishProfileSynchronized) {
         // notify profile cad changed
         this.bus.publish(new ProfileCardUpdated({
-          profileId: profile.profileId, 
+          profileId: profile.profileId,
           profileCard: newPublicCard
         }));
       }

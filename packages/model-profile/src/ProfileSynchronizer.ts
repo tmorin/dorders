@@ -23,8 +23,7 @@ export class ProfileSynchronizer extends Component {
 
   async onProfileCreated(profileCreated: ProfileCreated) {
     this.logger.debug('on %o', profileCreated);
-    const profile = await this.privateProfileRepository.get(profileCreated.body.profileId);
-    await this.profileSynchronizerService.startOngoingSynchronization(profile);
+    await this.profileSynchronizerService.startOngoingSynchronization(profileCreated.body.profileId);
   }
 
 }

@@ -3,7 +3,7 @@ import {startDemoContainers} from './__helpers__/container';
 import {disposeContainers, waitForMany} from '@dorders/infra-test';
 import {
   PrivateProfileFactory,
-  PrivateProfileFactorySymbol,
+  PrivateProfileFactorySymbol, PrivateProfileRepository, PrivateProfileRepositorySymbol,
   ProfileSynchronized,
   ProfileSynchronizerService,
   ProfileSynchronizerServiceSymbol
@@ -29,23 +29,29 @@ describe('SimpleProfileSynchronizerService', function () {
     const waitProfileSynchronized2 = waitForMany(container2, ProfileSynchronized.EVENT_NAME, 2);
 
     const privateProfileFactory0 = container0.registry.resolve<PrivateProfileFactory>(PrivateProfileFactorySymbol);
+    const privateProfileRepository0 = container0.registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol);
     const privateProfile0A = await privateProfileFactory0.createFromScratch();
     const privateProfileReferenceA = await privateProfile0A.getReference();
+    await privateProfileRepository0.add(privateProfile0A);
 
     const profileSynchronizerService0 = container0.registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol);
-    await profileSynchronizerService0.startOngoingSynchronization(privateProfile0A);
+    await profileSynchronizerService0.startOngoingSynchronization(privateProfile0A.profileId);
 
     const privateProfileFactory1 = container1.registry.resolve<PrivateProfileFactory>(PrivateProfileFactorySymbol);
+    const privateProfileRepository1 = container1.registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol);
     const privateProfile1A = await privateProfileFactory1.createFromReference(privateProfileReferenceA);
+    await privateProfileRepository1.add(privateProfile1A);
 
     const profileSynchronizerService1 = container1.registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol);
-    await profileSynchronizerService1.startOngoingSynchronization(privateProfile1A);
+    await profileSynchronizerService1.startOngoingSynchronization(privateProfile1A.profileId);
 
     const privateProfileFactory2 = container2.registry.resolve<PrivateProfileFactory>(PrivateProfileFactorySymbol);
+    const privateProfileRepository2 = container2.registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol);
     const privateProfile2A = await privateProfileFactory2.createFromReference(privateProfileReferenceA);
-
+    await privateProfileRepository2.add(privateProfile2A);
+    
     const profileSynchronizerService2 = container2.registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol);
-    await profileSynchronizerService2.startOngoingSynchronization(privateProfile2A);
+    await profileSynchronizerService2.startOngoingSynchronization(privateProfile2A.profileId);
 
     const simplePrivateProfile0A = SimplePrivateProfile.from(privateProfile0A);
     const simplePrivateProfile1A = SimplePrivateProfile.from(privateProfile1A);

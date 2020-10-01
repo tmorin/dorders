@@ -562,7 +562,7 @@ The mechanism can be foreground as well as background.
 The process `ProfileSynchronizer` is responsible to deal with the ongoing synchronizations.
 Its purpose is to start or monitor the ongoing synchronizations as well as the publication of events accordingly.
 
-For each published `ProfileCreated` event, the process loads the related aggregate and delegates to the infrastructure side the management of the synchronization as well as the eventual publication of events `ProfileSynchronized`.
+For each published `ProfileCreated` event, the process loads the related aggregate and delegates to the `ProfileSynchronizerService` the management of the synchronization as well as the eventual publication of events `ProfileSynchronized`.
 
 .EventStorming Diagram of the profile module - start or monitor the ongoing synchronizations
 image::design_profile_eventstorming_synchronize_profiles.png[]
@@ -578,6 +578,8 @@ On the other side, the value object `PublicProfile` is also an interface which e
 The factory `PrivateProfileFactory` is an interface which is responsible to create instances of `PrivateProfile`.
 
 The repository `PrivateProfileRepository` is an interface which is responsible to persist and load instances of `PrivateProfile`.
+
+The service `ProfileSynchronizerService` is an interface which is responsible to start and/or monitor the peer-to-peer syncrhonizaton private profiles.
 
 .UML Class Diagram of the profile module
 image::design_profile_model.png[]
@@ -718,17 +720,18 @@ image::design_contact_model.png[]
 
 == Prototypes
 
-=== IPFS and OrbitDB
+=== Demonstration
 
+The demonstration prototype implements the `dorders` model from an in memory and volatile point of view.
+
+Its main purpose is to validate the module.
+
+// === IPFS and OrbitDB
 // https://github.com/ipfs/ipfs
-
-=== IPFS alone
-
+// === IPFS alone
 // https://github.com/ipfs/ipfs
 // https://github.com/orbitdb/welcome
-
-=== Blockstack
-
+// === Blockstack
 // https://blockstack.org/
 
 [glossary]

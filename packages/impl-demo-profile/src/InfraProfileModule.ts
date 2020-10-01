@@ -59,7 +59,8 @@ export class InfraProfileModule extends AbstractModule {
       ProfileSynchronizerServiceSymbol,
       (registry) => new SimpleProfileSynchronizerService(
         registry.resolve<MessageBus>(MessageBusSymbol),
-        registry.resolve<LoggerFactory>(LoggerFactorySymbol)
+        registry.resolve<LoggerFactory>(LoggerFactorySymbol),
+        registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol)
       ),
       {singleton: true}
     );

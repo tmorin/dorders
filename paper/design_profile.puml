@@ -30,8 +30,8 @@ package profile {
 
 ProfileCreated -d-> ProfileSynchronizer : triggers
 ProfileSynchronizer -r-> ProfileSynchronizerService : starts the ongoing synchronization
-ProfileSynchronizerService --> PrivateProfile : loads
 ProfileSynchronizerService --> ProfileSynchronized : publishes
+ProfileSynchronizerService --> PrivateProfile : loads
 ProfileSynchronized -r-> PrivateProfile : applied on
 @enduml
 
