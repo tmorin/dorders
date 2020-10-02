@@ -37,7 +37,7 @@ Implementation of test suites validating the implementations of the `dorders`'s 
 - [@dorders/validator-profile](packages/validator-profile)
 - [@dorders/validator-contact](packages/validator-contact)
 
-Implementation of some framework's artifacts:
+Implementation of some framework's artifacts for testing purpose:
 
 - [@dorders/infra-test](packages/infra-test)
 
