@@ -724,7 +724,7 @@ image::design_contact_model.png[]
 
 The demonstration prototype implements the `dorders` model from an in memory and volatile point of view.
 
-Its main purpose is to validate the module.
+Its main purpose is to validate the `dorders` model.
 
 // === IPFS and OrbitDB
 // https://github.com/ipfs/ipfs
