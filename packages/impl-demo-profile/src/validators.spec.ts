@@ -6,7 +6,7 @@ import {
   ProfilesLoaderValidator,
   ProfileSynchronizerValidator,
   UpdateProfileCardValidator
-} from '@dorders/validator-profile';
+} from '@dorders/profile-validator';
 
 describe('validators', function () {
 

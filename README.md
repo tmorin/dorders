@@ -34,7 +34,7 @@ Implementation of the `dorders`'s model:
 Implementation of test suites validating the implementations of the `dorders`'s model.  
 
 - [@dorders/validator-peer](packages/peer-validator)
-- [@dorders/validator-profile](packages/validator-profile)
+- [@dorders/validator-profile](packages/profile-validator)
 - [@dorders/validator-contact](packages/contact-validator)
 
 Implementation of some framework's artifacts for testing purpose:
