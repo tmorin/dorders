@@ -45,7 +45,7 @@ The in-memory implementation of the `dorders` model:
 
 - [@dorders/impl-demo-peer](packages/impl-demo-peer)
 - [@dorders/impl-demo-profile](packages/impl-demo-profile)
-- [@dorders/impl-demo-contact](packages/impl-demo-contact)
+- [@dorders/impl-demo-contact](packages/contact-impl-demo)
 
 ## Build
 
