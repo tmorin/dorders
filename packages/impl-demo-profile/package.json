@@ -17,7 +17,7 @@
     "@dorders/fwk-infra-config-inmemory": "0.0.0-alpha.0",
     "@dorders/fwk-infra-logger-console": "0.0.0-alpha.0",
     "@dorders/peer-model": "0.0.0-alpha.0",
-    "@dorders/model-profile": "0.0.0-alpha.0",
+    "@dorders/profile-model": "0.0.0-alpha.0",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

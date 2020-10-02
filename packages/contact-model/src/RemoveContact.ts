@@ -1,4 +1,4 @@
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 import {ContactDeleted} from './ContactDeleted';
 import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';

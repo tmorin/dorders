@@ -28,7 +28,7 @@ Implementation of some framework's artifacts:
 Implementation of the `dorders`'s model:
 
 - [@dorders/model-peer](packages/peer-model)
-- [@dorders/model-profile](packages/model-profile)
+- [@dorders/model-profile](packages/profile-model)
 - [@dorders/model-contact](packages/contact-model)
 
 Implementation of test suites validating the implementations of the `dorders`'s model.  

@@ -1,5 +1,5 @@
 import {ProfileMap} from './ProfileMap';
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 
 export interface ProfileMaps {
   profileId: ProfileId

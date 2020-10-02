@@ -2,7 +2,7 @@ import {
   PrivateProfileReference,
   PrivateProfileReferenceDeserializer,
   SerializedPrivateProfileReference
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimplePrivateProfileReference} from './SimplePrivateProfileReference';
 
 export class SimplePrivateProfileReferenceDeserializer implements PrivateProfileReferenceDeserializer {

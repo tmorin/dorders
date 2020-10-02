@@ -1,7 +1,7 @@
 import {SimpleContact} from './SimpleContact';
 import {ProfileMap, SimplePublicProfile} from '@dorders/impl-demo-profile';
 import {Contact, ContactCreated, ContactDeleted, ContactId, ContactRenamed} from '@dorders/contact-model';
-import {ProfileId, PublicProfile} from '@dorders/model-profile';
+import {ProfileId, PublicProfile} from '@dorders/profile-model';
 
 class DummyContact implements Contact {
   readonly contactId: ContactId = 'contactId';

@@ -1,5 +1,5 @@
 import {SimplePrivateProfile} from './SimplePrivateProfile';
-import {PrivateProfile, ProfileId} from '@dorders/model-profile';
+import {PrivateProfile, ProfileId} from '@dorders/profile-model';
 import {ProfileMap} from '../map';
 
 describe('SimplePrivateProfile', function () {

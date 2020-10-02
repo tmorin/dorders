@@ -1,5 +1,5 @@
 import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
-import {ProfileId, PublicProfileReferenceDeserializer, SerializedPublicProfileReference} from '@dorders/model-profile';
+import {ProfileId, PublicProfileReferenceDeserializer, SerializedPublicProfileReference} from '@dorders/profile-model';
 import {ContactCreated} from './ContactCreated';
 import {ContactFactory} from './ContactFactory';
 import {ContactRepository} from './ContactRepository';

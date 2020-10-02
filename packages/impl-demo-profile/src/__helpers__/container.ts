@@ -1,5 +1,5 @@
 import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
-import {ModelProfileModule} from '@dorders/model-profile';
+import {ModelProfileModule} from '@dorders/profile-model';
 import {InfraProfileModule} from '../';
 import {Container, Module} from '@dorders/fwk-model-core';
 import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';

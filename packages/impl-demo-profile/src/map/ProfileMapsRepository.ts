@@ -1,4 +1,4 @@
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 import {ProfileMaps} from './ProfileMaps';
 import {ProfileConfigProvider} from '../ProfileConfigProvider';
 

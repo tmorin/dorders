@@ -16,7 +16,7 @@ import {RemoveContactHandler} from './RemoveContact';
 import {RenameContactHandler} from './RenameContact';
 import {ContactFactory, ContactFactorySymbol} from './ContactFactory';
 import {ContactRepository, ContactRepositorySymbol} from './ContactRepository';
-import {PublicProfileReferenceDeserializer, PublicProfileReferenceDeserializerSymbol} from '@dorders/model-profile';
+import {PublicProfileReferenceDeserializer, PublicProfileReferenceDeserializerSymbol} from '@dorders/profile-model';
 import {ContactSynchronizationService, ContactSynchronizationServiceSymbol} from './ContactSynchronizationService';
 
 export class ModelContactModule extends AbstractModule {

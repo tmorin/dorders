@@ -4,7 +4,7 @@ import {
   ProfileId,
   ProfileSynchronized,
   ProfileSynchronizerService
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimplePrivateProfile} from './private';
 import {Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
 import {ProfileMapKey} from './map';

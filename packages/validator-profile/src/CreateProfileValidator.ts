@@ -4,7 +4,7 @@ import {
   PrivateProfileRepository,
   PrivateProfileRepositorySymbol,
   ProfileCreated
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 
 export class CreateProfileValidator extends AbstractContainedValidator {
 

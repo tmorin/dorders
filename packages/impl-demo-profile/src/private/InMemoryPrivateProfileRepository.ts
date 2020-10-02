@@ -1,4 +1,4 @@
-import {PrivateProfile, PrivateProfileRepository, ProfileId} from '@dorders/model-profile';
+import {PrivateProfile, PrivateProfileRepository, ProfileId} from '@dorders/profile-model';
 import {SimplePrivateProfile} from './SimplePrivateProfile';
 
 export class InMemoryPrivateProfileRepository implements PrivateProfileRepository {

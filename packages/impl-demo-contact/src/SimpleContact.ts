@@ -1,5 +1,5 @@
 import {Contact, ContactCreated, ContactDeleted, ContactId, ContactRenamed} from '@dorders/contact-model';
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 import {SimplePublicProfile} from '@dorders/impl-demo-profile';
 
 export class SimpleContact implements Contact {

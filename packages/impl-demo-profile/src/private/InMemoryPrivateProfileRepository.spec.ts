@@ -4,7 +4,7 @@ import {
   PrivateProfileFactorySymbol,
   PrivateProfileRepository,
   PrivateProfileRepositorySymbol
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {DemoContainers} from '../__helpers__/container';
 
 describe('InMemoryPrivateProfileRepository', function () {

@@ -1,5 +1,5 @@
 import {Containers, waitForMany, waitForOnce} from '@dorders/fwk-model-test';
-import {DeleteProfile, ProfileDeleted} from '@dorders/model-profile';
+import {DeleteProfile, ProfileDeleted} from '@dorders/profile-model';
 import {AbstractContactValidator} from './AbstractContactValidator';
 import {ContactDeleted, ContactsCleared} from '@dorders/contact-model';
 

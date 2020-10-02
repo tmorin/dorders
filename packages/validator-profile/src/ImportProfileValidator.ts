@@ -6,7 +6,7 @@ import {
   PrivateProfileRepositorySymbol,
   ProfileCreated,
   ProfileSynchronized
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 
 export class ImportProfileValidator extends AbstractContainedValidator {
 

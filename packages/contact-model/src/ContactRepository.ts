@@ -1,5 +1,5 @@
 import {Contact, ContactId} from './Contact';
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 
 /**
  * Used as injection point.

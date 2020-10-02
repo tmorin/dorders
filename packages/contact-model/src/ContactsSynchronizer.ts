@@ -1,4 +1,4 @@
-import {ProfileSynchronized} from '@dorders/model-profile';
+import {ProfileSynchronized} from '@dorders/profile-model';
 import {ContactsSynchronized} from './ContactsSynchronized';
 import {ContactSynchronizationService} from './ContactSynchronizationService';
 import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';

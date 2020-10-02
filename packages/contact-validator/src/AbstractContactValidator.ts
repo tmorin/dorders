@@ -11,7 +11,7 @@ import {
   PublicProfileReference,
   SerializedPrivateProfileReference,
   SerializedPublicProfileReference
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {AddContact, ContactCreated, ContactDeleted, ContactId, RemoveContact} from '@dorders/contact-model';
 import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 

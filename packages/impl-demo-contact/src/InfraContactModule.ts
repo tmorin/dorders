@@ -22,7 +22,7 @@ import {
   PrivateProfileRepositorySymbol,
   PublicProfileReferenceDeserializer,
   PublicProfileReferenceDeserializerSymbol
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 
 export class InfraContactModule extends AbstractModule {
 

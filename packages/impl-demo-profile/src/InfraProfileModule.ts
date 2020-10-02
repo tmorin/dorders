@@ -18,7 +18,7 @@ import {
   ProfileSynchronizerServiceSymbol,
   PublicProfileReferenceDeserializer,
   PublicProfileReferenceDeserializerSymbol
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimplePublicProfileReferenceDeserializer} from './public';
 import {
   InMemoryPrivateProfileRepository,

@@ -1,6 +1,6 @@
 import {Container} from '@dorders/fwk-model-core';
 import {DemoContainers} from '../__helpers__/container';
-import {PrivateProfileFactory, PrivateProfileFactorySymbol} from '@dorders/model-profile';
+import {PrivateProfileFactory, PrivateProfileFactorySymbol} from '@dorders/profile-model';
 import {SimplePrivateProfile} from './SimplePrivateProfile';
 import {ProfileMapKey} from '../map';
 

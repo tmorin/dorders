@@ -7,7 +7,7 @@ import {
   ProfileId,
   ProfileSynchronized,
   PublicProfile
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimplePublicProfile} from '../public';
 import {SimplePrivateProfileReference} from './SimplePrivateProfileReference';
 import {ProfileMap, ProfileMapKey} from '../map';

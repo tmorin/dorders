@@ -1,4 +1,4 @@
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 import {Event} from '@dorders/fwk-model-core';
 
 export type ContactsSynchronizedBody = {

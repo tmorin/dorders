@@ -1,4 +1,4 @@
-import {ProfileId, PublicProfileReference, SerializedPublicProfileReference} from '@dorders/model-profile';
+import {ProfileId, PublicProfileReference, SerializedPublicProfileReference} from '@dorders/profile-model';
 
 export class SimplePublicProfileReference implements PublicProfileReference {
 

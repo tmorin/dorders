@@ -3,7 +3,7 @@ import {
   ProfileId,
   PublicProfileReferenceDeserializer,
   SerializedPublicProfileReference
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimpleContact} from './SimpleContact';
 import {ContactMapKey} from './ContactMapKey';
 import {Contact, ContactFactory, ContactRenamed} from '@dorders/contact-model';

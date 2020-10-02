@@ -1,5 +1,5 @@
 import {Container} from '@dorders/fwk-model-core';
-import {PublicProfileReferenceDeserializer, PublicProfileReferenceDeserializerSymbol} from '@dorders/model-profile';
+import {PublicProfileReferenceDeserializer, PublicProfileReferenceDeserializerSymbol} from '@dorders/profile-model';
 import {SimplePublicProfileReference} from './SimplePublicProfileReference';
 import {DemoContainers} from '../__helpers__/container';
 

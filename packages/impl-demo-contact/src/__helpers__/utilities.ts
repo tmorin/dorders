@@ -7,7 +7,7 @@ import {
   PrivateProfileRepositorySymbol,
   ProfileCardUpdated,
   ProfileId
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimpleContact} from '../SimpleContact';
 import {ContactFactory, ContactFactorySymbol} from '@dorders/contact-model';
 

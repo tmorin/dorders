@@ -1,5 +1,5 @@
 import {ContactId} from './Contact';
-import {ProfileId} from '@dorders/model-profile';
+import {ProfileId} from '@dorders/profile-model';
 
 export const ContactSynchronizationServiceSymbol = Symbol.for('ContactSynchronizationService');
 

@@ -8,7 +8,7 @@ import {
   ProfileCreated,
   ProfileSynchronized,
   UpdateProfileCard
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 
 export class ProfileSynchronizerValidator extends AbstractContainedValidator {
 

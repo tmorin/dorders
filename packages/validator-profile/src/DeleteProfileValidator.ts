@@ -6,7 +6,7 @@ import {
   PrivateProfileRepositorySymbol,
   ProfileCreated,
   ProfileDeleted
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 
 export class DeleteProfileValidator extends AbstractContainedValidator {
 

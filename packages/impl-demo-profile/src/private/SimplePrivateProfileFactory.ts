@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import {PrivateProfile, PrivateProfileFactory, PrivateProfileReference, ProfileId} from '@dorders/model-profile';
+import {PrivateProfile, PrivateProfileFactory, PrivateProfileReference, ProfileId} from '@dorders/profile-model';
 import {SimplePrivateProfile} from './SimplePrivateProfile';
 import {ProfileConfigProvider} from '../ProfileConfigProvider';
 import {ProfileMap, ProfileMapKey, ProfileMapsRepository} from '../map';

@@ -7,7 +7,7 @@ import {
   ProfileSynchronized,
   ProfileSynchronizerService,
   ProfileSynchronizerServiceSymbol
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimplePrivateProfile} from './private';
 import {Container} from '@dorders/fwk-model-core';
 import {waitForMany} from '@dorders/fwk-model-test';

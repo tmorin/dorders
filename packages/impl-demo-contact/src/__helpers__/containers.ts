@@ -2,7 +2,7 @@ import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
 import {Container} from '@dorders/fwk-model-core';
 import {ModelContactModule} from '@dorders/contact-model';
 import {InfraContactModule} from '../InfraContactModule';
-import {ModelProfileModule} from '@dorders/model-profile';
+import {ModelProfileModule} from '@dorders/profile-model';
 import {InfraProfileModule} from '@dorders/impl-demo-profile';
 import {ModelPeerModule} from '@dorders/peer-model';
 import {InfraPeerModule} from '@dorders/impl-demo-peer';

@@ -1,4 +1,4 @@
-import {ProfileCard, ProfileId, PublicProfile, PublicProfileReference} from '@dorders/model-profile';
+import {ProfileCard, ProfileId, PublicProfile, PublicProfileReference} from '@dorders/profile-model';
 import {SimplePublicProfileReference} from './SimplePublicProfileReference';
 import {valueAsString} from '@dorders/fwk-model-core';
 import {ProfileMap, ProfileMapKey} from '../map';

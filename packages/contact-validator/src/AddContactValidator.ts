@@ -1,4 +1,4 @@
-import {CreateProfile, ProfileCreated} from '@dorders/model-profile';
+import {CreateProfile, ProfileCreated} from '@dorders/profile-model';
 import {AbstractContactValidator, getSerializedPublicReference} from './AbstractContactValidator';
 import {AddContact, ContactCreated, ContactRepository, ContactRepositorySymbol} from '@dorders/contact-model';
 import {Containers, waitForOnce} from '@dorders/fwk-model-test';

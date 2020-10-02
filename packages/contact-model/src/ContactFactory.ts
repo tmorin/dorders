@@ -1,4 +1,4 @@
-import {ProfileId, PublicProfileReference} from '@dorders/model-profile';
+import {ProfileId, PublicProfileReference} from '@dorders/profile-model';
 import {Contact} from './Contact';
 
 export const ContactFactorySymbol = Symbol.for('ContactFactory');

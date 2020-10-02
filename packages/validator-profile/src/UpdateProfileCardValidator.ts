@@ -1,5 +1,5 @@
 import {AbstractContainedValidator, Containers} from '@dorders/fwk-model-test';
-import {CreateProfile, ProfileCardUpdated, ProfileCreated, UpdateProfileCard} from '@dorders/model-profile';
+import {CreateProfile, ProfileCardUpdated, ProfileCreated, UpdateProfileCard} from '@dorders/profile-model';
 
 export class UpdateProfileCardValidator extends AbstractContainedValidator {
 

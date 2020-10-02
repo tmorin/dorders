@@ -2,7 +2,7 @@ import {
   PublicProfileReference,
   PublicProfileReferenceDeserializer,
   SerializedPublicProfileReference
-} from '@dorders/model-profile';
+} from '@dorders/profile-model';
 import {SimplePublicProfileReference} from './SimplePublicProfileReference';
 
 export class SimplePublicProfileReferenceDeserializer implements PublicProfileReferenceDeserializer {
