@@ -9,7 +9,7 @@ import {
   MessageBus,
   MessageBusSymbol
 } from '@dorders/fwk-model-core';
-import {InMemoryConfigProvider} from '@dorders/infra-config-inmemory';
+import {InMemoryConfigProvider} from '@dorders/fwk-infra-config-inmemory';
 import {LocalMessageBus} from '@dorders/fwk-infra-bus-local';
 import {ConsoleLoggerFactory} from '@dorders/fwk-infra-logger-console';
 import {ConfigsTestProviderSymbol, DefaultConfigsTestProvider} from '@dorders/fwk-model-test';
