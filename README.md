@@ -44,7 +44,7 @@ Implementation of some framework's artifacts for testing purpose:
 The in-memory implementation of the `dorders` model:
 
 - [@dorders/impl-demo-peer](packages/peer-impl-demo)
-- [@dorders/impl-demo-profile](packages/impl-demo-profile)
+- [@dorders/impl-demo-profile](packages/profile-impl-demo)
 - [@dorders/impl-demo-contact](packages/contact-impl-demo)
 
 ## Build

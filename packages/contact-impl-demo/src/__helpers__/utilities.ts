@@ -1,4 +1,4 @@
-import {SimplePrivateProfile} from '@dorders/impl-demo-profile';
+import {SimplePrivateProfile} from '../../../profile-impl-demo';
 import {Container} from '@dorders/fwk-model-core';
 import {
   PrivateProfileFactory,

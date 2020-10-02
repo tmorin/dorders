@@ -1,5 +1,5 @@
 import {SimpleContact} from './SimpleContact';
-import {ProfileMap, SimplePublicProfile} from '@dorders/impl-demo-profile';
+import {ProfileMap, SimplePublicProfile} from '../../profile-impl-demo';
 import {Contact, ContactCreated, ContactDeleted, ContactId, ContactRenamed} from '@dorders/contact-model';
 import {ProfileId, PublicProfile} from '@dorders/profile-model';
 

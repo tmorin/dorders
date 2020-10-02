@@ -13,7 +13,7 @@ import {
   ProfileConfigProviderSymbol,
   ProfileMapsRepository,
   ProfileMapsRepositorySymbol
-} from '@dorders/impl-demo-profile';
+} from '../../profile-impl-demo';
 import {SimpleContactRepository} from './SimpleContactRepository';
 import {SimpleContactSynchronizationService} from './SimpleContactSynchronizationService';
 import {SerializedContactRepository, SerializedContactRepositorySymbol} from './SerializedContactRepository';

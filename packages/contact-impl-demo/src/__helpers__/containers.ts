@@ -3,7 +3,7 @@ import {Container} from '@dorders/fwk-model-core';
 import {ModelContactModule} from '@dorders/contact-model';
 import {InfraContactModule} from '../InfraContactModule';
 import {ModelProfileModule} from '@dorders/profile-model';
-import {InfraProfileModule} from '@dorders/impl-demo-profile';
+import {InfraProfileModule} from '../../../profile-impl-demo';
 import {ModelPeerModule} from '@dorders/peer-model';
 import {InfraPeerModule} from '../../../peer-impl-demo';
 import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';
