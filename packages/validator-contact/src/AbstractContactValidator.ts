@@ -12,7 +12,7 @@ import {
   SerializedPrivateProfileReference,
   SerializedPublicProfileReference
 } from '@dorders/model-profile';
-import {AddContact, ContactCreated, ContactDeleted, ContactId, RemoveContact} from '@dorders/model-contact';
+import {AddContact, ContactCreated, ContactDeleted, ContactId, RemoveContact} from '@dorders/contact-model';
 import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 
 export async function getPrivateReference(container: Container, profileId: ProfileId): Promise<PrivateProfileReference> {

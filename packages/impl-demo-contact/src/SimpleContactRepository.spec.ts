@@ -1,5 +1,5 @@
 import {toArray} from './__helpers__/utilities';
-import {Contact, ContactRepository, ContactRepositorySymbol} from '@dorders/model-contact';
+import {Contact, ContactRepository, ContactRepositorySymbol} from '@dorders/contact-model';
 import {SimpleContactRepository} from './SimpleContactRepository';
 import {SerializedContactRepository, SerializedContactRepositorySymbol} from './SerializedContactRepository';
 import {configureContextA, ContextA} from './__helpers__/contexts';

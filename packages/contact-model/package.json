@@ -1,5 +1,5 @@
 {
-  "name": "@dorders/model-contact",
+  "name": "@dorders/contact-model",
   "version": "0.0.0-alpha.0",
   "publishConfig": {
     "access": "public"

@@ -6,7 +6,7 @@ import {
   ContactRepositorySymbol,
   ContactSynchronizationService,
   ContactSynchronizationServiceSymbol
-} from '@dorders/model-contact';
+} from '@dorders/contact-model';
 import {SimpleContactFactory} from './SimpleContactFactory';
 import {
   ProfileConfigProvider,

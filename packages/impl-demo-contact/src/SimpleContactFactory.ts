@@ -1,4 +1,4 @@
-import {Contact, ContactFactory} from '@dorders/model-contact';
+import {Contact, ContactFactory} from '@dorders/contact-model';
 import {ProfileId, PublicProfileReference} from '@dorders/model-profile';
 import {ProfileConfigProvider, ProfileMapsRepository, SimplePublicProfile} from '@dorders/impl-demo-profile';
 import {SimpleContact} from './SimpleContact';

@@ -1,6 +1,6 @@
 import {Containers, waitForMany, waitForOnce} from '@dorders/fwk-model-test';
 import {AbstractContactValidator} from './AbstractContactValidator';
-import {ContactCreated, ContactsLoaded, ContactsSynchronized} from '@dorders/model-contact';
+import {ContactCreated, ContactsLoaded, ContactsSynchronized} from '@dorders/contact-model';
 
 export class ContactsLoaderValidator extends AbstractContactValidator {
 

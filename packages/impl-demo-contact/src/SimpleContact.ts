@@ -1,4 +1,4 @@
-import {Contact, ContactCreated, ContactDeleted, ContactId, ContactRenamed} from '@dorders/model-contact';
+import {Contact, ContactCreated, ContactDeleted, ContactId, ContactRenamed} from '@dorders/contact-model';
 import {ProfileId} from '@dorders/model-profile';
 import {SimplePublicProfile} from '@dorders/impl-demo-profile';
 

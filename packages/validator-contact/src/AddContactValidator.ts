@@ -1,6 +1,6 @@
 import {CreateProfile, ProfileCreated} from '@dorders/model-profile';
 import {AbstractContactValidator, getSerializedPublicReference} from './AbstractContactValidator';
-import {AddContact, ContactCreated, ContactRepository, ContactRepositorySymbol} from '@dorders/model-contact';
+import {AddContact, ContactCreated, ContactRepository, ContactRepositorySymbol} from '@dorders/contact-model';
 import {Containers, waitForOnce} from '@dorders/fwk-model-test';
 
 export class AddContactValidator extends AbstractContactValidator {

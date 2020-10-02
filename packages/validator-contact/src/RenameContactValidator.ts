@@ -1,6 +1,6 @@
 import {Containers, waitForOnce} from '@dorders/fwk-model-test';
 import {AbstractContactValidator} from './AbstractContactValidator';
-import {ContactRenamed, RenameContact} from '@dorders/model-contact';
+import {ContactRenamed, RenameContact} from '@dorders/contact-model';
 
 export class RenameContactValidator extends AbstractContactValidator {
 

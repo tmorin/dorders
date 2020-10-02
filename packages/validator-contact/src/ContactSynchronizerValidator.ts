@@ -6,7 +6,7 @@ import {
   ContactsSynchronized,
   ContactSynchronized,
   RenameContact
-} from '@dorders/model-contact';
+} from '@dorders/contact-model';
 import {ProfileSynchronized, UpdateProfileCard} from '@dorders/model-profile';
 
 export class ContactSynchronizerValidator extends AbstractContactValidator {

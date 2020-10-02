@@ -10,7 +10,7 @@ import {
   ContactSynchronizationService,
   ContactSynchronizationServiceSymbol,
   ContactSynchronized
-} from '@dorders/model-contact';
+} from '@dorders/contact-model';
 import {waitForMany} from '@dorders/fwk-model-test';
 
 describe('SimpleContactSynchronizationService', function () {

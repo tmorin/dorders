@@ -9,7 +9,7 @@ import {
   ProfileId
 } from '@dorders/model-profile';
 import {SimpleContact} from '../SimpleContact';
-import {ContactFactory, ContactFactorySymbol} from '@dorders/model-contact';
+import {ContactFactory, ContactFactorySymbol} from '@dorders/contact-model';
 
 export async function createPrivateProfile(container: Container, name?: string): Promise<SimplePrivateProfile> {
   const privateProfileFactory = container.registry.resolve<PrivateProfileFactory>(PrivateProfileFactorySymbol);

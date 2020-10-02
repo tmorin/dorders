@@ -4,7 +4,7 @@ import {
   ContactId,
   ContactSynchronizationService,
   ContactSynchronized
-} from '@dorders/model-contact';
+} from '@dorders/contact-model';
 import {ProfileId} from '@dorders/model-profile';
 import {SimpleContact} from './SimpleContact';
 import {Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';

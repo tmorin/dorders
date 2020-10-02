@@ -1,7 +1,7 @@
 import {Containers, waitForMany, waitForOnce} from '@dorders/fwk-model-test';
 import {DeleteProfile, ProfileDeleted} from '@dorders/model-profile';
 import {AbstractContactValidator} from './AbstractContactValidator';
-import {ContactDeleted, ContactsCleared} from '@dorders/model-contact';
+import {ContactDeleted, ContactsCleared} from '@dorders/contact-model';
 
 export class ContactClearerValidator extends AbstractContactValidator {
 

@@ -29,7 +29,7 @@ Implementation of the `dorders`'s model:
 
 - [@dorders/model-peer](packages/model-peer)
 - [@dorders/model-profile](packages/model-profile)
-- [@dorders/model-contact](packages/model-contact)
+- [@dorders/model-contact](packages/contact-model)
 
 Implementation of test suites validating the implementations of the `dorders`'s model.  
 

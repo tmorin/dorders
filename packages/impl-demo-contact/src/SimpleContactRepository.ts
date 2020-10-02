@@ -1,4 +1,4 @@
-import {Contact, ContactId, ContactRepository} from '@dorders/model-contact';
+import {Contact, ContactId, ContactRepository} from '@dorders/contact-model';
 import {ProfileId} from '@dorders/model-profile';
 import {SimpleContact} from './SimpleContact';
 import {SerializedContactRepository} from './SerializedContactRepository';

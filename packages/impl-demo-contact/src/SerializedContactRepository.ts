@@ -6,7 +6,7 @@ import {
 } from '@dorders/model-profile';
 import {SimpleContact} from './SimpleContact';
 import {ContactMapKey} from './ContactMapKey';
-import {Contact, ContactFactory, ContactRenamed} from '@dorders/model-contact';
+import {Contact, ContactFactory, ContactRenamed} from '@dorders/contact-model';
 import {SimplePrivateProfile} from '@dorders/impl-demo-profile';
 import {Logger, LoggerFactory} from '@dorders/fwk-model-core';
 
