@@ -30,6 +30,6 @@ export abstract class EventListener {
 
 export function listenEvents(...names: Array<EventName>) {
   return (constructor: Function) => {
-    constructor['__fwkHandledEventNames'] = names;
+    constructor.prototype['__fwkHandledEventNames'] = names;
   }
 }

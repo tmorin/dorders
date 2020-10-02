@@ -1,4 +1,10 @@
-import {AbstractModule, LoggerFactory, LoggerFactorySymbol, MessageBus, MessageBusSymbol} from '@dorders/fwk-model-core';
+import {
+  AbstractModule,
+  LoggerFactory,
+  LoggerFactorySymbol,
+  MessageBus,
+  MessageBusSymbol
+} from '@dorders/fwk-model-core';
 import {
   ContactFactory,
   ContactFactorySymbol,
@@ -35,8 +41,7 @@ export class InfraContactModule extends AbstractModule {
     this.registry.registerFactory<SerializedContactRepository>(SerializedContactRepositorySymbol, (registry) => new SerializedContactRepository(
       registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol),
       registry.resolve<PublicProfileReferenceDeserializer>(PublicProfileReferenceDeserializerSymbol),
-      registry.resolve<ContactFactory>(ContactFactorySymbol),
-      registry.resolve<LoggerFactory>(LoggerFactorySymbol)
+      registry.resolve<ContactFactory>(ContactFactorySymbol)
     ), {singleton: true});
 
     this.registry.registerFactory<ContactRepository>(ContactRepositorySymbol, (registry) => new SimpleContactRepository(

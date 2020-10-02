@@ -34,7 +34,7 @@ export interface MessageBus {
    * Call a query.
    * @param query the query
    */
-  call<Q extends Query>(query: Q): Promise<Result>
+  call<R extends Result = Result, Q extends Query = Query>(query: Q): Promise<R>
 
   /**
    * Publish events to the bus.

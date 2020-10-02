@@ -34,6 +34,6 @@ export abstract class QueryHandler<Q extends Query = Query, R extends Result = R
 
 export function handleQueries(...names: Array<QueryName>) {
   return (constructor: Function) => {
-    constructor['__fwkHandledQueryNames'] = names;
+    constructor.prototype['__fwkHandledQueryNames'] = names;
   }
 }

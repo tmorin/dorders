@@ -33,7 +33,7 @@ describe('LocalMessageBus/query', function () {
     const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     bus.registerQueryHandler(QueryA.name, new QueryAHandler());
     await bus.dispose();
-    await expect(bus.call(new QueryA())).rejects.toThrow('unable to found a command handler for (QueryA)')
+    await expect(bus.call(new QueryA())).rejects.toThrow('unable to found a query handler for (QueryA)')
   });
 
 });

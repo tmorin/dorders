@@ -1,8 +1,10 @@
 import {DemoContainers} from './__helpers__/container';
 import {
   CreateProfileValidator,
-  DeleteProfileValidator,
+  DeleteProfileValidator, 
+  GetProfileValidator,
   ImportProfileValidator,
+  ListProfileValidator,
   ProfilesLoaderValidator,
   ProfileSynchronizerValidator,
   UpdateProfileCardValidator
@@ -18,8 +20,16 @@ describe('validators', function () {
     await new DeleteProfileValidator(await DemoContainers.create()).test();
   });
 
+  it('should pass GetProfileValidator', async function () {
+    await new GetProfileValidator(await DemoContainers.create()).test();
+  });
+
   it('should pass ImportProfileValidator', async function () {
     await new ImportProfileValidator(await DemoContainers.create()).test();
+  });
+
+  it('should pass GetProfileValidator', async function () {
+    await new ListProfileValidator(await DemoContainers.create()).test();
   });
 
   it('should pass ProfilesLoaderValidator', async function () {

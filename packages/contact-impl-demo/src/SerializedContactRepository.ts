@@ -8,7 +8,6 @@ import {SimpleContact} from './SimpleContact';
 import {ContactMapKey} from './ContactMapKey';
 import {Contact, ContactFactory, ContactRenamed} from '@dorders/contact-model';
 import {SimplePrivateProfile} from '../../profile-impl-demo';
-import {Logger, LoggerFactory} from '@dorders/fwk-model-core';
 
 export type SerializedContact = {
   name: string
@@ -23,15 +22,11 @@ export const SerializedContactRepositorySymbol = Symbol.for('SerializedContactRe
 
 export class SerializedContactRepository {
 
-  private readonly logger: Logger
-
   public constructor(
     private readonly privateProfileRepository: PrivateProfileRepository,
     private readonly publicProfileReferenceDeserializer: PublicProfileReferenceDeserializer,
-    private readonly contactFactory: ContactFactory,
-    private readonly loggerFactory: LoggerFactory,
+    private readonly contactFactory: ContactFactory
   ) {
-    this.loggerFactory.create(SerializedContactRepository.name);
   }
 
   async persist(contact: SimpleContact) {

@@ -48,12 +48,13 @@ export class LocalMessageBus implements MessageBus {
     throw new Error(`unable to found a command handler for (${command.name.toString()})`,);
   }
 
-  async call<Q extends Query>(query: Q): Promise<Result> {
+  async call<R extends Result = Result, Q extends Query = Query>(query: Q): Promise<R> {
     this.logger.debug('execute query (%s)', query.name, query);
     if (this.queryHandlers.has(query.name)) {
+      // @ts-ignore
       return this.queryHandlers.get(query.name).handle(query);
     }
-    throw new Error(`unable to found a command handler for (${query.name.toString()})`,);
+    throw new Error(`unable to found a query handler for (${query.name.toString()})`,);
   }
 
   async publish<E extends Event>(...messages: Array<E>): Promise<void> {
