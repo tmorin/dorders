@@ -1,5 +1,5 @@
 {
-  "name": "@dorders/validator-peer",
+  "name": "@dorders/peer-validator",
   "version": "0.0.0-alpha.0",
   "publishConfig": {
     "access": "public"

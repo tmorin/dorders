@@ -1,4 +1,4 @@
-import {StartLocalPeerValidator, StopLocalPeerValidator} from '@dorders/validator-peer';
+import {StartLocalPeerValidator, StopLocalPeerValidator} from '@dorders/peer-validator';
 import {DemoContainers} from './__helpers__/container';
 
 describe('validators', function () {
