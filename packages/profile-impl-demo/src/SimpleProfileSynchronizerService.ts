@@ -21,18 +21,24 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
     this.logger = loggerFactory.create(SimpleProfileSynchronizerService.name)
   }
 
+  private async notifyProfileSynchronized(simplePrivateProfile: SimplePrivateProfile) {
+    const profileSynchronized = new ProfileSynchronized({profileId: simplePrivateProfile.profileId})
+    await simplePrivateProfile.applyProfilesSynchronized(profileSynchronized)
+    await this.bus.publish(profileSynchronized);
+  }
+
   async startOngoingSynchronization(profileId: ProfileId): Promise<void> {
     const profile = await this.privateProfileRepository.get(profileId);
 
     const simplePrivateProfile = SimplePrivateProfile.from(profile);
 
-    simplePrivateProfile.privateMap.addObserver((newPrivateMap) => {
+    simplePrivateProfile.privateMap.addObserver(async (newPrivateMap) => {
       this.logger.debug('private profile map of (%s) has mutated', profile.profileId);
       simplePrivateProfile.privateMap.replaceBy(newPrivateMap);
-      this.bus.publish(new ProfileSynchronized({profileId: profile.profileId}));
+      await this.notifyProfileSynchronized(simplePrivateProfile);
     });
 
-    simplePrivateProfile.publicMap.addObserver((newPublicMap) => {
+    simplePrivateProfile.publicMap.addObserver(async (newPublicMap) => {
       this.logger.debug('public profile map of (%s) has mutated', profile.profileId);
       // compare the public cards
       const oldPublicCard = simplePrivateProfile.publicMap.get(ProfileMapKey.publicCard);
@@ -41,20 +47,18 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
       // replace the public map
       simplePrivateProfile.publicMap.replaceBy(newPublicMap);
       if (publishProfileSynchronized) {
-        // notify profile cad changed
-        this.bus.publish(new ProfileCardUpdated({
+        const profileCardUpdated = new ProfileCardUpdated({
           profileId: profile.profileId,
           profileCard: newPublicCard
-        }));
+        });
+        await simplePrivateProfile.applyProfileCardUpdated(profileCardUpdated)
+        // notify profile cad changed
+        await this.bus.publish(profileCardUpdated);
       }
-      this.bus.publish(new ProfileSynchronized({
-        profileId: profile.profileId
-      }));
+      await this.notifyProfileSynchronized(simplePrivateProfile);
     });
 
-    await this.bus.publish(new ProfileSynchronized({
-      profileId: profile.profileId
-    }));
+    await this.notifyProfileSynchronized(simplePrivateProfile);
   }
 
 }
