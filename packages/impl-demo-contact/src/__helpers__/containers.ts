@@ -4,7 +4,7 @@ import {ModelContactModule} from '@dorders/contact-model';
 import {InfraContactModule} from '../InfraContactModule';
 import {ModelProfileModule} from '@dorders/model-profile';
 import {InfraProfileModule} from '@dorders/impl-demo-profile';
-import {ModelPeerModule} from '@dorders/model-peer';
+import {ModelPeerModule} from '@dorders/peer-model';
 import {InfraPeerModule} from '@dorders/impl-demo-peer';
 import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';
 import {StartOptions} from '@dorders/fwk-model-test';

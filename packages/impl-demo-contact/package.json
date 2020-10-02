@@ -17,7 +17,7 @@
     "@dorders/fwk-infra-config-inmemory": "0.0.0-alpha.0",
     "@dorders/fwk-infra-logger-console": "0.0.0-alpha.0",
     "@dorders/contact-model": "0.0.0-alpha.0",
-    "@dorders/model-peer": "0.0.0-alpha.0",
+    "@dorders/peer-model": "0.0.0-alpha.0",
     "@dorders/model-profile": "0.0.0-alpha.0",
     "uuid": "^8.3.0"
   },
@@ -29,7 +29,7 @@
     "@dorders/fwk-model-test": "0.0.0-alpha.0",
     "@dorders/impl-demo-peer": "0.0.0-alpha.0",
     "@dorders/impl-demo-profile": "0.0.0-alpha.0",
-    "@dorders/validator-contact": "0.0.0-alpha.0",
+    "@dorders/contact-validator": "0.0.0-alpha.0",
     "@types/uuid": "^8.0.0"
   }
 }

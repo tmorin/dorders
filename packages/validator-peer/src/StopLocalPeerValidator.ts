@@ -1,4 +1,4 @@
-import {LocalPeerStopped, StopLocalPeer} from '@dorders/model-peer';
+import {LocalPeerStopped, StopLocalPeer} from '@dorders/peer-model';
 import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 
 export class StopLocalPeerValidator extends AbstractContainedValidator {

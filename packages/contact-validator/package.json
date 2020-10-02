@@ -1,5 +1,5 @@
 {
-  "name": "@dorders/validator-contact",
+  "name": "@dorders/contact-validator",
   "version": "0.0.0-alpha.0",
   "publishConfig": {
     "access": "public"

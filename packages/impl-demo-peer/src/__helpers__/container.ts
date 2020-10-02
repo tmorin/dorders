@@ -1,4 +1,4 @@
-import {ModelPeerModule} from '@dorders/model-peer';
+import {ModelPeerModule} from '@dorders/peer-model';
 import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
 import {Container, Module} from '@dorders/fwk-model-core';
 import {InfraPeerModule} from '../';

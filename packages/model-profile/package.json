@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@dorders/fwk-model-core": "0.0.0-alpha.0",
-    "@dorders/model-peer": "0.0.0-alpha.0",
+    "@dorders/peer-model": "0.0.0-alpha.0",
     "schema-dts": "^0.7.1"
   }
 }

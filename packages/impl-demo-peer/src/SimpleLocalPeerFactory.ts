@@ -1,4 +1,4 @@
-import {LocalPeer, LocalPeerFactory} from '@dorders/model-peer';
+import {LocalPeer, LocalPeerFactory} from '@dorders/peer-model';
 import {SimpleLocalPeer} from './SimpleLocalPeer';
 import {LoggerFactory} from '@dorders/fwk-model-core';
 

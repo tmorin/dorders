@@ -16,7 +16,7 @@
     "@dorders/fwk-infra-bus-local": "0.0.0-alpha.0",
     "@dorders/fwk-infra-config-inmemory": "0.0.0-alpha.0",
     "@dorders/fwk-infra-logger-console": "0.0.0-alpha.0",
-    "@dorders/model-peer": "0.0.0-alpha.0",
+    "@dorders/peer-model": "0.0.0-alpha.0",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

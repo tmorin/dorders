@@ -7,7 +7,7 @@ import {
   ContactSynchronizerValidator,
   RemoveContactValidator,
   RenameContactValidator
-} from '@dorders/validator-contact';
+} from '@dorders/contact-validator';
 
 describe('validators', function () {
 

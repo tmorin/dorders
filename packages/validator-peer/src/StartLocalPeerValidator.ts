@@ -1,4 +1,4 @@
-import {LocalPeerStarted, StartLocalPeer} from '@dorders/model-peer';
+import {LocalPeerStarted, StartLocalPeer} from '@dorders/peer-model';
 import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 
 export class StartLocalPeerValidator extends AbstractContainedValidator {

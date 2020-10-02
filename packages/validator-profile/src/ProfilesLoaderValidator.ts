@@ -1,6 +1,6 @@
 import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 import {CreateProfile, ProfileCreated, ProfilesLoaded} from '@dorders/model-profile';
-import {LocalPeerStarted} from '@dorders/model-peer';
+import {LocalPeerStarted} from '@dorders/peer-model';
 
 export class ProfilesLoaderValidator extends AbstractContainedValidator {
 
