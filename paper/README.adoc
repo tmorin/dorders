@@ -2,7 +2,7 @@
 :doctype: article
 :author: Thibault Morin
 :revnumber: 1.0.0-draft.0
-:revdate: 2020-08-28
+:revdate: 2020-10-02
 :revremark: draft version
 :title-page: {title}
 ifndef::backend-pdf[]
