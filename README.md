@@ -12,44 +12,36 @@ The platform relies mostly on Internet embracing a decentralized system as well 
 
 To get more details reading the [white paper](paper/README.adoc).
 
-## Source code
+## Bounded contexts
 
-The source code is composed of several modules hosted in this monorepo.
-The glue between them is mostly done using the services provided by [@dorders/fwk-model-core](packages/fwk-model-core).
+### Peer
 
-The main programing language is TypeScript.
+- [peer-impl-demo](packages/peer-impl-demo)
+- [peer-model](packages/peer-model)
+- [peer-validator](packages/peer-validator)
 
-Implementation of some framework's artifacts:
+### Contact
 
-- [@dorders/infra-bus-local](packages/fwk-infra-bus-local)
-- [@dorders/infra-config-inmemory](packages/fwk-infra-config-inmemory)
-- [@dorders/infra-logger-console](packages/fwk-infra-logger-console)
+- [contact-impl-demo](packages/contact-impl-demo)
+- [contact-model](packages/contact-model)
+- [contact-validator](packages/contact-validator)
 
-Implementation of the `dorders`'s model:
+### Profile
 
-- [@dorders/model-peer](packages/peer-model)
-- [@dorders/model-profile](packages/profile-model)
-- [@dorders/model-contact](packages/contact-model)
+- [profile-impl-demo](packages/profile-impl-demo)
+- [profile-model](packages/profile-model)
+- [profile-validator](packages/profile-validator)
 
-Implementation of test suites validating the implementations of the `dorders`'s model.  
+### Framework
 
-- [@dorders/validator-peer](packages/peer-validator)
-- [@dorders/validator-profile](packages/profile-validator)
-- [@dorders/validator-contact](packages/contact-validator)
-
-Implementation of some framework's artifacts for testing purpose:
-
-- [@dorders/infra-test](packages/fwk-infra-test)
-
-The in-memory implementation of the `dorders` model:
-
-- [@dorders/impl-demo-peer](packages/peer-impl-demo)
-- [@dorders/impl-demo-profile](packages/profile-impl-demo)
-- [@dorders/impl-demo-contact](packages/contact-impl-demo)
+- [fwk-infra-bus-local](packages/fwk-infra-bus-local)
+- [fwk-infra-config-inmemory](packages/fwk-infra-config-inmemory)
+- [fwk-infra-logger-console](packages/fwk-infra-logger-console)
+- [fwk-infra-test](packages/fwk-infra-test)
+- [fwk-model-core](packages/fwk-model-core)
+- [fwk-model-test](packages/fwk-model-test)
 
 ## Build
-
-The main build tool is [lerna](https://lerna.js.org).
 
 ### Build and test the `dorders` modules.
 
