@@ -45,7 +45,7 @@ class FactoryEntry<T> implements Entry<T> {
 
   get(registry: Registry): T {
     if (this.options.singleton) {
-      if (!this.value) {
+      if (typeof this.value === 'undefined') {
         this.value = this.factory(registry)
       }
       return this.value;

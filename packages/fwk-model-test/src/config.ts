@@ -10,7 +10,7 @@ export abstract class ConfigsTestProvider {
 
 export class DefaultConfigsTestProvider extends ConfigsTestProvider {
 
-  async provide(index: number): Promise<Map<symbol, DefaultConfigsTestProvider>> {
+  async provide(index: number): Promise<Map<symbol, ConfigsTestProvider>> {
     return new Map();
   }
 
@@ -26,6 +26,7 @@ export class ConfigsTestProviderModule extends AbstractModule {
   }
 
   async configure(): Promise<void> {
+    this.registry.registerValue(ConfigsTestProviderSymbol, new DefaultConfigsTestProvider());
     const configProvider = this.registry.resolve<ConfigProvider>(ConfigProviderSymbol);
     const configsTestProviders = this.registry.resolveAll<ConfigsTestProvider>(ConfigsTestProviderSymbol);
     for (const configsTestProvider of configsTestProviders) {

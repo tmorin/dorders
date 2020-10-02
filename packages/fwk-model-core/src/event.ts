@@ -2,6 +2,7 @@ import {Message, MessageName, MessageType} from './message';
 
 export abstract class Event<B = any> implements Message<B> {
 
+  /* istanbul ignore next */
   protected constructor(
     readonly body: B,
     readonly name: MessageName,

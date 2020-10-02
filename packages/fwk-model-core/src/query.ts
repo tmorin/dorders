@@ -2,6 +2,7 @@ import {Message, MessageName, MessageType} from './message';
 
 export abstract class Query<M = any> implements Message<M> {
 
+  /* istanbul ignore next */
   protected constructor(
     readonly body: M,
     readonly name: MessageName,
@@ -13,6 +14,7 @@ export abstract class Query<M = any> implements Message<M> {
 
 export abstract class Result<M = any> implements Message<M> {
 
+  /* istanbul ignore next */
   protected constructor(
     readonly body: M,
     readonly name: MessageName,

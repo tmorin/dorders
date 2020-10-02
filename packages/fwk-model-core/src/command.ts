@@ -3,6 +3,7 @@ import {Event} from './event';
 
 export abstract class Command<B = any> implements Message<B> {
 
+  /* istanbul ignore next */
   protected constructor(
     readonly body: B,
     readonly name: MessageName,
