@@ -1,5 +1,5 @@
 {
-  "name": "@dorders/infra-bus-local",
+  "name": "@dorders/fwk-infra-bus-local",
   "version": "0.0.0-alpha.0",
   "publishConfig": {
     "access": "public"

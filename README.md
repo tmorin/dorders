@@ -21,7 +21,7 @@ The main programing language is TypeScript.
 
 Implementation of some framework's artifacts:
 
-- [@dorders/infra-bus-local](packages/infra-bus-local)
+- [@dorders/infra-bus-local](packages/fwk-infra-bus-local)
 - [@dorders/infra-config-inmemory](packages/infra-config-inmemory)
 - [@dorders/infra-logger-console](packages/infra-logger-console)
 
