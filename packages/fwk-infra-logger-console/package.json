@@ -1,5 +1,5 @@
 {
-  "name": "@dorders/infra-logger-console",
+  "name": "@dorders/fwk-infra-logger-console",
   "version": "0.0.0-alpha.0",
   "publishConfig": {
     "access": "public"

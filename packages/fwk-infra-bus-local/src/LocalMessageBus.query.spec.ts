@@ -1,6 +1,6 @@
 import {Container, Query, QueryHandler, Result} from '@dorders/fwk-model-core';
 import {LocalMessageBus} from '.';
-import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
+import {ConsoleLoggerFactory} from '@dorders/fwk-infra-logger-console';
 
 class QueryA extends Query {
   constructor() {

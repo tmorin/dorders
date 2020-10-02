@@ -1,4 +1,4 @@
-import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
+import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
 import {Container} from '@dorders/fwk-model-core';
 import {ModelContactModule} from '@dorders/model-contact';
 import {InfraContactModule} from '../InfraContactModule';

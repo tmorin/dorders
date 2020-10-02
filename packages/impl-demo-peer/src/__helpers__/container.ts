@@ -1,5 +1,5 @@
 import {ModelPeerModule} from '@dorders/model-peer';
-import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
+import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
 import {Container, Module} from '@dorders/fwk-model-core';
 import {InfraPeerModule} from '../';
 import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';

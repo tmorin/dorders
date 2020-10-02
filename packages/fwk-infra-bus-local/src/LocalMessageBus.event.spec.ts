@@ -1,6 +1,6 @@
 import {Container, Event} from '@dorders/fwk-model-core';
 import {LocalMessageBus} from '.';
-import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
+import {ConsoleLoggerFactory} from '@dorders/fwk-infra-logger-console';
 
 class EventA extends Event {
   constructor() {

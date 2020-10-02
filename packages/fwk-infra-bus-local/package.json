@@ -15,6 +15,6 @@
     "@dorders/fwk-model-core": "0.0.0-alpha.0"
   },
   "devDependencies": {
-    "@dorders/infra-logger-console": "0.0.0-alpha.0"
+    "@dorders/fwk-infra-logger-console": "0.0.0-alpha.0"
   }
 }
