@@ -2,7 +2,7 @@ import {ModelPeerModule} from '@dorders/model-peer';
 import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
 import {Container, Module} from '@dorders/fwk-model-core';
 import {InfraPeerModule} from '../';
-import {FwkInfraTestContainers} from '@dorders/infra-test';
+import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';
 import {StartOptions} from '@dorders/fwk-model-test';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;

@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@dorders/fwk-model-core": "0.0.0-alpha.0",
-    "@dorders/fwk-model-test": "0.0.0-alpha.0",
     "@dorders/infra-bus-local": "0.0.0-alpha.0",
     "@dorders/infra-config-inmemory": "0.0.0-alpha.0",
     "@dorders/infra-logger-console": "0.0.0-alpha.0",
@@ -22,7 +21,8 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
-    "@dorders/infra-test": "0.0.0-alpha.0",
+    "@dorders/fwk-infra-test": "0.0.0-alpha.0",
+    "@dorders/fwk-model-test": "0.0.0-alpha.0",
     "@dorders/validator-profile": "0.0.0-alpha.0",
     "@types/uuid": "^8.0.0"
   }

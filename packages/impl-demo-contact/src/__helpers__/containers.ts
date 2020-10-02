@@ -6,7 +6,7 @@ import {ModelProfileModule} from '@dorders/model-profile';
 import {InfraProfileModule} from '@dorders/impl-demo-profile';
 import {ModelPeerModule} from '@dorders/model-peer';
 import {InfraPeerModule} from '@dorders/impl-demo-peer';
-import {FwkInfraTestContainers} from '@dorders/infra-test';
+import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';
 import {StartOptions} from '@dorders/fwk-model-test';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;

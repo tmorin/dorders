@@ -39,7 +39,7 @@ Implementation of test suites validating the implementations of the `dorders`'s 
 
 Implementation of some framework's artifacts for testing purpose:
 
-- [@dorders/infra-test](packages/infra-test)
+- [@dorders/infra-test](packages/fwk-infra-test)
 
 The in-memory implementation of the `dorders` model:
 

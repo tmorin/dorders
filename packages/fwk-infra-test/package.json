@@ -1,5 +1,5 @@
 {
-  "name": "@dorders/infra-test",
+  "name": "@dorders/fwk-infra-test",
   "version": "0.0.0-alpha.0",
   "publishConfig": {
     "access": "public"

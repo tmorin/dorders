@@ -14,7 +14,7 @@ class EventB extends Event {
   }
 }
 
-describe('infra-test', function () {
+describe('fwk-infra-test', function () {
 
   it('should wait for an event', async function () {
     const containers = await FwkInfraTestContainers.create();
