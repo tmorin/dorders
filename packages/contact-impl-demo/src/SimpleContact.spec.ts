@@ -1,6 +1,13 @@
 import {SimpleContact} from './SimpleContact';
-import {ProfileMap, SimplePublicProfile} from '../../profile-impl-demo';
-import {Contact, ContactCreated, ContactDeleted, ContactId, ContactRenamed} from '@dorders/contact-model';
+import {ProfileMap, SimplePublicProfile} from '@dorders/profile-impl-demo';
+import {
+  Contact,
+  ContactCreated,
+  ContactDeleted,
+  ContactId,
+  ContactRenamed,
+  ContactSynchronized
+} from '@dorders/contact-model';
 import {ProfileId, PublicProfile} from '@dorders/profile-model';
 
 class DummyContact implements Contact {
@@ -14,6 +21,10 @@ class DummyContact implements Contact {
   }
 
   applyContactDeleted(contactDeleted: ContactDeleted): Promise<void> {
+    return Promise.resolve(undefined);
+  }
+
+  applyContactSynchronized(contactSynchronized: ContactSynchronized): Promise<void> {
     return Promise.resolve(undefined);
   }
 

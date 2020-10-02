@@ -2,6 +2,7 @@ import {ProfileId, PublicProfile} from '@dorders/profile-model';
 import {ContactRenamed} from './ContactRenamed';
 import {ContactCreated} from './ContactCreated';
 import {ContactDeleted} from './ContactDeleted'
+import {ContactSynchronized} from './ContactSynchronized';
 
 /**
  * The identifier of the contact.
@@ -44,6 +45,12 @@ export interface Contact {
    * @param contactRenamed the event
    */
   applyContactRenamed(contactRenamed: ContactRenamed): Promise<void>
+
+  /**
+   * Mutate the state of the contact according to the event.
+   * @param contactSynchronized the event
+   */
+  applyContactSynchronized(contactSynchronized: ContactSynchronized): Promise<void>
 
   /**
    * Mutate the state of the contact according to the event.

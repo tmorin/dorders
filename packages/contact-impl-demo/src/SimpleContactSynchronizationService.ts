@@ -29,7 +29,11 @@ export class SimpleContactSynchronizationService implements ContactSynchronizati
     simpleContact.publicProfile.map.addObserver(async (newProfileMap) => {
       this.logger.debug('public map mutated (%s/%s)', profileId, contactId);
       simpleContact.publicProfile.map.replaceBy(newProfileMap);
-      const contactSynchronized = new ContactSynchronized({profileId, contactId})
+      const contactSynchronized = new ContactSynchronized({
+        profileId: simpleContact.profileId,
+        contactId: simpleContact.contactId
+      })
+      await simpleContact.applyContactSynchronized(contactSynchronized)
       await this.bus.publish(contactSynchronized);
     });
   }

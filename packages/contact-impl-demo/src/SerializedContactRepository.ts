@@ -7,7 +7,7 @@ import {
 import {SimpleContact} from './SimpleContact';
 import {ContactMapKey} from './ContactMapKey';
 import {Contact, ContactFactory, ContactRenamed} from '@dorders/contact-model';
-import {SimplePrivateProfile} from '../../profile-impl-demo';
+import {SimplePrivateProfile} from '@dorders/profile-impl-demo';
 
 export type SerializedContact = {
   name: string

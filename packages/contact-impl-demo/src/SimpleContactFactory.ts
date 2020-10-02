@@ -1,6 +1,6 @@
 import {Contact, ContactFactory} from '@dorders/contact-model';
 import {ProfileId, PublicProfileReference} from '@dorders/profile-model';
-import {ProfileConfigProvider, ProfileMapsRepository, SimplePublicProfile} from '../../profile-impl-demo';
+import {ProfileConfigProvider, ProfileMapsRepository, SimplePublicProfile} from '@dorders/profile-impl-demo';
 import {SimpleContact} from './SimpleContact';
 
 export class SimpleContactFactory implements ContactFactory {
