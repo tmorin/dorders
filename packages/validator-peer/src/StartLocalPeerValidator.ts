@@ -1,5 +1,5 @@
 import {LocalPeerStarted, StartLocalPeer} from '@dorders/model-peer';
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 
 export class StartLocalPeerValidator extends AbstractContainedValidator {
 
@@ -11,7 +11,7 @@ export class StartLocalPeerValidator extends AbstractContainedValidator {
 
 
   async test(): Promise<void> {
-    const [container0] = this.containers.instances;
+    const [container0] = await this.containers.startContainers(1);
     const command = new StartLocalPeer();
     const pLocalPeerStarted = waitForOnce(container0, LocalPeerStarted.EVENT_NAME);
     const [localPeerStarted] = await container0.messageBus.execute<LocalPeerStarted>(command);

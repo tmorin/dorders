@@ -1,5 +1,5 @@
 import {LocalPeerStopped, StopLocalPeer} from '@dorders/model-peer';
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 
 export class StopLocalPeerValidator extends AbstractContainedValidator {
 
@@ -11,7 +11,7 @@ export class StopLocalPeerValidator extends AbstractContainedValidator {
 
 
   async test(): Promise<void> {
-    const [container0] = this.containers.instances;
+    const [container0] = await this.containers.startContainers(1);
     const command = new StopLocalPeer();
     const pLocalPeerStopped = waitForOnce(container0, LocalPeerStopped.EVENT_NAME);
     const [localPeerStopped] = await container0.messageBus.execute<LocalPeerStopped>(command);

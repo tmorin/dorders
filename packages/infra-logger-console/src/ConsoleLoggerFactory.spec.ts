@@ -1,5 +1,5 @@
 import {ConsoleLoggerFactory, Level} from '.';
-import {Container} from '@dorders/framework';
+import {Container} from '@dorders/fwk-model-core';
 
 describe('ConsoleLoggerFactory', function () {
 

@@ -1,4 +1,4 @@
-import {Command, CommandHandler, handleCommands} from '@dorders/framework';
+import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {PrivateProfileFactory} from './PrivateProfileFactory';
 import {ProfileCreated} from './ProfileCreated';

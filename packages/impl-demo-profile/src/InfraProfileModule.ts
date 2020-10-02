@@ -6,7 +6,7 @@ import {
   LoggerFactorySymbol,
   MessageBus,
   MessageBusSymbol
-} from '@dorders/framework';
+} from '@dorders/fwk-model-core';
 import {
   PrivateProfileFactory,
   PrivateProfileFactorySymbol,

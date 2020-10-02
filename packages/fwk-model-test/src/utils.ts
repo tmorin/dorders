@@ -1,4 +1,4 @@
-import {Container, Event, EventListenerCallback, MessageName} from '@dorders/framework';
+import {Container, Event, EventListenerCallback, MessageName} from '@dorders/fwk-model-core';
 
 export async function waitFor(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));

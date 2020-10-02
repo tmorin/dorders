@@ -4,11 +4,11 @@ import {DemoContainers} from './__helpers__/container';
 describe('validators', function () {
 
   it('should pass StartLocalPeerValidator', async function () {
-    await new StartLocalPeerValidator(await DemoContainers.create(1)).test();
+    await new StartLocalPeerValidator(await DemoContainers.create()).test();
   });
 
   it('should pass StopLocalPeerValidator', async function () {
-    await new StopLocalPeerValidator(await DemoContainers.create(1)).test();
+    await new StopLocalPeerValidator(await DemoContainers.create()).test();
   });
 
 })

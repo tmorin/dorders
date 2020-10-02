@@ -1,4 +1,4 @@
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 import {CreateProfile, ProfileCreated, ProfilesLoaded} from '@dorders/model-profile';
 import {LocalPeerStarted} from '@dorders/model-peer';
 
@@ -11,7 +11,7 @@ export class ProfilesLoaderValidator extends AbstractContainedValidator {
   }
 
   async test(): Promise<void> {
-    const [container0] = this.containers.instances;
+    const [container0] = await this.containers.startContainers(1);
 
     await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'profileA'}));
     await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'profileB'}));

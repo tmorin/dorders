@@ -1,4 +1,4 @@
-import {Container, Query, QueryHandler, Result} from '@dorders/framework';
+import {Container, Query, QueryHandler, Result} from '@dorders/fwk-model-core';
 import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
 

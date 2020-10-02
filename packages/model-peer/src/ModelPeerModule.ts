@@ -1,4 +1,4 @@
-import {AbstractModule, CommandHandlerSymbol} from '@dorders/framework';
+import {AbstractModule, CommandHandlerSymbol} from '@dorders/fwk-model-core';
 import {StartLocalPeerHandler} from './StartLocalPeer';
 import {LocalPeerFactory, LocalPeerFactorySymbol} from './LocalPeerFactory';
 import {StopLocalPeerHandler} from './StopLocalPeer';

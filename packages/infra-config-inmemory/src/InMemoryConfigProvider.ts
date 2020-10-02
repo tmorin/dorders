@@ -1,5 +1,5 @@
 import defaultsdeep from 'lodash.defaultsdeep';
-import {Config, ConfigProvider, ConfigScope} from '@dorders/framework';
+import {Config, ConfigProvider, ConfigScope} from '@dorders/fwk-model-core';
 
 export class InMemoryConfigProvider implements ConfigProvider {
 

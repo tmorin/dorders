@@ -1,4 +1,4 @@
-import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/framework';
+import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
 import {ProfileCreated} from '@dorders/model-profile';
 import {ContactsLoaded} from './ContactsLoaded';
 import {ContactCreated} from './ContactCreated';

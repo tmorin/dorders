@@ -15,7 +15,7 @@ To get more details reading the [white paper](paper/README.adoc).
 ## Source code
 
 The source code is composed of several modules hosted in this monorepo.
-The glue between them is mostly done using the services provided by [@dorders/framework](packages/framework).
+The glue between them is mostly done using the services provided by [@dorders/fwk-model-core](packages/fwk-model-core).
 
 The main programing language is TypeScript.
 

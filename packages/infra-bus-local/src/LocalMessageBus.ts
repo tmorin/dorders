@@ -11,7 +11,7 @@ import {
   Query,
   QueryHandler,
   Result
-} from '@dorders/framework';
+} from '@dorders/fwk-model-core';
 
 export class LocalMessageBus implements MessageBus {
 

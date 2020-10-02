@@ -11,7 +11,7 @@ import {
   ContactSynchronizationServiceSymbol,
   ContactSynchronized
 } from '@dorders/model-contact';
-import {waitForMany} from '@dorders/infra-test';
+import {waitForMany} from '@dorders/fwk-model-test';
 
 describe('SimpleContactSynchronizationService', function () {
 

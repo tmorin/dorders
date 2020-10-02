@@ -1,9 +1,9 @@
-import {AbstractContainedValidator} from './validator';
-import {Containers} from './containers';
+import {FwkInfraTestContainers} from './FwkInfraTestContainers';
+import {AbstractContainedValidator} from '@dorders/fwk-model-test';
 
 class SimpleContainedValidator extends AbstractContainedValidator {
   constructor(
-    containers: Containers
+    containers: FwkInfraTestContainers
   ) {
     super(containers)
   }
@@ -16,7 +16,7 @@ class SimpleContainedValidator extends AbstractContainedValidator {
 describe('validator', function () {
 
   it('should run validator', async function () {
-    const simpleContainedValidator = new SimpleContainedValidator(await Containers.create(1));
+    const simpleContainedValidator = new SimpleContainedValidator(await FwkInfraTestContainers.create(1));
     await simpleContainedValidator.validate();
   });
 

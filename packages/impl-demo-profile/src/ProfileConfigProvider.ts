@@ -1,5 +1,5 @@
 import *  as uuid from 'uuid';
-import {ConfigProvider} from '@dorders/framework';
+import {ConfigProvider} from '@dorders/fwk-model-core';
 
 export const ProfileConfigScope = Symbol.for('profile');
 

@@ -1,21 +1,22 @@
-import {Container} from '@dorders/framework';
-import {startDemoContainers} from '../__helpers__/container';
-import {disposeContainers} from '@dorders/infra-test';
+import {Container} from '@dorders/fwk-model-core';
 import {
   PrivateProfileFactory,
   PrivateProfileFactorySymbol,
   PrivateProfileRepository,
   PrivateProfileRepositorySymbol
 } from '@dorders/model-profile';
+import {DemoContainers} from '../__helpers__/container';
 
 describe('InMemoryPrivateProfileRepository', function () {
 
+  let containers: DemoContainers;
   let container0: Container;
   beforeEach(async function () {
-    [container0] = await startDemoContainers(1);
+    containers = new DemoContainers();
+    [container0] = await containers.startContainers(1);
   });
   afterEach(async function () {
-    await disposeContainers();
+    await containers.disposeContainers();
   });
 
   it('should add, list and iterate', async function () {

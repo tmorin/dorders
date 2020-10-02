@@ -1,4 +1,4 @@
-import {Container, Event} from '@dorders/framework';
+import {Container, Event} from '@dorders/fwk-model-core';
 import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/infra-logger-console';
 

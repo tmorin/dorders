@@ -12,7 +12,8 @@
     "test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
-    "@dorders/framework": "0.0.0-alpha.0",
+    "@dorders/fwk-model-core": "0.0.0-alpha.0",
+    "@dorders/fwk-model-test": "0.0.0-alpha.0",
     "@dorders/infra-bus-local": "0.0.0-alpha.0",
     "@dorders/infra-config-inmemory": "0.0.0-alpha.0",
     "@dorders/infra-logger-console": "0.0.0-alpha.0"

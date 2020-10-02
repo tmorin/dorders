@@ -1,17 +1,18 @@
-import {Container} from '@dorders/framework';
-import {disposeContainers} from '@dorders/infra-test';
+import {Container} from '@dorders/fwk-model-core';
 import {PublicProfileReferenceDeserializer, PublicProfileReferenceDeserializerSymbol} from '@dorders/model-profile';
 import {SimplePublicProfileReference} from './SimplePublicProfileReference';
-import {startDemoContainers} from '../__helpers__/container';
+import {DemoContainers} from '../__helpers__/container';
 
 describe('SimplePublicProfileReference', function () {
 
+  let containers: DemoContainers;
   let container0: Container;
   beforeEach(async function () {
-    [container0] = await startDemoContainers(1);
+    containers = new DemoContainers();
+    [container0] = await containers.startContainers(1);
   });
   afterEach(async function () {
-    await disposeContainers();
+    await containers.disposeContainers();
   });
 
   it('should be serialized and deserialized', async function () {

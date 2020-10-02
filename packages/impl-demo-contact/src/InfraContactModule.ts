@@ -1,4 +1,4 @@
-import {AbstractModule, LoggerFactory, LoggerFactorySymbol, MessageBus, MessageBusSymbol} from '@dorders/framework';
+import {AbstractModule, LoggerFactory, LoggerFactorySymbol, MessageBus, MessageBusSymbol} from '@dorders/fwk-model-core';
 import {
   ContactFactory,
   ContactFactorySymbol,

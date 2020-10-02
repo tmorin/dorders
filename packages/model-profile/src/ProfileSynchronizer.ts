@@ -1,6 +1,6 @@
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileCreated} from './ProfileCreated';
-import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/framework';
+import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
 import {ProfileSynchronizerService} from './ProfileSynchronizerService';
 
 export class ProfileSynchronizer extends Component {

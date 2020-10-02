@@ -1,4 +1,4 @@
-import {AbstractContainedValidator, Containers} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers} from '@dorders/fwk-model-test';
 import {CreateProfile, ProfileCardUpdated, ProfileCreated, UpdateProfileCard} from '@dorders/model-profile';
 
 export class UpdateProfileCardValidator extends AbstractContainedValidator {
@@ -10,7 +10,7 @@ export class UpdateProfileCardValidator extends AbstractContainedValidator {
   }
 
   async test(): Promise<void> {
-    const [container0] = this.containers.instances;
+    const [container0] = await this.containers.startContainers(1);
 
     const [profileCreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'profileA'}));
 

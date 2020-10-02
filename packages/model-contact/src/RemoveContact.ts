@@ -2,7 +2,7 @@ import {ProfileId} from '@dorders/model-profile';
 import {ContactDeleted} from './ContactDeleted';
 import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';
-import {Command, CommandHandler, handleCommands} from '@dorders/framework';
+import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
 import {ContactRepository} from './ContactRepository';
 
 export type RemoveContactBody = {

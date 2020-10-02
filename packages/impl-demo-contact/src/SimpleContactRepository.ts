@@ -2,7 +2,7 @@ import {Contact, ContactId, ContactRepository} from '@dorders/model-contact';
 import {ProfileId} from '@dorders/model-profile';
 import {SimpleContact} from './SimpleContact';
 import {SerializedContactRepository} from './SerializedContactRepository';
-import {Logger, LoggerFactory} from '@dorders/framework';
+import {Logger, LoggerFactory} from '@dorders/fwk-model-core';
 
 export class SimpleContactRepository implements ContactRepository {
 

@@ -1,20 +1,23 @@
 import rimraf from 'rimraf';
-import {Container, ContainerBuilder, Module} from '@dorders/framework';
-import {waitFor} from './utils';
+import {Container, ContainerBuilder, Module} from '@dorders/fwk-model-core';
 import {InfraTestModule} from './InfraTestModule';
-import {ConfigsTestProviderModule} from './config';
+import {ConfigsTestProviderModule, Containers, StartOptions, waitFor} from '@dorders/fwk-model-test';
 
-export type StartOptions = {
-  name?: string
-  clean: boolean
-  verbose: boolean
-}
-
-export class Containers {
+export class FwkInfraTestContainers implements Containers {
 
   constructor(
     public readonly instances: Array<Container> = []
   ) {
+  }
+
+  static async create(
+    numbers: number = 0,
+    options: Partial<StartOptions> = {},
+    modulesFactory: () => Array<Module> = () => ([])
+  ): Promise<FwkInfraTestContainers> {
+    const containers = new FwkInfraTestContainers();
+    await containers.startContainers(numbers, options, modulesFactory);
+    return containers;
   }
 
   async startContainer(
@@ -84,16 +87,6 @@ export class Containers {
       await waitFor(waitForBetween);
     }
     await waitFor(waitForAfter);
-  }
-
-  static async create(
-    numbers: number,
-    options: Partial<StartOptions> = {},
-    modulesFactory: () => Array<Module> = () => ([])
-  ) {
-    const containers = new Containers();
-    await containers.startContainers(numbers, options, modulesFactory);
-    return containers;
   }
 
 }

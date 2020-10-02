@@ -1,16 +1,17 @@
-import {Containers, StartOptions} from '@dorders/infra-test';
 import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
-import {Container} from '@dorders/framework';
+import {Container} from '@dorders/fwk-model-core';
 import {ModelContactModule} from '@dorders/model-contact';
 import {InfraContactModule} from '../InfraContactModule';
 import {ModelProfileModule} from '@dorders/model-profile';
 import {InfraProfileModule} from '@dorders/impl-demo-profile';
 import {ModelPeerModule} from '@dorders/model-peer';
 import {InfraPeerModule} from '@dorders/impl-demo-peer';
+import {FwkInfraTestContainers} from '@dorders/infra-test';
+import {StartOptions} from '@dorders/fwk-model-test';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;
 
-export class DemoContainers extends Containers {
+export class DemoContainers extends FwkInfraTestContainers {
 
   constructor(instances?: Array<Container>) {
     super(instances);

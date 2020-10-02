@@ -8,7 +8,7 @@ import {SimpleContact} from './SimpleContact';
 import {ContactMapKey} from './ContactMapKey';
 import {Contact, ContactFactory, ContactRenamed} from '@dorders/model-contact';
 import {SimplePrivateProfile} from '@dorders/impl-demo-profile';
-import {Logger, LoggerFactory} from '@dorders/framework';
+import {Logger, LoggerFactory} from '@dorders/fwk-model-core';
 
 export type SerializedContact = {
   name: string

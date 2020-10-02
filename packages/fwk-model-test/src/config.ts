@@ -1,5 +1,4 @@
-import {Config, ConfigProvider, ConfigProviderSymbol} from '../../framework';
-import {AbstractModule} from '@dorders/framework';
+import {AbstractModule, Config, ConfigProvider, ConfigProviderSymbol} from '@dorders/fwk-model-core';
 
 export const ConfigsTestProviderSymbol = Symbol.for('test/ConfigsTestProvider');
 

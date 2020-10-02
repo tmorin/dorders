@@ -1,19 +1,20 @@
-import {Container} from '@dorders/framework';
-import {startDemoContainers} from '../__helpers__/container';
-import {disposeContainers} from '@dorders/infra-test';
+import {Container} from '@dorders/fwk-model-core';
+import {DemoContainers} from '../__helpers__/container';
 import {PrivateProfileFactory, PrivateProfileFactorySymbol} from '@dorders/model-profile';
 import {SimplePrivateProfile} from './SimplePrivateProfile';
 import {ProfileMapKey} from '../map';
 
 describe('SimplePrivateProfileFactory', function () {
 
+  let containers: DemoContainers;
   let container0: Container;
   let container1: Container;
   beforeEach(async function () {
-    [container0, container1] = await startDemoContainers(2);
+    containers = new DemoContainers();
+    [container0, container1] = await containers.startContainers(2);
   });
   afterEach(async function () {
-    await disposeContainers();
+    await containers.disposeContainers();
   });
 
   it('should create from scratch', async function () {

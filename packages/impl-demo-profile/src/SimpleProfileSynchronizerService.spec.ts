@@ -1,25 +1,29 @@
-import {Container} from '@dorders/framework';
-import {startDemoContainers} from './__helpers__/container';
-import {disposeContainers, waitForMany} from '@dorders/infra-test';
+import {DemoContainers} from './__helpers__/container';
 import {
   PrivateProfileFactory,
-  PrivateProfileFactorySymbol, PrivateProfileRepository, PrivateProfileRepositorySymbol,
+  PrivateProfileFactorySymbol,
+  PrivateProfileRepository,
+  PrivateProfileRepositorySymbol,
   ProfileSynchronized,
   ProfileSynchronizerService,
   ProfileSynchronizerServiceSymbol
 } from '@dorders/model-profile';
 import {SimplePrivateProfile} from './private';
+import {Container} from '@dorders/fwk-model-core';
+import {waitForMany} from '@dorders/fwk-model-test';
 
 describe('SimpleProfileSynchronizerService', function () {
 
+  let containers: DemoContainers;
   let container0: Container;
   let container1: Container;
   let container2: Container;
   beforeEach(async function () {
-    [container0, container1, container2] = await startDemoContainers(3);
+    containers = new DemoContainers();
+    [container0, container1, container2] = await containers.startContainers(3);
   });
   afterEach(async function () {
-    await disposeContainers();
+    await containers.disposeContainers();
   });
 
   it('should synchronize profiles', async function () {

@@ -1,4 +1,4 @@
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 import {
   CreateProfile,
   DeleteProfile,
@@ -17,7 +17,7 @@ export class DeleteProfileValidator extends AbstractContainedValidator {
   }
 
   async test(): Promise<void> {
-    const [container0] = this.containers.instances;
+    const [container0] = await this.containers.startContainers(1);
 
     const pWaitForEvents = waitForOnce(container0, ProfileDeleted.EVENT_NAME);
 

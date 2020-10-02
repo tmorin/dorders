@@ -1,4 +1,4 @@
-import {Containers, waitForMany, waitForOnce} from '@dorders/infra-test';
+import {Containers, waitForMany, waitForOnce} from '@dorders/fwk-model-test';
 import {AbstractContactValidator} from './AbstractContactValidator';
 import {ContactCreated, ContactDeleted, ContactsLoaded, ContactsSynchronized} from '@dorders/model-contact';
 

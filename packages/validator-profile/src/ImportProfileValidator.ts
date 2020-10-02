@@ -1,10 +1,11 @@
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/infra-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
 import {
   CreateProfile,
   ImportProfile,
   PrivateProfileRepository,
   PrivateProfileRepositorySymbol,
-  ProfileCreated, ProfileSynchronized
+  ProfileCreated,
+  ProfileSynchronized
 } from '@dorders/model-profile';
 
 export class ImportProfileValidator extends AbstractContainedValidator {
@@ -16,7 +17,7 @@ export class ImportProfileValidator extends AbstractContainedValidator {
   }
 
   async test(): Promise<void> {
-    const [container0, container1] = this.containers.instances;
+    const [container0, container1] = await this.containers.startContainers(2);
 
     const pWaitForEvents = waitForOnce(container1, ProfileCreated.EVENT_NAME, ProfileSynchronized.EVENT_NAME);
 

@@ -1,4 +1,4 @@
-import {Container, Logger, LoggerFactory} from '@dorders/framework';
+import {Container, Logger, LoggerFactory} from '@dorders/fwk-model-core';
 import {ConsoleLogger} from './ConsoleLogger';
 
 export class ConsoleLoggerFactory implements LoggerFactory {

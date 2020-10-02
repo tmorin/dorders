@@ -1,4 +1,4 @@
-import {Container} from '@dorders/framework';
+import {Container} from '@dorders/fwk-model-core';
 import {SimplePrivateProfile} from '@dorders/impl-demo-profile';
 import {SimpleContact} from '../SimpleContact';
 import {DemoContainers} from './containers';

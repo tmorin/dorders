@@ -1,10 +1,10 @@
-import {Containers} from './containers';
-import {ConfigProviderSymbol, LoggerFactorySymbol, MessageBusSymbol} from '@dorders/framework';
+import {ConfigProviderSymbol, LoggerFactorySymbol, MessageBusSymbol} from '@dorders/fwk-model-core';
+import {FwkInfraTestContainers} from './FwkInfraTestContainers';
 
 describe('containers', function () {
 
   it('should start and dispose containers', async function () {
-    const containers = new Containers();
+    const containers = await FwkInfraTestContainers.create();
     const [container0, container1] = await containers.startContainers(2, {
       clean: true,
       verbose: true
@@ -17,7 +17,7 @@ describe('containers', function () {
   });
 
   it('should have a configured container', async function () {
-    const containers = new Containers();
+    const containers = await FwkInfraTestContainers.create();
     const [container0] = await containers.startContainers(1, {
       clean: false,
       verbose: false
@@ -29,7 +29,7 @@ describe('containers', function () {
   });
 
   it('should start simple container', async function () {
-    const containers = new Containers([]);
+    const containers = new FwkInfraTestContainers([]);
     const container0 = await containers.startContainer(0);
     expect(container0.registry.resolve(MessageBusSymbol)).toBeTruthy();
     expect(container0.registry.resolve(LoggerFactorySymbol)).toBeTruthy();
@@ -38,7 +38,7 @@ describe('containers', function () {
   });
 
   it('should dispose a container', async function () {
-    const containers = new Containers([]);
+    const containers = new FwkInfraTestContainers([]);
     const [container1, container2, container3] = await containers.startContainers(3);
     expect(container1).toBeTruthy();
     expect(container2).toBeTruthy();

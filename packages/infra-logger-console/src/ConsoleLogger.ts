@@ -1,4 +1,4 @@
-import {Logger} from '@dorders/framework';
+import {Logger} from '@dorders/fwk-model-core';
 
 export enum Level {
   debug,

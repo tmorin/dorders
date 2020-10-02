@@ -1,4 +1,4 @@
-import {Event} from '@dorders/framework';
+import {Event} from '@dorders/fwk-model-core';
 
 /**
  * Profiles have been loaded.

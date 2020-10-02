@@ -1,41 +1,33 @@
-import {Containers, startContainers, StartOptions} from '@dorders/infra-test';
 import {ConsoleLogger, Level} from '@dorders/infra-logger-console';
 import {ModelProfileModule} from '@dorders/model-profile';
 import {InfraProfileModule} from '../';
-import {Container, Module} from '@dorders/framework';
+import {Container, Module} from '@dorders/fwk-model-core';
+import {FwkInfraTestContainers} from '@dorders/infra-test';
+import {StartOptions} from '@dorders/fwk-model-test';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;
 
-export async function startDemoContainers(
-  numbers: number,
-  options: Partial<StartOptions> = {}
-) {
-  return await startContainers(numbers, options, () => ([
-    new ModelProfileModule(), new InfraProfileModule(),
-  ]))
-}
-
-export class DemoContainers extends Containers {
+export class DemoContainers extends FwkInfraTestContainers {
 
   constructor(instances?: Array<Container>) {
     super(instances);
   }
 
   static async create(
-    numbers: number,
+    numbers: number = 0,
     options: Partial<StartOptions> = {},
     modulesFactory: () => Array<Module> = () => ([])
   ) {
     const containers = new DemoContainers();
-    await containers.startDemoContainers(numbers, options);
+    await containers.startContainers(numbers, options);
     return containers;
   }
 
-  startDemoContainers(
+  startContainers(
     numbers: number,
     options?: Partial<StartOptions>
   ): Promise<Array<Container>> {
-    return this.startContainers(numbers, options, () => ([
+    return super.startContainers(numbers, options, () => ([
       new ModelProfileModule(), new InfraProfileModule(),
     ]));
   }

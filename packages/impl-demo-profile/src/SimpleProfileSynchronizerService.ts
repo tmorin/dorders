@@ -6,7 +6,7 @@ import {
   ProfileSynchronizerService
 } from '@dorders/model-profile';
 import {SimplePrivateProfile} from './private';
-import {Logger, LoggerFactory, MessageBus} from '@dorders/framework';
+import {Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
 import {ProfileMapKey} from './map';
 
 export class SimpleProfileSynchronizerService implements ProfileSynchronizerService {
