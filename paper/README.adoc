@@ -2,7 +2,7 @@
 :doctype: article
 :author: Thibault Morin
 :revnumber: 1.0.0-draft.0
-:revdate: 2020-10-02
+:revdate: 2020-10-03
 :revremark: draft version
 :title-page: {title}
 ifndef::backend-pdf[]
@@ -425,14 +425,12 @@ The closer solutions to the `dorders` domain are :
 
 == Bounded Contexts
 
-The main purpose of the present design is to provide a model which promotes the emergence of various implementations.
+> *bounded context*: A description of a boundary (typically a subsystem, or the work of a particular team) within which a particular model is defined and applicable. +
+> - <<dddref>>
 
-It relies on the following approaches:
-
-- Hexagonal Architecture <<hexarch>>
-- Domain Development Design <<ddd>>
-- CQRS <<cqrs>>
-- EventStorming <<evstorm>>
+The design of the following bounded contexts emerges applying the Domain Development Design <<ddd>> approach.
+The underlying models are mainly expressed using the EventStorming <<evstorm>> notations.
+They also integrate the two following patterns: CQRS <<cqrs>> and Hexagonal Architecture <<hexarch>>.
 
 [#boudned_context_peer]
 === Peer
