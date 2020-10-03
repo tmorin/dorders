@@ -116,38 +116,3 @@ ContactDeleted -u-> Contact : applied on
 ContactsClearer --> ContactDeleted : publishes
 ContactsClearer --> ContactsDeleted : publishes
 @enduml
-
-@startuml design_contact_model
-!include common.puml
-skinparam monochrome true
-hide empty members
-interface profile.PublicProfile <<ValueObject>> {
-}
-interface contact.Contact <<RootAggregate>> {
-  profileId
-  contactId
-  name
-  publicProfile
-  applyContactCreated()
-  applyContactRenamed()
-  applyContactDeleted()
-}
-interface contact.ContactFactory <<Factory>> {
-  createFromReference()
-}
-interface contact.ContactRepository <<Repository>> {
-  persist()
-  get()
-  delete()
-  clear()
-  iterate()
-}
-interface contact.ContactSynchronizationService <<Service>> {
-  monitor()
-  check()
-}
-contact.ContactFactory .u.> contact.Contact : <<create>>
-contact.ContactRepository .u.> contact.Contact : <<use>>
-contact.Contact .u.> profile.PublicProfile : <<use>>
-contact.ContactSynchronizationService .u.> contact.Contact : <<use>>
-@enduml

@@ -1,0 +1,97 @@
+@startuml ooo_design_peer
+!include common.puml
+skinparam monochrome true
+hide empty members
+interface peer.Peer {
+  peerId
+}
+interface peer.LocalPeer <<RootAggregate>> {
+  applyLocalPeerStarted()
+  applyLocalPeerStopped()
+}
+interface peer.LocalPeerFactory <<Factory>> {
+  create()
+}
+peer.Peer <|-- peer.LocalPeer
+peer.LocalPeerFactory .l.> peer.LocalPeer : <<create>>
+@enduml
+
+@startuml ooo_design_profile
+!include common.puml
+skinparam monochrome true
+hide empty members
+interface profile.Profile {
+  profileId
+  getReference()
+}
+interface profile.ProfileReference {
+  profileId
+  serialize()
+}
+interface profile.PublicProfile <<ValueObject>> {
+  card
+}
+interface profile.PrivateProfile <<RootAggregate>> {
+  publicProfile
+  applyProfileCreated()
+  applyProfileCardUpdated()
+  applyProfilesSynchronized()
+  applyProfileDeleted()
+}
+interface profile.PrivateProfileFactory <<Factory>> {
+  createFromScratch()
+  createFromReference()
+}
+interface profile.PrivateProfileRepository <<Repository>> {
+  add()
+  remove()
+  get()
+  list()
+  iterate()
+}
+interface profile.ProfileSynchronizerService <<Service>> {
+  startOngoingSynchronization()
+}
+profile.Profile <|-- profile.PrivateProfile
+profile.Profile <|-- profile.PublicProfile
+profile.Profile .u.> profile.ProfileReference
+profile.PrivateProfile .r.> profile.PublicProfile : <<use>>
+profile.ProfileSynchronizerService .d.> profile.PrivateProfile : <<use>>
+profile.PrivateProfileFactory .u.> profile.PrivateProfile : <<create>>
+profile.PrivateProfileRepository .u.> profile.PrivateProfile : <<use>>
+@enduml
+
+@startuml ooo_design_contact
+!include common.puml
+skinparam monochrome true
+hide empty members
+interface profile.PublicProfile <<ValueObject>> {
+}
+interface contact.Contact <<RootAggregate>> {
+  profileId
+  contactId
+  name
+  publicProfile
+  applyContactCreated()
+  applyContactRenamed()
+  applyContactDeleted()
+}
+interface contact.ContactFactory <<Factory>> {
+  createFromReference()
+}
+interface contact.ContactRepository <<Repository>> {
+  persist()
+  get()
+  delete()
+  clear()
+  iterate()
+}
+interface contact.ContactSynchronizationService <<Service>> {
+  monitor()
+  check()
+}
+contact.ContactFactory .u.> contact.Contact : <<create>>
+contact.ContactRepository .u.> contact.Contact : <<use>>
+contact.Contact .u.> profile.PublicProfile : <<use>>
+contact.ContactSynchronizationService .u.> contact.Contact : <<use>>
+@enduml

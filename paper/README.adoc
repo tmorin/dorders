@@ -423,7 +423,7 @@ The closer solutions to the `dorders` domain are :
 - Schema.org <<schema>> for the vocabulary
 - JSON for Linking Data (JSON-LD) <<jsonld>> for the encoding/decoding
 
-== Design
+== High Level Design
 
 The main purpose of the present design is to provide a model which promotes the emergence of various implementations.
 
@@ -448,15 +448,6 @@ The present design focuses only on the _local peer_.
 
 .EventStorming Diagram of the peer module
 image::design_peer_eventstorming.png[]
-
-==== Model
-
-The aggregate `LocalPeer` is an interface which extends the interface `Peer`.
-
-The factory `LocalPeerFactory` is an interface which is responsible to create instances of `LocalPeer`.
-
-.UML Class Diagram of the peer module
-image::design_peer_model.png[]
 
 [#design_profile]
 === Module profile
@@ -566,23 +557,6 @@ For each published `ProfileCreated` event, the process loads the related aggrega
 
 .EventStorming Diagram of the profile module - start or monitor the ongoing synchronizations
 image::design_profile_eventstorming_synchronize_profiles.png[]
-
-==== Model
-
-A part of a _profile_ is _public_, and the other one is _private_.
-In the present design, the _public_ side is a subset of the _private_ one.
-
-The aggregate `PrivateProfile` is an interface which extends the interface `Profile`.
-On the other side, the value object `PublicProfile` is also an interface which extends the same interface `Profile`.
-
-The factory `PrivateProfileFactory` is an interface which is responsible to create instances of `PrivateProfile`.
-
-The repository `PrivateProfileRepository` is an interface which is responsible to persist and load instances of `PrivateProfile`.
-
-The service `ProfileSynchronizerService` is an interface which is responsible to start and/or monitor the peer-to-peer syncrhonizaton private profiles.
-
-.UML Class Diagram of the profile module
-image::design_profile_model.png[]
 
 [#design_contact]
 === Module contact
@@ -705,19 +679,6 @@ The publication of the event `ContactsDeleted` indicates the completion of the p
 .EventStorming Diagram of the contact module - clear contacts's data
 image::design_contact_eventstorming_contacts_clearer.png[]
 
-==== Model
-
-The aggregate `Contact` is an interface which relies on the value object `PublicProfile` to expose the public profile of the related profile.
-
-The factory `ContactFactory` is an interface which is responsible to create instances of `Contact`.
-
-The repository `ContactRepository` is an interface which is responsible to persist and load instances of `Contact`.
-
-The service `ContactSynchronizationService` is an interface which is responsible to manage the ongoing synchronizations.
-
-.UML Class Diagram of the contact module
-image::design_contact_model.png[]
-
 == Prototypes
 
 === Demonstration
@@ -733,6 +694,48 @@ Its main purpose is to validate the `dorders` model.
 // https://github.com/orbitdb/welcome
 // === Blockstack
 // https://blockstack.org/
+
+[appendix]
+== Object Oriented Design
+
+=== Peer
+
+The aggregate `LocalPeer` is an interface which extends the interface `Peer`.
+
+The factory `LocalPeerFactory` is an interface which is responsible to create instances of `LocalPeer`.
+
+.UML Class Diagram of the peer module
+image::ooo_design_peer.png[]
+
+=== Profile
+
+A part of a _profile_ is _public_, and the other one is _private_.
+In the present design, the _public_ side is a subset of the _private_ one.
+
+The aggregate `PrivateProfile` is an interface which extends the interface `Profile`.
+On the other side, the value object `PublicProfile` is also an interface which extends the same interface `Profile`.
+
+The factory `PrivateProfileFactory` is an interface which is responsible to create instances of `PrivateProfile`.
+
+The repository `PrivateProfileRepository` is an interface which is responsible to persist and load instances of `PrivateProfile`.
+
+The service `ProfileSynchronizerService` is an interface which is responsible to start and/or monitor the peer-to-peer syncrhonizaton private profiles.
+
+.UML Class Diagram of the profile module
+image::ooo_design_profile.png[]
+
+=== Contact
+
+The aggregate `Contact` is an interface which relies on the value object `PublicProfile` to expose the public profile of the related profile.
+
+The factory `ContactFactory` is an interface which is responsible to create instances of `Contact`.
+
+The repository `ContactRepository` is an interface which is responsible to persist and load instances of `Contact`.
+
+The service `ContactSynchronizationService` is an interface which is responsible to manage the ongoing synchronizations.
+
+.UML Class Diagram of the contact module
+image::ooo_design_contact.png[]
 
 [glossary]
 == Glossary
@@ -775,7 +778,7 @@ References
 - [[[ddd]]] Domain-Driven Design: Tackling Complexity in the Heart of Software ~ Eric Evans 2003
 - [[[dddref]]] Domain-Driven Design Reference ~ Eric Evans 2015 ~ https://domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf[]
 - [[[evstorm]]] Introducing EventStorming ~ Alberto Brandolini ~ https://leanpub.com/introducing_eventstorming[]
-- [[[hexarch]]] Hexagonal Architecture ~ https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)[]
+- [[[hexarch]]] Hexagonal Architecture ~ https://web.archive.org/web/20180822100852/http://alistair.cockburn.us/Hexagonal+architecture[]
 - [[[reaman]]] The Reactive Manifesto ~ https://www.reactivemanifesto.org[]
 
 [.lead]
