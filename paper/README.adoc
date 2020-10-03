@@ -68,11 +68,11 @@ We have to take care of us and others staying at home or going outside to work.
 We have to accept reduction of social interactions, unexpected delivery dates or lack of goods.
 We have to deal with our beliefs, fears and wishes.
 
-Front of a broken economy where big fishs become bigger whereas weaker are weakens, what could we do?
+Front of a broken economy where big fishes become bigger whereas weaker are weakens, what could we do?
 Could we be able to act more locally?
 Could we be able to be more humanness?
 
-In fact, there is a place to boost local initiatives far from big fishs.
+In fact, there is a place to boost local initiatives far from big fishes.
 As well as there is a place to transform self-interest to common-interest.
 This place is close, very close to us.
 It is already available at home, at work, in our smartphones or other connected devices.
@@ -298,7 +298,7 @@ When both sides, together, trigger and confirm manually the relationship, then t
 It can be the case when the creation context involves mobile applications exchanging data locally in realtime, for instance scanning a QR-Code or establishing a Bluetooth connection.
 
 When only one side triggers manually the creation of a relationship and then wait for the confirmation from the other side, so then, once confirmed, the level of truthfulness is by default _moderate_ for both side.
-It can be the case when the creation context involves an "invitation" which can be accepted or ignored, for instance an URL sent by email or instant messaging.
+It can be the case when the creation context involves an "invitation" which can be accepted or ignored, for instance a URL sent by email or instant messaging.
 
 When only one side triggers automatically the creation as well as the confirmation of a relationship, then the level of truthfulness is by default _low_ for both sides.
 It can be the case when the creation context involves a public portal where people can create their "invitations" them-self, for instance a web form sending an "invitation" on submission.
@@ -379,9 +379,9 @@ image::characteristics_elastic_layered.svg[]
 `dorders` recognizes only three levels of privacy: _private_, _relational_ and _public_.
 A _relational_ or _public_ data cannot become _private_, because by essence shared with other actors.
 
-Due to the xref:characteristics_truthfulness[truthfulness characteristic], and especially its immutability about data, it's not possible to physically _delete_ or _update_ something in `dorders`.
-Only the so called _create_ and _read_ operations coming from the _CRUD operations_ are allowed.
-That means, data of the levels _relational_ and _public_ cannot be _deleted_ or _updated_.
+Due to the xref:characteristics_truthfulness[truthfulness characteristic], and especially its immutability about data, `dorders` can only `create` and `read` data physically (c.f. the CRUD functions).
+Therefore, append-only logs provide the illusion of mutations, i.e the `update` and `delete` functions.
+That means, already committed data of the levels _relational_ and _public_ cannot be _deleted_ or _updated_.
 
 ==== Private
 
@@ -423,7 +423,7 @@ The closer solutions to the `dorders` domain are :
 - Schema.org <<schema>> for the vocabulary
 - JSON for Linking Data (JSON-LD) <<jsonld>> for the encoding/decoding
 
-== High Level Design
+== Bounded Contexts
 
 The main purpose of the present design is to provide a model which promotes the emergence of various implementations.
 
@@ -434,8 +434,8 @@ It relies on the following approaches:
 - CQRS <<cqrs>>
 - EventStorming <<evstorm>>
 
-[#design_peer]
-=== Module peer
+[#boudned_context_peer]
+=== Peer
 
 ==== Start and stop the local peer
 
@@ -449,8 +449,8 @@ The present design focuses only on the _local peer_.
 .EventStorming Diagram of the peer module
 image::design_peer_eventstorming.png[]
 
-[#design_profile]
-=== Module profile
+[#boudned_context_profile]
+=== Profile
 
 ==== Create a profile
 
@@ -558,8 +558,8 @@ For each published `ProfileCreated` event, the process loads the related aggrega
 .EventStorming Diagram of the profile module - start or monitor the ongoing synchronizations
 image::design_profile_eventstorming_synchronize_profiles.png[]
 
-[#design_contact]
-=== Module contact
+[#boudned_context_contact]
+=== Contact
 
 ==== Add a contact
 
@@ -698,7 +698,8 @@ Its main purpose is to validate the `dorders` model.
 [appendix]
 == Object Oriented Design
 
-=== Peer
+[#ooo_peer]
+=== Module Peer
 
 The aggregate `LocalPeer` is an interface which extends the interface `Peer`.
 
@@ -707,7 +708,8 @@ The factory `LocalPeerFactory` is an interface which is responsible to create in
 .UML Class Diagram of the peer module
 image::ooo_design_peer.png[]
 
-=== Profile
+[#ooo_profile]
+=== Module Profile
 
 A part of a _profile_ is _public_, and the other one is _private_.
 In the present design, the _public_ side is a subset of the _private_ one.
@@ -719,12 +721,13 @@ The factory `PrivateProfileFactory` is an interface which is responsible to crea
 
 The repository `PrivateProfileRepository` is an interface which is responsible to persist and load instances of `PrivateProfile`.
 
-The service `ProfileSynchronizerService` is an interface which is responsible to start and/or monitor the peer-to-peer syncrhonizaton private profiles.
+The service `ProfileSynchronizerService` is an interface which is responsible to start and/or monitor the peer-to-peer synchronization private profiles.
 
 .UML Class Diagram of the profile module
 image::ooo_design_profile.png[]
 
-=== Contact
+[#ooo_contact]
+=== Module Contact
 
 The aggregate `Contact` is an interface which relies on the value object `PublicProfile` to expose the public profile of the related profile.
 
