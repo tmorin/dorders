@@ -684,6 +684,10 @@ image::design_contact_eventstorming_contacts_clearer.png[]
 The demonstration prototype implements the `dorders` model from an in memory and volatile point of view.
 
 Its main purpose is to validate the `dorders` model.
+The second purpose is to provide easily a network of `dorders` nodes for testing activities. 
+
+.Container diagram <<c4m>> for the demonstration prototype
+image::prototype_demo_container.png[]
 
 // === IPFS and OrbitDB
 // https://github.com/ipfs/ipfs
@@ -775,6 +779,7 @@ References
 
 - [[[a4d1]]] Technical leadership and the balance with agility ~ Simon Brown 2019 ~ https://leanpub.com/software-architecture-for-developers[]
 - [[[a4d2]]] Visualise, document and explore your software architecture ~ Simon Brown 2019 ~ https://leanpub.com/visualising-software-architecture[]
+- [[[c4m]]] The C4 model for visualising software architecture ~ Simon Brown ~ https://c4model.com[]
 - [[[cqrs]]] Command Query Responsibility Segregation ~ Martin Fowler ~ https://martinfowler.com/bliki/CQRS.html[]
 - [[[ddd]]] Domain-Driven Design: Tackling Complexity in the Heart of Software ~ Eric Evans 2003
 - [[[dddref]]] Domain-Driven Design Reference ~ Eric Evans 2015 ~ https://domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf[]
