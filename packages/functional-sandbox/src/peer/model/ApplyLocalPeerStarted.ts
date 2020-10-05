@@ -1,4 +1,4 @@
-import {LocalPeerStarted} from './LocalPeerStarted';
+import {LocalPeerStarted} from '../api/LocalPeerStarted';
 import {LocalPeer} from './LocalPeer';
 import {EventProcessor} from '../../fwk/model/EventProcessor';
 

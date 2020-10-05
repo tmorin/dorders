@@ -1,9 +1,7 @@
-export type PeerId = string;
+import {PeerId} from '../api/PeerId';
 
 export enum LocalPeerStatus {
-  starting = 'starting',
   started = 'started',
-  stopping = 'stopping',
   stopped = 'stopped'
 }
 

@@ -1,5 +1,5 @@
-import {StartLocalPeer} from './StartLocalPeer';
-import {LocalPeerStarted} from './LocalPeerStarted';
+import {StartLocalPeer} from '../api/StartLocalPeer';
+import {LocalPeerStarted} from '../api/LocalPeerStarted';
 import {LocalPeer, LocalPeerStatus} from './LocalPeer';
 import {Either, Maybe} from 'purify-ts';
 

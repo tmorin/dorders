@@ -1,11 +1,11 @@
 import {GetLocalPeer} from './GetLocalPeer';
 import {ApplyLocalPeerStarted} from './ApplyLocalPeerStarted';
-import {StartLocalPeer} from './StartLocalPeer';
+import {StartLocalPeer} from '../api/StartLocalPeer';
 import {defaultProcessStartLocalPeer, ProcessStartLocalPeer} from './ProcessStartLocalPeer';
 import {PersistLocalPeer} from './PersistLocalPeer';
 import {EitherAsync, Tuple} from 'purify-ts';
 import {CommandHandler} from '../../fwk/model/CommandHandler';
-import {StartLocalPeerResult} from './StartLocalPeerResult';
+import {StartLocalPeerResult} from '../api/StartLocalPeerResult';
 
 export interface StartLocalPeeHandler extends CommandHandler<StartLocalPeer, StartLocalPeerResult> {
 }
