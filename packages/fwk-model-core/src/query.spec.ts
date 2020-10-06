@@ -1,4 +1,5 @@
-import {handleQueries, Query, QueryHandler, Result} from './query';
+import {handleQueries, Query, QueryHandler} from './query';
+import {Result} from './result';
 
 class QueryA extends Query {
   constructor() {

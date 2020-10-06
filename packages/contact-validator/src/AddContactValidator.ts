@@ -15,17 +15,17 @@ export class AddContactValidator extends AbstractContactValidator {
     const [container0, container1] = await this.containers.startContainers(2);
 
     const pWaitForProfileCreatedA = waitForOnce(container0, ProfileCreated.EVENT_NAME);
-    const [profileACreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
+    const [, [profileACreated]] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
     const profileAId = profileACreated.body.profileId;
     await pWaitForProfileCreatedA;
 
     const pWaitForProfileCreatedB = waitForOnce(container1, ProfileCreated.EVENT_NAME);
-    const [profileBCreated] = await container1.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileB'}));
+    const [, [profileBCreated]] = await container1.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileB'}));
     const serializedReference = await getSerializedPublicReference(container1, profileBCreated.body.profileId);
     await pWaitForProfileCreatedB;
 
     const pWaitForContactBCreated = waitForOnce(container0, ContactCreated.EVENT_NAME);
-    const [contactBCreated] = await container0.messageBus.execute<ContactCreated>(new AddContact({
+    const [, [contactBCreated]] = await container0.messageBus.execute<ContactCreated>(new AddContact({
       profileId: profileAId,
       serializedReference
     }));

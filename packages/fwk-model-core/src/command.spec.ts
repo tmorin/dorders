@@ -1,5 +1,6 @@
 import {Command, CommandHandler, handleCommands} from './command';
 import {Event} from './event';
+import {EmptyResult} from './result';
 
 class CommandA extends Command {
   constructor() {
@@ -14,9 +15,9 @@ class EventA extends Event {
 }
 
 @handleCommands(CommandA.name)
-class CommandAHandler implements CommandHandler<CommandA> {
-  async handle(command: CommandA): Promise<Array<EventA>> {
-    return [new EventA()];
+class CommandAHandler implements CommandHandler<CommandA, EmptyResult> {
+  async handle(command: CommandA): Promise<[EmptyResult, Array<EventA>]> {
+    return [EmptyResult.create(), [new EventA()]];
   }
 }
 

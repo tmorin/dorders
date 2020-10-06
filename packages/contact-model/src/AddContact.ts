@@ -1,4 +1,4 @@
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 import {ProfileId, PublicProfileReferenceDeserializer, SerializedPublicProfileReference} from '@dorders/profile-model';
 import {ContactCreated} from './ContactCreated';
 import {ContactFactory} from './ContactFactory';
@@ -21,7 +21,7 @@ export class AddContact extends Command<AddContactBody> {
 }
 
 @handleCommands(AddContact.COMMAND_NAME)
-export class AddContactHandler implements CommandHandler<AddContact> {
+export class AddContactHandler implements CommandHandler<AddContact, EmptyResult> {
 
   constructor(
     private readonly contactFactory: ContactFactory,
@@ -30,7 +30,7 @@ export class AddContactHandler implements CommandHandler<AddContact> {
   ) {
   }
 
-  async handle(msg: AddContact): Promise<[ContactCreated]> {
+  async handle(msg: AddContact): Promise<[EmptyResult, [ContactCreated]]> {
     const {profileId, serializedReference} = msg.body;
 
     const publicProfileReference = await this.publicProfileReferenceDeserializer.deserialize(serializedReference);
@@ -46,7 +46,7 @@ export class AddContactHandler implements CommandHandler<AddContact> {
 
     await this.contactRepository.persist(contact);
 
-    return [contactCreated];
+    return [EmptyResult.create(), [contactCreated]];
   }
 
 }

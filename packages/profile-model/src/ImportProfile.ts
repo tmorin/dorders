@@ -3,7 +3,7 @@ import {PrivateProfileFactory} from './PrivateProfileFactory';
 import {ProfileCreated} from './ProfileCreated';
 import {SerializedPrivateProfileReference} from './PrivateProfile';
 import {PrivateProfileReferenceDeserializer} from './PrivateProfileReferenceDeserializer';
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 
 export type ImportProfileBody = {
   serializedReference: SerializedPrivateProfileReference
@@ -21,7 +21,7 @@ export class ImportProfile extends Command<ImportProfileBody> {
 }
 
 @handleCommands(ImportProfile.COMMAND_NAME)
-export class ImportProfileHandler implements CommandHandler<ImportProfile> {
+export class ImportProfileHandler implements CommandHandler<ImportProfile, EmptyResult> {
 
   constructor(
     private readonly privateProfileReferenceDeserializer: PrivateProfileReferenceDeserializer,
@@ -30,7 +30,7 @@ export class ImportProfileHandler implements CommandHandler<ImportProfile> {
   ) {
   }
 
-  async handle(message: ImportProfile): Promise<[ProfileCreated]> {
+  async handle(message: ImportProfile): Promise<[EmptyResult, [ProfileCreated]]> {
     const privateProfileReference = await this.privateProfileReferenceDeserializer.deserialize(message.body.serializedReference);
     const privateProfile = await this.privateProfileFactory.createFromReference(privateProfileReference);
 
@@ -41,7 +41,7 @@ export class ImportProfileHandler implements CommandHandler<ImportProfile> {
 
     await this.privateProfileRepository.add(privateProfile);
 
-    return [profileCreated];
+    return [EmptyResult.create(), [profileCreated]];
   }
 
 }

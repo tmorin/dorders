@@ -2,8 +2,9 @@ import {ProfileId} from '@dorders/profile-model';
 import {ContactRenamed} from './ContactRenamed';
 import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 import {ContactRepository} from './ContactRepository';
+import {AddContact} from './AddContact';
 
 export type RenameContactBody = {
   profileId: ProfileId
@@ -24,7 +25,7 @@ export class RenameContact extends Command<RenameContactBody> {
 }
 
 @handleCommands(RenameContact.COMMAND_NAME)
-export class RenameContactHandler implements CommandHandler<RenameContact> {
+export class RenameContactHandler implements CommandHandler<RenameContact, EmptyResult> {
 
   constructor(
     private readonly contactFactory: ContactFactory,
@@ -32,7 +33,7 @@ export class RenameContactHandler implements CommandHandler<RenameContact> {
   ) {
   }
 
-  async handle(msg: RenameContact): Promise<[ContactRenamed]> {
+  async handle(msg: RenameContact): Promise<[EmptyResult, [ContactRenamed]]> {
     const contact = await this.contactRepository.get(msg.body.profileId, msg.body.contactId);
 
     const contactRenamed = new ContactRenamed({
@@ -45,7 +46,7 @@ export class RenameContactHandler implements CommandHandler<RenameContact> {
 
     await this.contactRepository.persist(contact);
 
-    return [contactRenamed];
+    return [EmptyResult.create(), [contactRenamed]];
   }
 
 }

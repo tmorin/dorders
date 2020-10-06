@@ -47,7 +47,7 @@ export abstract class AbstractContactValidator extends AbstractContainedValidato
 
   protected async createProfile(container: Container, profileCard: ProfileCard) {
     const pWaitForProfileCreated = waitForOnce(container, ProfileCreated.EVENT_NAME);
-    const [profileACreated] = await container.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard}));
+    const [, [profileACreated]] = await container.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard}));
     const profileId = profileACreated.body.profileId;
     await pWaitForProfileCreated;
     return profileId;
@@ -65,12 +65,12 @@ export abstract class AbstractContactValidator extends AbstractContainedValidato
     for (let i = 0; i < num; i++) {
       // create profile
       const pWaitForProfileCreated = waitForOnce(tContainer, ProfileCreated.EVENT_NAME);
-      const [profileCreated] = await tContainer.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: `Profile${num}`}));
+      const [, [profileCreated]] = await tContainer.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: `Profile${num}`}));
       const serializedReference = await getSerializedPublicReference(tContainer, profileCreated.body.profileId);
       await pWaitForProfileCreated;
       // add created profile as profile
       const pWaitForContactCreated = waitForOnce(fContainer, ContactCreated.EVENT_NAME);
-      const [contactCreated] = await fContainer.messageBus.execute<ContactCreated>(new AddContact({
+      const [, [contactCreated]] = await fContainer.messageBus.execute<ContactCreated>(new AddContact({
         profileId,
         serializedReference
       }));
@@ -83,7 +83,7 @@ export abstract class AbstractContactValidator extends AbstractContainedValidato
   protected async addContact(containerA: Container, profileIdA: ProfileId, containerB: Container, profileIdB: ProfileId): Promise<ContactId> {
     const serializedReference = await getSerializedPublicReference(containerB, profileIdB);
     const pWaitForContactCreated = waitForOnce(containerA, ContactCreated.EVENT_NAME);
-    const [contactCreated] = await containerA.messageBus.execute<ContactCreated>(new AddContact({
+    const [, [contactCreated]] = await containerA.messageBus.execute<ContactCreated>(new AddContact({
       profileId: profileIdA,
       serializedReference
     }));

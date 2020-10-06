@@ -1,5 +1,5 @@
 import {LocalPeerStarted} from './LocalPeerStarted';
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 import {LocalPeerFactory} from './LocalPeerFactory';
 
 /**
@@ -14,20 +14,20 @@ export class StartLocalPeer extends Command {
 }
 
 @handleCommands(StartLocalPeer.COMMAND_NAME)
-export class StartLocalPeerHandler implements CommandHandler<StartLocalPeer> {
+export class StartLocalPeerHandler implements CommandHandler<StartLocalPeer, EmptyResult> {
 
   constructor(
     private readonly localPeerFactory: LocalPeerFactory
   ) {
   }
 
-  async handle(message: StartLocalPeer): Promise<[LocalPeerStarted]> {
+  async handle(message: StartLocalPeer): Promise<[EmptyResult, [LocalPeerStarted]]> {
     const localPeer = await this.localPeerFactory.create();
     const peerStarted = new LocalPeerStarted({
       peerId: localPeer.peerId
     });
     await localPeer.applyPeerStarted(peerStarted);
-    return [peerStarted];
+    return [EmptyResult.create(), [peerStarted]];
   }
 
 }

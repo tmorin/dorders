@@ -1,7 +1,7 @@
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileId} from './Profile';
 import {ProfileDeleted} from './ProfileDeleted';
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 
 export type DeleteProfileBody = {
   profileId: ProfileId
@@ -19,14 +19,14 @@ export class DeleteProfile extends Command<DeleteProfileBody> {
 }
 
 @handleCommands(DeleteProfile.COMMAND_NAME)
-export class DeleteProfileHandler implements CommandHandler<DeleteProfile> {
+export class DeleteProfileHandler implements CommandHandler<DeleteProfile, EmptyResult> {
 
   constructor(
     private readonly privateProfileRepository: PrivateProfileRepository
   ) {
   }
 
-  async handle(message: DeleteProfile): Promise<[ProfileDeleted]> {
+  async handle(message: DeleteProfile): Promise<[EmptyResult, [ProfileDeleted]]> {
     const privateProfile = await this.privateProfileRepository.get(message.body.profileId);
 
     const profileDeleted = new ProfileDeleted({
@@ -36,7 +36,7 @@ export class DeleteProfileHandler implements CommandHandler<DeleteProfile> {
 
     await this.privateProfileRepository.remove(privateProfile);
 
-    return [profileDeleted];
+    return [EmptyResult.create(), [profileDeleted]];
   }
 
 }

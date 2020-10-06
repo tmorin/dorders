@@ -21,7 +21,7 @@ export class ImportProfileValidator extends AbstractContainedValidator {
 
     const pWaitForEvents = waitForOnce(container1, ProfileCreated.EVENT_NAME, ProfileSynchronized.EVENT_NAME);
 
-    const [profileACreated0] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
+    const [, [profileACreated0]] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
     expect(profileACreated0).toBeTruthy();
     expect(profileACreated0.body.profileId).toBeTruthy();
 
@@ -30,7 +30,7 @@ export class ImportProfileValidator extends AbstractContainedValidator {
     const profileARef0 = await profileA0.getReference();
     const profileARef0AsString = await profileARef0.serialize();
 
-    const [profileACreated1] = await container1.messageBus.execute<ProfileCreated>(new ImportProfile({serializedReference: profileARef0AsString}));
+    const [, [profileACreated1]] = await container1.messageBus.execute<ProfileCreated>(new ImportProfile({serializedReference: profileARef0AsString}));
     expect(profileACreated1).toBeTruthy();
     expect(profileACreated1.body.profileId).toBeTruthy();
 

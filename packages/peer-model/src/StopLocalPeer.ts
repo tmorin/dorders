@@ -1,5 +1,5 @@
 import {LocalPeerStopped} from './LocalPeerStopped';
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 import {LocalPeerFactory} from './LocalPeerFactory';
 
 /**
@@ -14,20 +14,20 @@ export class StopLocalPeer extends Command {
 }
 
 @handleCommands(StopLocalPeer.COMMAND_NAME)
-export class StopLocalPeerHandler implements CommandHandler<StopLocalPeer> {
+export class StopLocalPeerHandler implements CommandHandler<StopLocalPeer, EmptyResult> {
 
   constructor(
     private readonly localPeerFactory: LocalPeerFactory
   ) {
   }
 
-  async handle(message: StopLocalPeer): Promise<[LocalPeerStopped]> {
+  async handle(message: StopLocalPeer): Promise<[EmptyResult, [LocalPeerStopped]]> {
     const localPeer = await this.localPeerFactory.create();
     const peerStopped = new LocalPeerStopped({
       peerId: localPeer.peerId
     });
     await localPeer.applyPeerStopped(peerStopped);
-    return [peerStopped];
+    return [EmptyResult.create(), [peerStopped]];
   }
 
 }

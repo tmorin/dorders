@@ -2,8 +2,9 @@ import {ProfileId} from '@dorders/profile-model';
 import {ContactDeleted} from './ContactDeleted';
 import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 import {ContactRepository} from './ContactRepository';
+import {AddContact} from './AddContact';
 
 export type RemoveContactBody = {
   profileId: ProfileId
@@ -23,7 +24,7 @@ export class RemoveContact extends Command<RemoveContactBody> {
 }
 
 @handleCommands(RemoveContact.COMMAND_NAME)
-export class RemoveContactHandler implements CommandHandler<RemoveContact> {
+export class RemoveContactHandler implements CommandHandler<RemoveContact, EmptyResult> {
 
   constructor(
     private readonly contactFactory: ContactFactory,
@@ -31,7 +32,7 @@ export class RemoveContactHandler implements CommandHandler<RemoveContact> {
   ) {
   }
 
-  async handle(msg: RemoveContact): Promise<[ContactDeleted]> {
+  async handle(msg: RemoveContact): Promise<[EmptyResult, [ContactDeleted]]> {
     const contact = await this.contactRepository.get(msg.body.profileId, msg.body.contactId);
 
     const contactDeleted = new ContactDeleted({
@@ -43,7 +44,7 @@ export class RemoveContactHandler implements CommandHandler<RemoveContact> {
 
     await this.contactRepository.delete(contact);
 
-    return [contactDeleted];
+    return [EmptyResult.create(), [contactDeleted]];
   }
 
 }

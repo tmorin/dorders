@@ -19,7 +19,7 @@ export class CreateProfileValidator extends AbstractContainedValidator {
 
     const pWaitForEvents = waitForOnce(container0, ProfileCreated.EVENT_NAME);
 
-    const [profileCreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
+    const [, [profileCreated]] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
     expect(profileCreated).toBeTruthy();
     expect(profileCreated.body.profileId).toBeTruthy();
 

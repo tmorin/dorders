@@ -11,4 +11,6 @@ export * from './message';
 export * from './module';
 export * from './query';
 export * from './registry';
+export * from './result';
 export * from './schema';
+export {Result} from './result';

@@ -1,4 +1,4 @@
-import {Command, CommandHandler, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {PrivateProfileFactory} from './PrivateProfileFactory';
 import {ProfileCreated} from './ProfileCreated';
@@ -21,7 +21,7 @@ export class CreateProfile extends Command<CreateProfileBody> {
 }
 
 @handleCommands(CreateProfile.COMMAND_NAME)
-export class CreateProfileHandler implements CommandHandler<CreateProfile> {
+export class CreateProfileHandler implements CommandHandler<CreateProfile, EmptyResult> {
 
   constructor(
     private readonly privateProfileFactory: PrivateProfileFactory,
@@ -29,7 +29,7 @@ export class CreateProfileHandler implements CommandHandler<CreateProfile> {
   ) {
   }
 
-  async handle(msg: CreateProfile): Promise<[ProfileCreated, ProfileCardUpdated]> {
+  async handle(msg: CreateProfile): Promise<[EmptyResult, [ProfileCreated, ProfileCardUpdated]]> {
     const privateProfile = await this.privateProfileFactory.createFromScratch();
 
     const profileCreated = new ProfileCreated({
@@ -45,7 +45,7 @@ export class CreateProfileHandler implements CommandHandler<CreateProfile> {
 
     await this.privateProfileRepository.add(privateProfile);
 
-    return [profileCreated, profileCardUpdated];
+    return [EmptyResult.create(), [profileCreated, profileCardUpdated]];
   }
 
 }

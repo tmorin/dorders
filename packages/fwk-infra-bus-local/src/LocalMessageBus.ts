@@ -35,15 +35,15 @@ export class LocalMessageBus implements MessageBus {
     return this;
   }
 
-  async execute<E extends Event = Event, C extends Command = Command>(command: C): Promise<Array<E>> {
+  async execute<E extends Event = Event, R extends Result = Result, C extends Command = Command>(command: C): Promise<[R, Array<E>]> {
     this.logger.debug('execute command (%s)', command.name, command);
     if (this.commandHandlers.has(command.name)) {
-      const events = await this.commandHandlers.get(command.name).handle(command);
+      const [result, events] = await this.commandHandlers.get(command.name).handle(command);
       for (const event of events) {
         await this.publish(event);
       }
       // @ts-ignore
-      return events;
+      return [result, events];
     }
     throw new Error(`unable to found a command handler for (${command.name.toString()})`,);
   }

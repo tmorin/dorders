@@ -1,4 +1,4 @@
-import {Command, CommandHandler, Container, Event} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, Container, EmptyResult, Event} from '@dorders/fwk-model-core';
 import {LocalMessageBus} from '.';
 import {ConsoleLoggerFactory} from '@dorders/fwk-infra-logger-console';
 
@@ -14,9 +14,9 @@ class EventA extends Event {
   }
 }
 
-class CommandAHandler extends CommandHandler<CommandA, EventA> {
-  async handle(command: Command): Promise<Array<Event>> {
-    return [new EventA()];
+class CommandAHandler extends CommandHandler<CommandA, EmptyResult, EventA> {
+  async handle(command: Command): Promise<[EmptyResult, Array<Event>]> {
+    return [EmptyResult.create(), [new EventA()]];
   }
 }
 
@@ -26,7 +26,8 @@ describe('LocalMessageBus/command', function () {
     const bus = new LocalMessageBus(new ConsoleLoggerFactory(new Container()));
     bus.registerCommandHandler(CommandA.name, new CommandAHandler());
     const waitForEventA = new Promise(resolve => bus.once('EventA', resolve));
-    const [eventA] = await bus.execute(new CommandA());
+    const [result, [eventA]] = await bus.execute(new CommandA());
+    expect(result).toBeTruthy();
     expect(eventA.name).toEqual('EventA');
     const eventABis = await waitForEventA;
     expect(eventABis).toEqual(eventA);

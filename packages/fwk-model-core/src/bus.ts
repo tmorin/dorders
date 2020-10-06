@@ -1,6 +1,7 @@
 import {Event, EventListenerCallback, EventName} from './event';
 import {Command, CommandHandler, CommandName} from './command';
-import {Query, QueryHandler, QueryName, Result} from './query';
+import {Query, QueryHandler, QueryName} from './query';
+import {Result} from './result';
 
 export const MessageBusSymbol = Symbol.for('fwk/MessageBus');
 
@@ -21,7 +22,7 @@ export interface MessageBus {
    * Execute a command.
    * @param command the command
    */
-  execute<E extends Event = Event, C extends Command = Command>(command: C): Promise<Array<E>>
+  execute<E extends Event = Event, R extends Result = Result, C extends Command = Command>(command: C): Promise<[R, Array<E>]>
 
   /**
    * Register a query handler.

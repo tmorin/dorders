@@ -1,4 +1,5 @@
 import {Message, MessageName, MessageType} from './message';
+import {Result} from './result';
 
 export abstract class Query<M = any> implements Message<M> {
 
@@ -7,18 +8,6 @@ export abstract class Query<M = any> implements Message<M> {
     readonly body: M,
     readonly name: MessageName,
     readonly type: MessageType = MessageType.query
-  ) {
-  }
-
-}
-
-export abstract class Result<M = any> implements Message<M> {
-
-  /* istanbul ignore next */
-  protected constructor(
-    readonly body: M,
-    readonly name: MessageName,
-    readonly type: MessageType = MessageType.result
   ) {
   }
 

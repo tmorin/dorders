@@ -21,15 +21,15 @@ export class DeleteProfileValidator extends AbstractContainedValidator {
 
     const pWaitForEvents = waitForOnce(container0, ProfileDeleted.EVENT_NAME);
 
-    const [profileACreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
+    const [, [profileACreated]] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileA'}));
     expect(profileACreated).toBeTruthy();
     expect(profileACreated.body.profileId).toBeTruthy();
 
-    const [profileBCreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileB'}));
+    const [, [profileBCreated]] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileB'}));
     expect(profileBCreated).toBeTruthy();
     expect(profileBCreated.body.profileId).toBeTruthy();
 
-    const [profileCCreated] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileC'}));
+    const [, [profileCCreated]] = await container0.messageBus.execute<ProfileCreated>(new CreateProfile({profileCard: 'ProfileC'}));
     expect(profileCCreated).toBeTruthy();
     expect(profileCCreated.body.profileId).toBeTruthy();
 
@@ -38,7 +38,7 @@ export class DeleteProfileValidator extends AbstractContainedValidator {
     const beforeProfiles = await privateProfileRepository0.list();
     expect(beforeProfiles.length).toEqual(3);
 
-    const [profileBDeleted] = await container0.messageBus.execute<ProfileDeleted>(new DeleteProfile({profileId: profileBCreated.body.profileId}));
+    const [, [profileBDeleted]] = await container0.messageBus.execute<ProfileDeleted>(new DeleteProfile({profileId: profileBCreated.body.profileId}));
     expect(profileBDeleted).toBeTruthy();
     expect(profileBDeleted.body.profileId).toEqual(profileBCreated.body.profileId);
 
