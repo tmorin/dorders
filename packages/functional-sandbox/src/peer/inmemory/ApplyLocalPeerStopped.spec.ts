@@ -1,5 +1,5 @@
 import {makeGetLocalPeer, makePersistLocalPeer} from './repository';
-import {LocalPeer, LocalPeerStatus} from '../model/LocalPeer';
+import {LocalPeerState, LocalPeerStatus} from '../model/LocalPeerState';
 import {makeApplyLocalPeerStopped} from './ApplyLocalPeerStopped';
 import {makeHandleStopLocalPeer} from '../model/StopLocalPeerHandler';
 import {StopLocalPeer} from '../api/StopLocalPeer';
@@ -7,7 +7,7 @@ import {StopLocalPeer} from '../api/StopLocalPeer';
 describe('ApplyLocalPeerStopped', function () {
 
   it('should succeed', async function () {
-    const rootLocalPeer: LocalPeer = {
+    const rootLocalPeer: LocalPeerState = {
       peerId: 'peerA',
       status: LocalPeerStatus.started
     }
@@ -27,7 +27,7 @@ describe('ApplyLocalPeerStopped', function () {
   })
 
   it('should failed when already stopped', async function () {
-    const rootLocalPeer: LocalPeer = {
+    const rootLocalPeer: LocalPeerState = {
       peerId: 'peerA',
       status: LocalPeerStatus.stopped
     }

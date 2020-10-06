@@ -1,13 +1,13 @@
 import {EitherAsync} from 'purify-ts';
-import {LocalPeer} from '../model/LocalPeer';
-import {GetLocalPeer} from '../model/GetLocalPeer';
-import {PersistLocalPeer} from '../model/PersistLocalPeer';
+import {LocalPeerState} from '../model/LocalPeerState';
+import {GetLocalPeerState} from '../model/GetLocalPeerState';
+import {PersistLocalPeerState} from '../model/PersistLocalPeerState';
 
-export function makeGetLocalPeer(rootLocalPeer: LocalPeer): GetLocalPeer {
+export function makeGetLocalPeer(rootLocalPeer: LocalPeerState): GetLocalPeerState {
   return () => EitherAsync(async () => Object.freeze({...rootLocalPeer}))
 }
 
-export function makePersistLocalPeer(rootLocalPeer: LocalPeer): PersistLocalPeer {
+export function makePersistLocalPeer(rootLocalPeer: LocalPeerState): PersistLocalPeerState {
   return (localPeer) => EitherAsync(async () => {
     Object.assign(rootLocalPeer, localPeer);
   });

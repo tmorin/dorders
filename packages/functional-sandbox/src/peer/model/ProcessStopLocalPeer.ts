@@ -1,12 +1,12 @@
 import {LocalPeerStopped} from '../api/LocalPeerStopped';
-import {LocalPeer, LocalPeerStatus} from './LocalPeer';
+import {LocalPeerState, LocalPeerStatus} from './LocalPeerState';
 import {StopLocalPeer} from '../api/StopLocalPeer';
 import {Either, Maybe} from 'purify-ts';
 
 export type StopLocalPeerEvents = [LocalPeerStopped];
 
 export interface ProcessStopLocalPeer {
-  (state: LocalPeer, command: StopLocalPeer): Either<Error, StopLocalPeerEvents>
+  (state: LocalPeerState, command: StopLocalPeer): Either<Error, StopLocalPeerEvents>
 }
 
 export function localPeerCanBeStoppedFrom(status: LocalPeerStatus): boolean {
@@ -18,10 +18,10 @@ export function localPeerCanBeStoppedFrom(status: LocalPeerStatus): boolean {
   }
 }
 
-export function defaultProcessStopLocalPeer(state: Readonly<LocalPeer>): Either<Error, StopLocalPeerEvents> {
+export function defaultProcessStopLocalPeer(state: Readonly<LocalPeerState>): Either<Error, StopLocalPeerEvents> {
   return Maybe.of(state)
     .map(state => state.status)
     .filter(localPeerCanBeStoppedFrom)
-    .map<StopLocalPeerEvents>(() => [new LocalPeerStopped()])
+    .map<StopLocalPeerEvents>(() => [new LocalPeerStopped(state.peerId)])
     .toEither(new Error('local peer already stopped'));
 }

@@ -1,4 +1,4 @@
-import {LocalPeer, LocalPeerStatus} from '../model/LocalPeer';
+import {LocalPeerState, LocalPeerStatus} from '../model/LocalPeerState';
 import {makeHandleStartLocalPeer} from '../model/StartLocalPeerHandler';
 import {StartLocalPeer} from '../api/StartLocalPeer';
 import {makeGetLocalPeer, makePersistLocalPeer} from './repository';
@@ -7,7 +7,7 @@ import {makeApplyLocalPeerStarted} from './ApplyLocalPeerStarted';
 describe('ApplyLocalPeerStarted', function () {
 
   it('should succeed', async function () {
-    const rootLocalPeer: LocalPeer = {
+    const rootLocalPeer: LocalPeerState = {
       peerId: 'peerA',
       status: LocalPeerStatus.stopped
     }
@@ -15,8 +15,8 @@ describe('ApplyLocalPeerStarted', function () {
     const persistLocalPeer = makePersistLocalPeer(rootLocalPeer);
     const applyLocalPeerStarted = makeApplyLocalPeerStarted();
     const handleStartLocalPeer = makeHandleStartLocalPeer({
-      getLocalPeer,
-      persistLocalPeer,
+      getLocalPeerState: getLocalPeer,
+      persistLocalPeerState: persistLocalPeer,
       applyLocalPeerStarted
     });
     const result = await handleStartLocalPeer(new StartLocalPeer()).run();
@@ -27,7 +27,7 @@ describe('ApplyLocalPeerStarted', function () {
   })
 
   it('should failed when already started', async function () {
-    const rootLocalPeer: LocalPeer = {
+    const rootLocalPeer: LocalPeerState = {
       peerId: 'peerA',
       status: LocalPeerStatus.started
     }
@@ -35,8 +35,8 @@ describe('ApplyLocalPeerStarted', function () {
     const applyLocalPeerStarted = makeApplyLocalPeerStarted();
     const persistLocalPeer = makePersistLocalPeer(rootLocalPeer);
     const handleStartLocalPeer = makeHandleStartLocalPeer({
-      getLocalPeer,
-      persistLocalPeer,
+      getLocalPeerState: getLocalPeer,
+      persistLocalPeerState: persistLocalPeer,
       applyLocalPeerStarted
     });
     const result = await handleStartLocalPeer(new StartLocalPeer()).run();

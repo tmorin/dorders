@@ -5,7 +5,7 @@ export enum LocalPeerStatus {
   stopped = 'stopped'
 }
 
-export interface LocalPeer {
+export interface LocalPeerState {
   peerId: PeerId
   status: LocalPeerStatus
 }

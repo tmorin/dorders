@@ -1,12 +1,12 @@
 import {StartLocalPeer} from '../api/StartLocalPeer';
 import {LocalPeerStarted} from '../api/LocalPeerStarted';
-import {LocalPeer, LocalPeerStatus} from './LocalPeer';
+import {LocalPeerState, LocalPeerStatus} from './LocalPeerState';
 import {Either, Maybe} from 'purify-ts';
 
 export type StartLocalPeerEvents = [LocalPeerStarted];
 
 export interface ProcessStartLocalPeer {
-  (state: LocalPeer, command: StartLocalPeer): Either<Error, StartLocalPeerEvents>
+  (state: LocalPeerState, command: StartLocalPeer): Either<Error, StartLocalPeerEvents>
 }
 
 export function localPeerCanBeStartedFrom(status: LocalPeerStatus): boolean {
@@ -18,10 +18,10 @@ export function localPeerCanBeStartedFrom(status: LocalPeerStatus): boolean {
   }
 }
 
-export function defaultProcessStartLocalPeer(state: Readonly<LocalPeer>): Either<Error, StartLocalPeerEvents> {
+export function defaultProcessStartLocalPeer(state: Readonly<LocalPeerState>): Either<Error, StartLocalPeerEvents> {
   return Maybe.of(state)
     .map(state => state.status)
     .filter(localPeerCanBeStartedFrom)
-    .map<StartLocalPeerEvents>(() => [new LocalPeerStarted()])
+    .map<StartLocalPeerEvents>(() => [new LocalPeerStarted(state.peerId)])
     .toEither(new Error('local peer already started'));
 }
