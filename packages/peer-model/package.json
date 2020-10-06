@@ -8,7 +8,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "clean": "rimraf lib tmp coverage junit.xml"
+    "clean": "rimraf lib tmp coverage"
   },
   "dependencies": {
     "@dorders/fwk-model-core": "0.0.0-alpha.0"

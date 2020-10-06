@@ -7,9 +7,3 @@
 !include common.puml
 !include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
 @enduml
-
-@startuml design_relationship_model
-!include common.puml
-skinparam monochrome true
-hide empty members
-@enduml

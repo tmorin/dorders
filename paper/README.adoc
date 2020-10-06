@@ -2,7 +2,7 @@
 :doctype: article
 :author: Thibault Morin
 :revnumber: 1.0.0-draft.0
-:revdate: 2020-10-03
+:revdate: 2020-10-06
 :revremark: draft version
 :title-page: {title}
 ifndef::backend-pdf[]
@@ -435,8 +435,6 @@ They also integrate the two following patterns: CQRS <<cqrs>> and Hexagonal Arch
 [#boudned_context_peer]
 === Peer
 
-==== Start and stop the local peer
-
 At any time a peer can be available or unavailable.
 A peer is available because it has been _started_.
 On the other hand, a peer is unavailable because it has been _stopped_ or simply never started.
@@ -444,8 +442,53 @@ On the other hand, a peer is unavailable because it has been _stopped_ or simply
 According the point of view, a peer can be _local_ or _remote_.
 The present design focuses only on the _local peer_.
 
-.EventStorming Diagram of the peer module
-image::design_peer_eventstorming.png[]
+==== Start the local peer
+
+The command `StartLocalPeer` starts a `LocalPeer`.
+Once the peer is started, the event `LocalPeerStarted` is generated.
+
+.EventStorming Diagram of Peer - start the local peer
+image::design_peer_eventstorming_start_local_peer.png[]
+
+[scenario-start_local_peer-1]
+....
+Scenario: start the local peer
+GIVEN a stopped local peer
+WHEN StartLocalPeer is executed
+THEN the event LocalPeerStarted is published
+....
+
+[scenario-start_local_peer-2]
+....
+Scenario: fail to start the local peer
+GIVEN a started local peer
+WHEN StartLocalPeer is executed
+THEN the execution fails
+....
+
+==== Stop the local peer
+
+The command `StopLocalPeer` stops a `LocalPeer`.
+Once the peer is started, the event `LocalPeerStopped` is generated.
+
+.EventStorming Diagram of Peer - start the local peer
+image::design_peer_eventstorming_stop_local_peer.png[]
+
+[scenario-stop_local_peer-1]
+....
+Scenario: stop the local peer
+GIVEN a stopped local peer
+WHEN StopLocalPeer is executed
+THEN the event LocalPeerStopped is published
+....
+
+[scenario-stop_local_peer-2]
+....
+Scenario: fail to stop the local peer
+GIVEN a stopped local peer
+WHEN StopLocalPeer is executed
+THEN the execution fails
+....
 
 [#boudned_context_profile]
 === Profile
@@ -459,12 +502,21 @@ I want to create a profile,
 So that, I could exist in dorder
 ....
 
-The command `CreateProfile` initiates the creation of a profile from scratch.
-Its logic creates and persists a new `PrivateProfile` aggregate.
-The publication of the event `ProfileCreated` indicates the completion of the command.
+The command `CreateProfile` creates a new `Profile` from scratch in a `LocalPeer`.
+The creation process leads to the generation of the following two events: `ProfileCreated` and `ProfileCardUpdated`.
+The command returns the `ProfileId` of the created `Profile`.
 
-.EventStorming Diagram of the profile module - create a profile
+.EventStorming Diagram of Profile - create a profile
 image::design_profile_eventstorming_create.png[]
+
+[scenario-create_profile_from_scratch]
+....
+Scenario: create a profile from scratch
+GIVEN the started peers PeerA
+WHEN CreateProfile is executed on PeerA
+THEN the event ProfileCreated is published
+AND  the event ProfileCardUpdated is published
+....
 
 ==== Import a profile
 
@@ -475,12 +527,24 @@ I want to import an existing profile hosted in another device,
 So that, I could use the same profile in the other device
 ....
 
-The command `ImportProfile` initiates the import of a profile hosted somewhere in `dorders`.
-Its logic creates and persists a new `PrivateProfile` aggregate.
-The publication of the events `ProfileCreated` indicates the completion of the command.
+The command `ImportProfile` imports a `Profile` from its `SerializedProfileReference` in a `LocalPeer`. 
+The import process leads to the generation of the following event: `ProfileCreated`.
+The command returns the `ProfileId` of the created `Profile`.
 
-.EventStorming Diagram of the profile module - import a profile
+The deserialization of the `SerializedProfileReference` is delegated to the service `ProfileReferenceDeserializer`.
+
+.EventStorming Diagram of Profile - import a profile
 image::design_profile_eventstorming_import.png[]
+
+[scenario-import_profile_from_reference]
+....
+Scenario: import a profile from its reference
+GIVEN the started peers PeerA and PeerB
+AND the profile ProfileA with the reference ProfileAReference
+AND the profile ProfileA hosted by the PeerA
+WHEN ImportProfile is executed with ProfileAReference on PeerB
+THEN the event ProfileCreated is published by PeerB
+....
 
 ==== Update the profile card
 
@@ -491,12 +555,20 @@ I want to update the card of one of my profile
 So that, I could adapt it 
 ....
 
-The command `UpdateProfileCard` initiates the update of the profile card of a hosted profile.
-Its logic updates a `PrivateProfile` aggregate.
-The publication of the event `ProfileCardUpdated` indicates the completion of the command.
+The command `UpdateProfileCard` updates the card of a `Profile` on a `LocalPeer`.
+The update process leads to the generation of the following event: `ProfileCardUpdated`.
 
-.EventStorming Diagram of the profile module - update the profile card
+.EventStorming Diagram of Profile - update the profile card
 image::design_profile_eventstorming_update_profile_card.png[]
+
+[scenario-update_profile_card]
+....
+Scenario: update the card of a profile
+GIVEN the started peers PeerA
+AND the profile ProfileA hosted by the PeerA
+WHEN UpdateProfileCard is executed
+THEN the event ProfileCardUpdated is published
+....
 
 ==== Delete a profile
 
@@ -507,12 +579,45 @@ I want to delete a profile on my current device
 So that, it won't be anymore available from the device
 ....
 
-The command `DeleteProfile` initiates the deletion of a hosted profile.
-Its logic physically deletes a `PrivateProfile` aggregate.
-The publication of the event `ProfileDeleted` indicates the completion of the command.
+The command `DeleteProfile` deletes a `Profile` on a `LocalPeer`.
+The update process leads to the generation of the following event: `ProfileDeleted`.
 
-.EventStorming Diagram of the profile module - delete a profile
+.EventStorming Diagram of Profile - delete a profile
 image::design_profile_eventstorming_delete.png[]
+
+[scenario-delete_profile]
+....
+Scenario: delete a profile
+GIVEN the started peers PeerA
+AND the profile ProfileA hosted by the PeerA
+WHEN DeleteProfile is executed
+THEN the event ProfileDeleted is published
+....
+
+==== Get the Serialized Profile Reference
+
+[story-GetSerializedProfileReference]
+....
+As user,
+I want to get the serialized value of a profile reference
+So that, I could use to import the profile in another peer
+....
+
+The query `GetSerializedProfileReference` returns the `SerializedProfileReference` a `Profile` located in a `LocalPeer`.
+
+The serialization of the `ProfileReference` is delegated to the service `ProfileReferenceSerializer`.
+
+.EventStorming Diagram of Profile - get a serialized profile reference
+image::design_profile_eventstorming_get_serialized_reference.png[]
+
+[scenario-GetSerializedProfileReference]
+....
+Scenario: get a serialized profile reference
+GIVEN the started peers PeerA
+AND the profile ProfileA hosted by the PeerA
+WHEN GetSerializedProfileReference is called 
+THEN the serialized profile reference is returned
+....
 
 ==== Load profiles
 
@@ -524,19 +629,29 @@ So that, I won't miss important information
 And my device will be able to provide the most accurate data
 ....
 
-Once the local peer is online (i.e. _started_), the hosted profiles have to be loaded.
-So that, their contents will be available fo other `dorders` peers.
+Once a `LocalPeer` is online (i.e. _started_), the hosted `Profile` have to be loaded.
+So that, their contents will be available for other `dorders` peers.
 
 The process starts on the event `LocalPeerStarted`.
-For each hosted profile, the process creates its aggregate and publishes the related event `ProfilesLoaded`.
-The publication of the event `ProfilesLoaded` indicates the completion of the process.
+For each hosted `Profile`, the process creates its aggregate and generates the related event `ProfileCreated`.
+Once all profiles are loaded, the process generates the event `ProfilesLoaded`.
 
-.EventStorming Diagram of the profile module - load profiles
+.EventStorming Diagram of Profile - load profiles
 image::design_profile_eventstorming_load_profiles.png[]
+
+[scenario-load_hosted_profiles]
+....
+Scenario: load hosted profiles on startup
+GIVEN the stopped peer PeerA
+AND the profiles ProfileA, ProfileB and ProfileC hosted on PeerA
+WHEN PeerA is started
+THEN an event ProfileCreated is published for each hosted profiles 
+THEN an event ProfilesLoaded is published 
+....
 
 ==== Synchronize profiles
 
-[story-synchronize_profiles]
+[story-ProfileSynchronizer]
 ....
 As user,
 I want to have an automatic synchronization of the content of hosted profiles among my devices 
@@ -544,17 +659,44 @@ So that, I won't miss important information
 And my devices will be able to provide the most accurate data at any time
 ....
 
-The data of a private profile can be updated at any time by any peers which hosts it.
+The data of a profile can be updated at any time by any peers which hosts it.
 The peer-to-peer technology used to implement the model should provide the mechanism to synchronize profile data among the peers.
-The mechanism can be foreground as well as background.
 
 The process `ProfileSynchronizer` is responsible to deal with the ongoing synchronizations.
-Its purpose is to start or monitor the ongoing synchronizations as well as the publication of events accordingly.
 
-For each published `ProfileCreated` event, the process loads the related aggregate and delegates to the `ProfileSynchronizerService` the management of the synchronization as well as the eventual publication of events `ProfileSynchronized`.
+===== Manage the ongoing synchronizations 
 
-.EventStorming Diagram of the profile module - start or monitor the ongoing synchronizations
-image::design_profile_eventstorming_synchronize_profiles.png[]
+For each published event `ProfileCreated`, the process get the related aggregate and delegates to `ProfileSynchronizerService` the management of the synchronization.
+Each time a profile is _synchronized_, an event `ProfileSynchronized` is generated.
+
+.EventStorming Diagram of Profile - manage the ongoing synchronizations
+image::design_profile_eventstorming_synchronize_profiles_manage.png[]
+
+[scenario-ProfileSynchronizer_start]
+....
+Scenario: synchronize profile's card
+GIVEN the started peers PeerA and PeerB
+AND the profiles ProfileA hosted on PeerA and PeerB
+WHEN ProfileA's card is updated on PeerA
+THEN an event ProfileSynchronized is published on PeerB
+....
+
+===== Stop the ongoing synchronizations 
+
+When the `LocalPeer` is stopped, the process notifies `ProfileSynchronizerService` to stop the management of the ongoing synchronizations.
+When all ongoing synchronizations are stopped, the event `ProfilesSynchronizationStopped` is generated.
+
+.EventStorming Diagram of Profile - stop the ongoing synchronizations
+image::design_profile_eventstorming_synchronize_profiles_stop.png[]
+
+[scenario-ProfileSynchronizer_stop]
+....
+Scenario: stop the ongoing synchronizations
+GIVEN the started peers PeerA
+AND the profiles ProfileA hosted on PeerA
+WHEN PeerA is stopped
+THEN an event ProfilesSynchronizationStopped is published
+....
 
 [#boudned_context_contact]
 === Contact
@@ -572,7 +714,7 @@ The command `AddContact` initiates the addition of a new contact.
 Its logic creates and persists a new `Contact` aggregate.
 The publication of the event `ContactCreated` indicates the completion of the command.
 
-.EventStorming Diagram of the contact module - add a contact
+.EventStorming Diagram of Contact - add a contact
 image::design_contact_eventstorming_add.png[]
 
 ==== Rename a contact
@@ -588,7 +730,7 @@ The command `RenameContact` initiates the update of a contact.
 Its logic changes the name of a `Contact` aggregate and persists it.
 The publication of the event `ContactRenamed` indicates the completion of the command.
 
-.EventStorming Diagram of the contact module - rename a contact
+.EventStorming Diagram of Contact - rename a contact
 image::design_contact_eventstorming_rename.png[]
 
 ==== Remove a contact
@@ -604,7 +746,7 @@ The command `RemoveContact` initiates the deletion of a contact.
 Its logic physically deletes a `Contact` aggregate.
 The publication of the event `ContactDeleted` indicates the completion of the command.
 
-.EventStorming Diagram of the contact module - remove a contact
+.EventStorming Diagram of Contact - remove a contact
 image::design_contact_eventstorming_remove.png[]
 
 ==== Load contacts
@@ -629,7 +771,7 @@ The process starts on the event `ProfileCreated`.
 For each contact related to the created profile, the process creates the `Contact` aggregate.
 The publication of the event `ContactsLoaded` indicates the completion of the process.
 
-.EventStorming Diagram of the contact module - load contacts
+.EventStorming Diagram of Contact - load contacts
 image::design_contact_eventstorming_contacts_loader.png[]
 
 ==== Synchronize the contact's data
@@ -646,7 +788,7 @@ The process starts on the event `ContactCreated`.
 Then the process delegates to the service `ContactSynchronizationService` the monitoring of the ongoing synchronization.
 The service publishes the event `ContactSynchronized` each time data are synchronized.
 
-.EventStorming Diagram of the contact module - synchronize the contact's data
+.EventStorming Diagram of Contact - synchronize the contact's data
 image::design_contact_eventstorming_contact_synchronizer.png[]
 
 ==== Synchronize the contact lists
@@ -663,7 +805,7 @@ The process starts on the event `ProfileSynchronized`.
 Then, the process delegates to the service `ContactSynchronizationService` the merging logic.
 The publication of the event `ContactsSynchronized` indicates the completion of the process.
 
-.EventStorming Diagram of the contact module - synchronize the contact lists
+.EventStorming Diagram of Contact - synchronize the contact lists
 image::design_contact_eventstorming_contacts_synchronizer.png[]
 
 ==== Clear contacts's data
@@ -674,7 +816,7 @@ The process starts on the event `ProfileDeleted`.
 For each contact related to the deleted profile, the process deletes the `Contact` aggregate and publishes the related event `ContactDeleted`.
 The publication of the event `ContactsDeleted` indicates the completion of the process.
 
-.EventStorming Diagram of the contact module - clear contacts's data
+.EventStorming Diagram of Contact - clear contacts's data
 image::design_contact_eventstorming_contacts_clearer.png[]
 
 == Prototypes
@@ -684,7 +826,7 @@ image::design_contact_eventstorming_contacts_clearer.png[]
 The demonstration prototype implements the `dorders` model from an in memory and volatile point of view.
 
 Its main purpose is to validate the `dorders` model.
-The second purpose is to provide easily a network of `dorders` nodes for testing activities. 
+The second purpose is to provide easily a network of `dorders` nodes for testing activities.
 
 .Container diagram <<c4m>> for the demonstration prototype
 image::prototype_demo_container.png[]

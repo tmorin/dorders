@@ -1,51 +1,19 @@
-@startuml design_profile_eventstorming_load_profiles
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
-package peer {
-  event('LocalPeerStarted')
-}
-package profile {
-  process('ProfilesLoader')
-  event('ProfileCreated')
-  event('ProfilesLoaded') 
-  aggregate('PrivateProfile')
-}
-LocalPeerStarted --> ProfilesLoader : triggers
-ProfilesLoader -r-> PrivateProfile : creates
-ProfileCreated -u-> PrivateProfile : applied on
-ProfilesLoader --> ProfileCreated : publishes
-ProfilesLoader --> ProfilesLoaded : publishes
-@enduml
-
-@startuml design_profile_eventstorming_synchronize_profiles
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
-package profile {
-  event('ProfileCreated')
-  event('ProfileSynchronized')
-  service('ProfileSynchronizerService')
-  aggregate('PrivateProfile')
-  process('ProfileSynchronizer')
-}
-
-ProfileCreated -d-> ProfileSynchronizer : triggers
-ProfileSynchronizer -r-> ProfileSynchronizerService : starts the ongoing synchronization
-ProfileSynchronizerService --> ProfileSynchronized : publishes
-ProfileSynchronizerService --> PrivateProfile : loads
-ProfileSynchronized -r-> PrivateProfile : applied on
-@enduml
-
 @startuml design_profile_eventstorming_create
 !include common.puml
 !include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
 package profile {
   command('CreateProfile')
-  event('ProfileCreated')
-  aggregate('PrivateProfile')
+  domain_event('ProfileCreated')
+  domain_event('ProfileCardUpdated')
+  aggregate('Profile')
+  result('ProfileId')
 }
-CreateProfile --> ProfileCreated : publishes
-CreateProfile -r-> PrivateProfile : creates
-ProfileCreated -u-> PrivateProfile : applied on
+CreateProfile --> ProfileCreated : generates
+CreateProfile --> ProfileCardUpdated : generates
+CreateProfile --> ProfileId : returns
+CreateProfile --> Profile : creates
+ProfileCreated -u-> Profile : applied on
+ProfileCardUpdated -u-> Profile : applied on
 @enduml
 
 @startuml design_profile_eventstorming_import
@@ -53,25 +21,16 @@ ProfileCreated -u-> PrivateProfile : applied on
 !include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
 package profile {
   command('ImportProfile')
-  event('ProfileCreated')
-  aggregate('PrivateProfile')
+  domain_event('ProfileCreated')
+  aggregate('Profile')
+  result('ProfileId')
+  service('ProfileReferenceDeserializer')
 }
-ImportProfile --> ProfileCreated : publishes
-ImportProfile -d-> PrivateProfile : creates
-ProfileCreated -r-> PrivateProfile : applied on
-@enduml
-
-@startuml design_profile_eventstorming_delete
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
-package profile {
-  command('DeleteProfile')
-  event('ProfileDeleted')
-  aggregate('PrivateProfile')
-}
-DeleteProfile --> ProfileDeleted : publishes
-DeleteProfile -r-> PrivateProfile : deletes
-ProfileDeleted -u-> PrivateProfile : applied on
+ImportProfile --> ProfileCreated : generates
+ImportProfile --> Profile : creates
+ImportProfile -r-> ProfileId : returns
+ImportProfile -l-> ProfileReferenceDeserializer : deserializes the reference
+ProfileCreated -r-> Profile : applied on
 @enduml
 
 @startuml design_profile_eventstorming_update_profile_card
@@ -79,10 +38,91 @@ ProfileDeleted -u-> PrivateProfile : applied on
 !include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
 package profile {
   command('UpdateProfileCard')
-  event('ProfileCardUpdated')
-  aggregate('PrivateProfile')
+  domain_event('ProfileCardUpdated')
+  aggregate('Profile')
 }
-UpdateProfileCard --> ProfileCardUpdated : publishes
-UpdateProfileCard -r-> PrivateProfile : loads
-ProfileCardUpdated -u-> PrivateProfile : applied on
+UpdateProfileCard --> ProfileCardUpdated : generates
+UpdateProfileCard --> Profile : get
+ProfileCardUpdated -r-> Profile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_delete
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  command('DeleteProfile')
+  domain_event('ProfileDeleted')
+  aggregate('Profile')
+}
+DeleteProfile --> ProfileDeleted : generates
+DeleteProfile --> Profile : deletes
+ProfileDeleted -r-> Profile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_get_serialized_reference
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  query('GetSerializedProfileReference')
+  aggregate('Profile')
+  service('ProfileReferenceSerializer')
+  result('SerializedProfileReference')
+}
+GetSerializedProfileReference --> Profile : get
+GetSerializedProfileReference --> ProfileReferenceSerializer : serializes the reference
+GetSerializedProfileReference -r-> SerializedProfileReference : returns
+@enduml
+
+@startuml design_profile_eventstorming_load_profiles
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package peer {
+  domain_event('LocalPeerStarted')
+}
+package profile {
+  process('ProfilesLoader')
+  domain_event('ProfileCreated')
+  integration_event('ProfilesLoaded') 
+  aggregate('Profile')
+}
+LocalPeerStarted --> ProfilesLoader : triggers
+ProfilesLoader -r-> Profile : creates
+ProfileCreated -u-> Profile : applied on
+ProfilesLoader --> ProfileCreated : generates
+ProfilesLoader --> ProfilesLoaded : generates
+@enduml
+
+@startuml design_profile_eventstorming_synchronize_profiles_manage
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package profile {
+  domain_event('ProfileCreated')
+  domain_event('ProfileSynchronized')
+  service('ProfileSynchronizerService')
+  aggregate('Profile')
+  process('ProfileSynchronizer')
+}
+
+ProfileCreated -d-> ProfileSynchronizer : triggers
+ProfileSynchronizer --> Profile : get
+ProfileSynchronizer -r-> ProfileSynchronizerService : manages the ongoing synchronization
+ProfileSynchronizer --> ProfileSynchronized : generates
+ProfileSynchronized -l-> Profile : applied on
+@enduml
+
+@startuml design_profile_eventstorming_synchronize_profiles_stop
+!include common.puml
+!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+package peer {
+  domain_event('LocalPeerStopped')
+}
+package profile {
+  process('ProfileSynchronizer')
+  service('ProfileSynchronizerService')
+  integration_event('ProfilesSynchronizationStopped')
+}
+
+LocalPeerStopped -d-> ProfileSynchronizer : triggers
+ProfileSynchronizer -r-> ProfileSynchronizerService : stops the ongoing synchronizations
+ProfileSynchronizer --> ProfilesSynchronizationStopped : generates
 @enduml
