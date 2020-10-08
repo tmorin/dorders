@@ -19,9 +19,11 @@ describe('ApplyLocalPeerStarted', function () {
       persistLocalPeerState: persistLocalPeer,
       applyLocalPeerStarted
     });
-    const result = await handleStartLocalPeer(new StartLocalPeer()).run();
-    expect(result.isRight()).toBeTruthy();
-    const events = result.toMaybe().map(tuple => tuple.snd()).extract();
+    const messages = await handleStartLocalPeer(new StartLocalPeer()).run();
+    expect(messages.isRight()).toBeTruthy();
+    const result = messages.toMaybe().map(tuple => tuple.fst()).extract();
+    expect(result.body.peerId).toBeTruthy();
+    const events = messages.toMaybe().map(tuple => tuple.snd()).extract();
     expect(events.length).toBe(1);
     expect(rootLocalPeer.status).toBe(LocalPeerStatus.started);
   })
@@ -39,9 +41,9 @@ describe('ApplyLocalPeerStarted', function () {
       persistLocalPeerState: persistLocalPeer,
       applyLocalPeerStarted
     });
-    const result = await handleStartLocalPeer(new StartLocalPeer()).run();
-    expect(result.isLeft()).toBeTruthy();
-    const error = result.swap().toMaybe().extract();
+    const messages = await handleStartLocalPeer(new StartLocalPeer()).run();
+    expect(messages.isLeft()).toBeTruthy();
+    const error = messages.swap().toMaybe().extract();
     expect(error.message).toBe('local peer already started');
   })
 

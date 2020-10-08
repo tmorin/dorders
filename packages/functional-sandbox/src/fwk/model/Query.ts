@@ -1,10 +1,10 @@
 import {Message, MessageName, MessageType} from './Message';
 
-export abstract class Query<M = any> implements Message<M> {
+export abstract class Query<B = any> implements Message<B> {
 
   /* istanbul ignore next */
   protected constructor(
-    readonly body: M,
+    readonly body: B,
     readonly name: MessageName,
     readonly type: MessageType = MessageType.query
   ) {

@@ -1,4 +1,5 @@
 import {Message, MessageName, MessageType} from './Message';
+import {Result} from './Result';
 
 export abstract class Command<B = any> implements Message<B> {
 
@@ -8,6 +9,10 @@ export abstract class Command<B = any> implements Message<B> {
     readonly name: MessageName,
     readonly type: MessageType = MessageType.command
   ) {
+  }
+
+  toResult<B = any>(body?: B): Result<B> {
+    return new Result<B>(body, this.name);
   }
 
 }

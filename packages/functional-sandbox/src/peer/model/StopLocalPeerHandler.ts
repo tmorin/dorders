@@ -1,10 +1,9 @@
 import {GetLocalPeerState} from './GetLocalPeerState';
-import {StopLocalPeer} from '../api/StopLocalPeer';
+import {StopLocalPeer, StopLocalPeerResult} from '../api/StopLocalPeer';
 import {defaultProcessStopLocalPeer, ProcessStopLocalPeer} from './ProcessStopLocalPeer';
 import {PersistLocalPeerState} from './PersistLocalPeerState';
 import {EitherAsync, Tuple} from 'purify-ts';
 import {CommandHandler} from '../../fwk/model/CommandHandler';
-import {StopLocalPeerResult} from '../api/StopLocalPeerResult';
 import {ApplyLocalPeerStopped} from './ApplyLocalPeerStopped';
 
 export interface StopLocalPeeHandler extends CommandHandler<StopLocalPeer, StopLocalPeerResult> {
@@ -25,7 +24,7 @@ export function makeHandleStopLocalPeer(options: MakeHandleStopLocalPeerOptions)
       const [localPeerStopped] = await liftEither(processStopLocalPeer(state, command));
       const newState = await fromPromise(applyLocalPeerStopped(state, localPeerStopped));
       await fromPromise(persistLocalPeer(newState));
-      return Tuple.fromArray([new StopLocalPeerResult(command.peerId), [localPeerStopped]]);
+      return Tuple.fromArray([command.toResult({peerId: command.peerId}), [localPeerStopped]]);
     } catch (e) {
       throwE(e);
     }

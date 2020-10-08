@@ -2,8 +2,7 @@ import {ApplyProfileCreated} from './ApplyProfileCreated';
 import {EitherAsync, Tuple} from 'purify-ts';
 import {CommandHandler} from '../../fwk/model/CommandHandler';
 import {PersistProfile} from './PersistProfile';
-import {CreateProfile} from '../api/CreateProfile';
-import {CreateProfileResult} from '../api/CreateProfileResult';
+import {CreateProfile, CreateProfileResult} from '../api/CreateProfile';
 import {defaultProcessCreateProfile, ProcessCreateProfile} from './ProcessCreateProfile';
 import {ApplyProfileCardUpdated} from './ApplyProfileCardUpdated';
 
@@ -25,7 +24,7 @@ export function makeHandleStartLocalPeer(options: MakeHandleStartLocalPeerOption
       let newState = await fromPromise(applyProfileCreated(undefined, profileCreated));
       newState = await fromPromise(applyProfileCardUpdated(newState, profileCardUpdated));
       await fromPromise(persistProfile(newState));
-      return Tuple.fromArray([new CreateProfileResult({
+      return Tuple.fromArray([command.toResult({
         profileId: newState.profileId
       }), [profileCreated, profileCardUpdated]]);
     } catch (e) {
