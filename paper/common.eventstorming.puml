@@ -1,0 +1,17 @@
+!global $INCLUSION_MODE="local"
+!global $LIB_BASE_LOCATION="../.gdiag/plantuml-libs/dist"
+!include $LIB_BASE_LOCATION/bootstrap.puml
+
+include('eventstorming/bootstrap')
+include('eventstorming/Element/Command')
+include('eventstorming/Element/Aggregate')
+include('eventstorming/Element/Service')
+include('eventstorming/Element/Process')
+include('eventstorming/Element/Event')
+include('eventstorming/Element/DomainEvent')
+include('eventstorming/Element/Result')
+include('eventstorming/Element/Query')
+include('eventstorming/Element/IntegrationEvent')
+
+scale 0.9
+show stereotype

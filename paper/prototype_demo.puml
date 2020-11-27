@@ -1,6 +1,5 @@
 @startuml prototype_demo_container
-!include common.puml
-!include ../.gdiag/plantuml-libs/c4model/c4-all.puml
+!include common.c4model.puml
 ExternalSystem("github_actions", "GitHub Actions", "The main CI/CD environment of the dorders platform.")
 SystemBoundary("dorders", "dorders") {
   Container("inmemory_network", "In Memory Network", "A network of dorders nodes hosted in the container memory.", "nodejs")

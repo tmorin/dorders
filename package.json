@@ -16,13 +16,13 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "clean": "lerna run clean --parallel && rimraf coverage",
-    "g:paper": "gdiag -w=paper",
+    "g:paper": "gdiag --wd=paper",
     "jest": "jest --runInBand --detectOpenHandles --coverage",
     "paper:build": "npm run g:paper && ./scripts/generate-paper.sh",
     "test": "lerna run test --stream --concurrency=1"
   },
   "devDependencies": {
-    "@tmorin/plantuml-libs": "^1.1.1",
+    "@tmorin/plantuml-libs": "^2.0.3",
     "@types/jest": "^26.0.14",
     "jest": "^26.5.0",
     "lerna": "^3.22.1",

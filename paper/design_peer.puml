@@ -1,10 +1,9 @@
 @startuml design_peer_eventstorming_start_local_peer
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package peer {
-  command('StartLocalPeer')
-  domain_event('LocalPeerStarted')
-  aggregate('LocalPeer')
+  Command('StartLocalPeer')
+  DomainEvent('LocalPeerStarted')
+  Aggregate('LocalPeer')
 }
 StartLocalPeer --> LocalPeerStarted : generates
 StartLocalPeer --> LocalPeer : get
@@ -12,12 +11,11 @@ LocalPeerStarted -r-> LocalPeer : applied on
 @enduml
 
 @startuml design_peer_eventstorming_stop_local_peer
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package peer {
-  command('StopLocalPeer')
-  domain_event('LocalPeerStopped')
-  aggregate('LocalPeer')
+  Command('StopLocalPeer')
+  DomainEvent('LocalPeerStopped')
+  Aggregate('LocalPeer')
 }
 StopLocalPeer --> LocalPeerStopped : generates
 StopLocalPeer --> LocalPeer : get

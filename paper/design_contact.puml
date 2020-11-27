@@ -1,10 +1,9 @@
 @startuml design_contact_eventstorming_add
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package contact {
-  command('AddContact')
-  aggregate('Contact')
-  event('ContactCreated')
+  Command('AddContact')
+  Aggregate('Contact')
+  Event('ContactCreated')
 }
 AddContact -r-> Contact : creates
 AddContact --> ContactCreated : publishes
@@ -12,12 +11,11 @@ ContactCreated -u-> Contact : applied on
 @enduml
 
 @startuml design_contact_eventstorming_rename
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package contact {
-  command('RenameContact')
-  aggregate('Contact')
-  event('ContactRenamed')
+  Command('RenameContact')
+  Aggregate('Contact')
+  Event('ContactRenamed')
 }
 RenameContact -r-> Contact : loads
 RenameContact --> ContactRenamed : publishes
@@ -25,12 +23,11 @@ ContactRenamed -u-> Contact : applied on
 @enduml
 
 @startuml design_contact_eventstorming_remove
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package contact {
-  command('RemoveContact')
-  aggregate('Contact')
-  event('ContactDeleted')
+  Command('RemoveContact')
+  Aggregate('Contact')
+  Event('ContactDeleted')
 }
 RemoveContact -r-> Contact : deletes
 RemoveContact --> ContactDeleted : publishes
@@ -38,16 +35,15 @@ ContactDeleted -u-> Contact : applied on
 @enduml
 
 @startuml design_contact_eventstorming_contacts_loader
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package profile {
-  event('ProfileCreated')
+  Event('ProfileCreated')
 }
 package contact {
-  process('ContactsLoader')
-  aggregate('Contact')
-  event('ContactCreated')
-  event('ContactsLoaded')
+  Process('ContactsLoader')
+  Aggregate('Contact')
+  Event('ContactCreated')
+  Event('ContactsLoaded')
 }
 ProfileCreated --> ContactsLoader : triggers
 ContactsLoader -r-> Contact : creates
@@ -57,14 +53,13 @@ ContactsLoader --> ContactsLoaded : publishes
 @enduml
 
 @startuml design_contact_eventstorming_contact_synchronizer
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package contact {
-  process('ContactSynchronizer')
-  service('ContactSynchronizationService')
-  event('ContactCreated')
-  event('ContactSynchronized')
-  aggregate('Contact')
+  Process('ContactSynchronizer')
+  Service('ContactSynchronizationService')
+  Event('ContactCreated')
+  Event('ContactSynchronized')
+  Aggregate('Contact')
 }
 ContactCreated --> ContactSynchronizer : triggers
 ContactSynchronizer -r-> ContactSynchronizationService : monitor the ongoing synchronization
@@ -74,20 +69,19 @@ ContactSynchronized -r-> Contact : applied on
 @enduml
 
 @startuml design_contact_eventstorming_contacts_synchronizer
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package profile {
-  event('ProfileSynchronized')
+  Event('ProfileSynchronized')
 }
 package contact {
-  process('ContactsSynchronizer')
-  service('ContactSynchronizationService')
-  event('ContactDeleted')
-  event('ContactCreated')
-  event('ContactsSynchronized')
-  aggregate('Contact')
+  Process('ContactsSynchronizer')
+  Service('ContactSynchronizationService')
+  Event('ContactDeleted')
+  Event('ContactCreated')
+  Event('ContactsSynchronized')
+  Aggregate('Contact')
 }
-ProfileSynchronized --> ContactsSynchronizer : triggers
+ProfileSynchronizeQueryd --> ContactsSynchronizer : triggers
 ContactsSynchronizer -r-> ContactSynchronizationService : check ongoing synchronizations
 ContactSynchronizationService --> ContactCreated : publishes
 ContactSynchronizationService --> ContactDeleted : publishes
@@ -99,16 +93,15 @@ ContactDeleted -l-> Contact : applied on
 @enduml
 
 @startuml design_contact_eventstorming_contacts_clearer
-!include common.puml
-!include ../.gdiag/plantuml-libs/eventstorming/eventstorming-all.puml
+!include common.eventstorming.puml
 package profile {
-  event('ProfileDeleted')
+  Event('ProfileDeleted')
 }
 package contact {
-  process('ContactsClearer')
-  aggregate('Contact')
-  event('ContactDeleted')
-  event('ContactsDeleted')
+  Process('ContactsClearer')
+  Aggregate('Contact')
+  Event('ContactDeleted')
+  Event('ContactsDeleted')
 }
 ProfileDeleted --> ContactsClearer : triggers
 ContactsClearer -r-> Contact : deletes

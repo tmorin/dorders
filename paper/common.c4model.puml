@@ -1,0 +1,10 @@
+!global $INCLUSION_MODE="local"
+!global $LIB_BASE_LOCATION="../.gdiag/plantuml-libs/dist"
+!include $LIB_BASE_LOCATION/bootstrap.puml
+
+include('c4model/bootstrap')
+include('c4model/Element/ExternalSystem')
+include('c4model/Element/Container')
+include('c4model/Boundary/SystemBoundary')
+
+scale 0.9
