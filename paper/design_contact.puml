@@ -81,7 +81,7 @@ package contact {
   Event('ContactsSynchronized')
   Aggregate('Contact')
 }
-ProfileSynchronizeQueryd --> ContactsSynchronizer : triggers
+ProfileSynchronized --> ContactsSynchronizer : triggers
 ContactsSynchronizer -r-> ContactSynchronizationService : check ongoing synchronizations
 ContactSynchronizationService --> ContactCreated : publishes
 ContactSynchronizationService --> ContactDeleted : publishes

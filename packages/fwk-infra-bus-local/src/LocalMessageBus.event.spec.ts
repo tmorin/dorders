@@ -29,7 +29,7 @@ describe('LocalMessageBus/event', function () {
       bus.on('EventA', () => {
         cnt += 1;
         if (cnt === 2) {
-          resolve();
+          resolve(null);
         }
       })
     });

@@ -14,7 +14,7 @@
   "dependencies": {
     "@dorders/fwk-model-core": "0.0.0-alpha.0",
     "@dorders/peer-model": "0.0.0-alpha.0",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@dorders/fwk-infra-logger-console": "0.0.0-alpha.0",

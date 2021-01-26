@@ -16,7 +16,7 @@
     "@dorders/contact-model": "0.0.0-alpha.0",
     "@dorders/peer-model": "0.0.0-alpha.0",
     "@dorders/profile-model": "0.0.0-alpha.0",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.2"
   },
   "peerDependencies": {
     "@dorders/peer-impl-demo": "*",
