@@ -26,8 +26,8 @@ export class DeleteProfileHandler implements CommandHandler<DeleteProfile, Empty
   ) {
   }
 
-  async handle(message: DeleteProfile): Promise<[EmptyResult, [ProfileDeleted]]> {
-    const privateProfile = await this.privateProfileRepository.get(message.body.profileId);
+  async handle(command: DeleteProfile): Promise<[EmptyResult, [ProfileDeleted]]> {
+    const privateProfile = await this.privateProfileRepository.get(command.body.profileId);
 
     const profileDeleted = new ProfileDeleted({
       profileId: privateProfile.profileId
@@ -36,7 +36,7 @@ export class DeleteProfileHandler implements CommandHandler<DeleteProfile, Empty
 
     await this.privateProfileRepository.remove(privateProfile);
 
-    return [EmptyResult.create(), [profileDeleted]];
+    return [EmptyResult.from(command), [profileDeleted]];
   }
 
 }

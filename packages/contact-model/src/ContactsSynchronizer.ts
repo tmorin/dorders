@@ -26,7 +26,7 @@ export class ContactsSynchronizer extends Component {
 
   async onProfileSynchronized(profileSynchronized: ProfileSynchronized) {
     this.logger.debug('on %o', profileSynchronized);
-    
+
     const profileId = profileSynchronized.body.profileId;
 
     // delegate to the infrastructure the merging logic of the ongoing synchronizations about contacts

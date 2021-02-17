@@ -30,8 +30,8 @@ export class ImportProfileHandler implements CommandHandler<ImportProfile, Empty
   ) {
   }
 
-  async handle(message: ImportProfile): Promise<[EmptyResult, [ProfileCreated]]> {
-    const privateProfileReference = await this.privateProfileReferenceDeserializer.deserialize(message.body.serializedReference);
+  async handle(command: ImportProfile): Promise<[EmptyResult, [ProfileCreated]]> {
+    const privateProfileReference = await this.privateProfileReferenceDeserializer.deserialize(command.body.serializedReference);
     const privateProfile = await this.privateProfileFactory.createFromReference(privateProfileReference);
 
     const profileCreated = new ProfileCreated({
@@ -41,7 +41,7 @@ export class ImportProfileHandler implements CommandHandler<ImportProfile, Empty
 
     await this.privateProfileRepository.add(privateProfile);
 
-    return [EmptyResult.create(), [profileCreated]];
+    return [EmptyResult.from(command), [profileCreated]];
   }
 
 }

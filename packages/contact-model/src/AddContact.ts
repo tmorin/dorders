@@ -30,8 +30,8 @@ export class AddContactHandler implements CommandHandler<AddContact, EmptyResult
   ) {
   }
 
-  async handle(msg: AddContact): Promise<[EmptyResult, [ContactCreated]]> {
-    const {profileId, serializedReference} = msg.body;
+  async handle(command: AddContact): Promise<[EmptyResult, [ContactCreated]]> {
+    const {profileId, serializedReference} = command.body;
 
     const publicProfileReference = await this.publicProfileReferenceDeserializer.deserialize(serializedReference);
 
@@ -46,7 +46,7 @@ export class AddContactHandler implements CommandHandler<AddContact, EmptyResult
 
     await this.contactRepository.persist(contact);
 
-    return [EmptyResult.create(), [contactCreated]];
+    return [EmptyResult.from(command), [contactCreated]];
   }
 
 }

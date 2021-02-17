@@ -18,6 +18,10 @@ export class ProfileMap implements Map<string, string> {
     this[Symbol.toStringTag] = this.map[Symbol.toStringTag]
   }
 
+  get size() {
+    return this.map.size;
+  }
+
   addObserver(listener: ProfileMapObserverListener) {
     this.observers.add({
       repositoryId: this.repositoryId,
@@ -31,18 +35,6 @@ export class ProfileMap implements Map<string, string> {
         this.observers.delete(observer);
       }
     }
-  }
-
-  private notifyObservers() {
-    for (const observers of this.observers) {
-      if (observers.repositoryId !== this.repositoryId) {
-        observers.listener(this.clone(this.repositoryId));
-      }
-    }
-  }
-
-  get size() {
-    return this.map.size;
   }
 
   clear(): void {
@@ -101,5 +93,13 @@ export class ProfileMap implements Map<string, string> {
   replaceBy(profileMap: ProfileMap): ProfileMap {
     this.map = profileMap.map;
     return this;
+  }
+
+  private notifyObservers() {
+    for (const observers of this.observers) {
+      if (observers.repositoryId !== this.repositoryId) {
+        observers.listener(this.clone(this.repositoryId));
+      }
+    }
   }
 }

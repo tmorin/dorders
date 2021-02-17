@@ -1,7 +1,7 @@
 import {DemoContainers} from './__helpers__/container';
 import {
   CreateProfileValidator,
-  DeleteProfileValidator, 
+  DeleteProfileValidator,
   GetProfileValidator,
   ImportProfileValidator,
   ListProfileValidator,

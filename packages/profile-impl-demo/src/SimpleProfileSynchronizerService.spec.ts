@@ -53,7 +53,7 @@ describe('SimpleProfileSynchronizerService', function () {
     const privateProfileRepository2 = container2.registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol);
     const privateProfile2A = await privateProfileFactory2.createFromReference(privateProfileReferenceA);
     await privateProfileRepository2.add(privateProfile2A);
-    
+
     const profileSynchronizerService2 = container2.registry.resolve<ProfileSynchronizerService>(ProfileSynchronizerServiceSymbol);
     await profileSynchronizerService2.startOngoingSynchronization(privateProfile2A.profileId);
 

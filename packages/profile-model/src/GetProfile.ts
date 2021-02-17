@@ -21,11 +21,7 @@ export class GetProfileQuery extends Query<GetProfileBody> {
 /**
  * The found profile.
  */
-export class GetProfileResult extends Result<PrivateProfile> {
-  constructor(body: PrivateProfile) {
-    super(body, GetProfileQuery.QUERY_NAME);
-  }
-}
+export type GetProfileResult = Result<PrivateProfile>
 
 @handleQueries(GetProfileQuery.QUERY_NAME)
 export class GetProfileHandler implements QueryHandler<GetProfileQuery, GetProfileResult> {
@@ -37,7 +33,7 @@ export class GetProfileHandler implements QueryHandler<GetProfileQuery, GetProfi
 
   async handle(query: GetProfileQuery): Promise<GetProfileResult> {
     const privateProfile = await this.privateProfileRepository.get(query.body.profileId);
-    return new GetProfileResult(privateProfile);
+    return Result.create<PrivateProfile>(query, privateProfile);
   }
 
 }

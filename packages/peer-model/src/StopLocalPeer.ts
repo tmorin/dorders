@@ -21,13 +21,13 @@ export class StopLocalPeerHandler implements CommandHandler<StopLocalPeer, Empty
   ) {
   }
 
-  async handle(message: StopLocalPeer): Promise<[EmptyResult, [LocalPeerStopped]]> {
+  async handle(command: StopLocalPeer): Promise<[EmptyResult, [LocalPeerStopped]]> {
     const localPeer = await this.localPeerFactory.create();
     const peerStopped = new LocalPeerStopped({
       peerId: localPeer.peerId
     });
     await localPeer.applyPeerStopped(peerStopped);
-    return [EmptyResult.create(), [peerStopped]];
+    return [EmptyResult.from(command), [peerStopped]];
   }
 
 }

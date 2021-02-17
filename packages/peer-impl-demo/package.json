@@ -12,14 +12,14 @@
     "test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
-    "@tmorin/ddd-fwk-model-core": "^0.1.0",
+    "@tmorin/ddd-fwk-model-core": "^0.2.0",
     "@dorders/peer-model": "0.1.0-alpha.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@tmorin/ddd-fwk-infra-logger-console": "^0.1.0",
-    "@tmorin/ddd-fwk-infra-test": "^0.1.0",
-    "@tmorin/ddd-fwk-model-test": "^0.1.0",
+    "@tmorin/ddd-fwk-infra-logger-console": "^0.2.0",
+    "@tmorin/ddd-fwk-infra-test": "^0.2.0",
+    "@tmorin/ddd-fwk-model-test": "^0.2.0",
     "@dorders/peer-validator": "0.1.0-alpha.0",
     "@types/uuid": "^8.0.0"
   }

@@ -23,11 +23,18 @@ export class SimplePrivateProfile implements PrivateProfile {
   ) {
   }
 
-  async getReference(): Promise<PrivateProfileReference> {
-    return new SimplePrivateProfileReference(this.profileId);
+  static from(privateProfile: PrivateProfile): SimplePrivateProfile {
+    if (privateProfile instanceof SimplePrivateProfile) {
+      return privateProfile;
+    }
+    throw new Error(`PrivateProfile (${privateProfile}) is not a SimplePrivateProfile`);
   }
 
   // EVENTS
+
+  async getReference(): Promise<PrivateProfileReference> {
+    return new SimplePrivateProfileReference(this.profileId);
+  }
 
   async applyProfileCardUpdated(profileCardUpdated: ProfileCardUpdated): Promise<void> {
     const cardAsString = typeof profileCardUpdated.body.profileCard === 'string'
@@ -44,20 +51,13 @@ export class SimplePrivateProfile implements PrivateProfile {
     await this.dispose();
   }
 
+  // UTILITIES
+
   async applyProfilesSynchronized(profilesSynchronized: ProfileSynchronized): Promise<void> {
   }
-
-  // UTILITIES
 
   async dispose() {
     this.publicMap.removeObservers();
     this.privateMap.removeObservers();
-  }
-
-  static from(privateProfile: PrivateProfile): SimplePrivateProfile {
-    if (privateProfile instanceof SimplePrivateProfile) {
-      return privateProfile;
-    }
-    throw new Error(`PrivateProfile (${privateProfile}) is not a SimplePrivateProfile`);
   }
 }

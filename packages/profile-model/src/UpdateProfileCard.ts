@@ -24,14 +24,14 @@ export class UpdateProfileCardHandler implements CommandHandler<UpdateProfileCar
   ) {
   }
 
-  async handle(message: UpdateProfileCard): Promise<[EmptyResult, [ProfileCardUpdated]]> {
-    const privateProfile = await this.privateProfileRepository.get(message.body.profileId);
+  async handle(command: UpdateProfileCard): Promise<[EmptyResult, [ProfileCardUpdated]]> {
+    const privateProfile = await this.privateProfileRepository.get(command.body.profileId);
     const profileCardUpdated = new ProfileCardUpdated({
       profileId: privateProfile.profileId,
-      profileCard: message.body.profileCard
+      profileCard: command.body.profileCard
     })
     await privateProfile.applyProfileCardUpdated(profileCardUpdated);
-    return [EmptyResult.create(), [profileCardUpdated]];
+    return [EmptyResult.from(command), [profileCardUpdated]];
   }
 
 }

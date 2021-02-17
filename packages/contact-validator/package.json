@@ -12,8 +12,8 @@
     "skip.test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
-    "@tmorin/ddd-fwk-model-core": "^0.1.0",
-    "@tmorin/ddd-fwk-model-test": "^0.1.0",
+    "@tmorin/ddd-fwk-model-core": "^0.2.0",
+    "@tmorin/ddd-fwk-model-test": "^0.2.0",
     "@dorders/profile-model": "0.1.0-alpha.0",
     "@dorders/contact-model": "0.1.0-alpha.0"
   },

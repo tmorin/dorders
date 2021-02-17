@@ -20,11 +20,7 @@ export type ListProfilesResultBody = {
 /**
  * The found profiles.
  */
-export class ListProfilesResult extends Result<ListProfilesResultBody> {
-  constructor(body: ListProfilesResultBody) {
-    super(body, ListProfilesQuery.QUERY_NAME);
-  }
-}
+export type ListProfilesResult = Result<ListProfilesResultBody>
 
 @handleQueries(ListProfilesQuery.QUERY_NAME)
 export class ListProfilesHandler implements QueryHandler<ListProfilesQuery, ListProfilesResult> {
@@ -36,7 +32,7 @@ export class ListProfilesHandler implements QueryHandler<ListProfilesQuery, List
 
   async handle(query: ListProfilesQuery): Promise<ListProfilesResult> {
     const profiles = await this.privateProfileRepository.list();
-    return new ListProfilesResult({profiles});
+    return Result.create<ListProfilesResultBody>(query, {profiles});
   }
 
 }

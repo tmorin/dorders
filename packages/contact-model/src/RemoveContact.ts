@@ -4,7 +4,6 @@ import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';
 import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 import {ContactRepository} from './ContactRepository';
-import {AddContact} from './AddContact';
 
 export type RemoveContactBody = {
   profileId: ProfileId
@@ -32,8 +31,8 @@ export class RemoveContactHandler implements CommandHandler<RemoveContact, Empty
   ) {
   }
 
-  async handle(msg: RemoveContact): Promise<[EmptyResult, [ContactDeleted]]> {
-    const contact = await this.contactRepository.get(msg.body.profileId, msg.body.contactId);
+  async handle(command: RemoveContact): Promise<[EmptyResult, [ContactDeleted]]> {
+    const contact = await this.contactRepository.get(command.body.profileId, command.body.contactId);
 
     const contactDeleted = new ContactDeleted({
       profileId: contact.profileId,
@@ -44,7 +43,7 @@ export class RemoveContactHandler implements CommandHandler<RemoveContact, Empty
 
     await this.contactRepository.delete(contact);
 
-    return [EmptyResult.create(), [contactDeleted]];
+    return [EmptyResult.from(command), [contactDeleted]];
   }
 
 }

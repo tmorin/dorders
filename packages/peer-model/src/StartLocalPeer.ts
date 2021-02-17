@@ -21,13 +21,13 @@ export class StartLocalPeerHandler implements CommandHandler<StartLocalPeer, Emp
   ) {
   }
 
-  async handle(message: StartLocalPeer): Promise<[EmptyResult, [LocalPeerStarted]]> {
+  async handle(command: StartLocalPeer): Promise<[EmptyResult, [LocalPeerStarted]]> {
     const localPeer = await this.localPeerFactory.create();
     const peerStarted = new LocalPeerStarted({
       peerId: localPeer.peerId
     });
     await localPeer.applyPeerStarted(peerStarted);
-    return [EmptyResult.create(), [peerStarted]];
+    return [EmptyResult.from(command), [peerStarted]];
   }
 
 }

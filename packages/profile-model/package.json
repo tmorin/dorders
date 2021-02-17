@@ -11,7 +11,7 @@
     "clean": "rimraf lib tmp coverage"
   },
   "dependencies": {
-    "@tmorin/ddd-fwk-model-core": "^0.1.0",
+    "@tmorin/ddd-fwk-model-core": "^0.2.0",
     "@dorders/peer-model": "0.1.0-alpha.0",
     "schema-dts": "^0.8.2"
   }

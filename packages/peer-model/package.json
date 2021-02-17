@@ -11,6 +11,6 @@
     "clean": "rimraf lib tmp coverage"
   },
   "dependencies": {
-    "@tmorin/ddd-fwk-model-core": "^0.1.0"
+    "@tmorin/ddd-fwk-model-core": "^0.2.0"
   }
 }

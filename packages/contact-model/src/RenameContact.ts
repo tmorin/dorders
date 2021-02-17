@@ -4,7 +4,6 @@ import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';
 import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 import {ContactRepository} from './ContactRepository';
-import {AddContact} from './AddContact';
 
 export type RenameContactBody = {
   profileId: ProfileId
@@ -33,20 +32,20 @@ export class RenameContactHandler implements CommandHandler<RenameContact, Empty
   ) {
   }
 
-  async handle(msg: RenameContact): Promise<[EmptyResult, [ContactRenamed]]> {
-    const contact = await this.contactRepository.get(msg.body.profileId, msg.body.contactId);
+  async handle(command: RenameContact): Promise<[EmptyResult, [ContactRenamed]]> {
+    const contact = await this.contactRepository.get(command.body.profileId, command.body.contactId);
 
     const contactRenamed = new ContactRenamed({
       profileId: contact.profileId,
       contactId: contact.contactId,
-      newName: msg.body.newName,
+      newName: command.body.newName,
       oldName: contact.name
     });
     await contact.applyContactRenamed(contactRenamed);
 
     await this.contactRepository.persist(contact);
 
-    return [EmptyResult.create(), [contactRenamed]];
+    return [EmptyResult.from(command), [contactRenamed]];
   }
 
 }

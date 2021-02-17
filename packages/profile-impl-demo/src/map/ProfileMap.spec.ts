@@ -92,41 +92,41 @@ describe('ProfileMap', function () {
 
   it('should handle observers', function () {
     const mapB0 = mapA0.clone('RepoB');
-    
+
     let repoAEvents = [];
     mapA0.addObserver((newProfileMap) => {
       repoAEvents.push(newProfileMap);
     });
-    
+
     let repoBEvents = [];
     mapB0.addObserver((event) => {
       repoBEvents.push(event)
     });
-    
+
     mapA0.clear();
     mapA0.done();
     expect(repoAEvents.length).toBe(0);
     expect(repoBEvents.length).toBe(1);
-    
+
     mapB0.set('val0', 'key0B0').done();
     expect(repoAEvents.length).toBe(1);
     expect(repoBEvents.length).toBe(1);
-    
+
     mapA0.set('val0', 'key0A0').set('val1', 'key1A0').done();
     expect(repoAEvents.length).toBe(1);
     expect(repoBEvents.length).toBe(2);
-    
+
     mapB0.delete('val0');
     mapB0.done();
     expect(repoAEvents.length).toBe(2);
     expect(repoBEvents.length).toBe(2);
-    
+
     mapB0.removeObservers();
     mapA0.removeObservers();
 
     mapA0.clear();
     mapB0.clear();
-    
+
     expect(repoAEvents.length).toBe(2);
     expect(repoBEvents.length).toBe(2);
   })

@@ -29,7 +29,7 @@ export class CreateProfileHandler implements CommandHandler<CreateProfile, Empty
   ) {
   }
 
-  async handle(msg: CreateProfile): Promise<[EmptyResult, [ProfileCreated, ProfileCardUpdated]]> {
+  async handle(command: CreateProfile): Promise<[EmptyResult, [ProfileCreated, ProfileCardUpdated]]> {
     const privateProfile = await this.privateProfileFactory.createFromScratch();
 
     const profileCreated = new ProfileCreated({
@@ -39,13 +39,13 @@ export class CreateProfileHandler implements CommandHandler<CreateProfile, Empty
 
     const profileCardUpdated = new ProfileCardUpdated({
       profileId: privateProfile.profileId,
-      profileCard: msg.body.profileCard
+      profileCard: command.body.profileCard
     });
     await privateProfile.applyProfileCardUpdated(profileCardUpdated);
 
     await this.privateProfileRepository.add(privateProfile);
 
-    return [EmptyResult.create(), [profileCreated, profileCardUpdated]];
+    return [EmptyResult.from(command), [profileCreated, profileCardUpdated]];
   }
 
 }

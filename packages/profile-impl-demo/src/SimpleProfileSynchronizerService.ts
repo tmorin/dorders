@@ -21,12 +21,6 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
     this.logger = loggerFactory.create(SimpleProfileSynchronizerService.name)
   }
 
-  private async notifyProfileSynchronized(simplePrivateProfile: SimplePrivateProfile) {
-    const profileSynchronized = new ProfileSynchronized({profileId: simplePrivateProfile.profileId})
-    await simplePrivateProfile.applyProfilesSynchronized(profileSynchronized)
-    await this.bus.publish(profileSynchronized);
-  }
-
   async startOngoingSynchronization(profileId: ProfileId): Promise<void> {
     const profile = await this.privateProfileRepository.get(profileId);
 
@@ -59,6 +53,12 @@ export class SimpleProfileSynchronizerService implements ProfileSynchronizerServ
     });
 
     await this.notifyProfileSynchronized(simplePrivateProfile);
+  }
+
+  private async notifyProfileSynchronized(simplePrivateProfile: SimplePrivateProfile) {
+    const profileSynchronized = new ProfileSynchronized({profileId: simplePrivateProfile.profileId})
+    await simplePrivateProfile.applyProfilesSynchronized(profileSynchronized)
+    await this.bus.publish(profileSynchronized);
   }
 
 }
