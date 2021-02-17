@@ -2,7 +2,7 @@ import {ProfileId} from '@dorders/profile-model';
 import {ContactDeleted} from './ContactDeleted';
 import {ContactId} from './Contact';
 import {ContactFactory} from './ContactFactory';
-import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 import {ContactRepository} from './ContactRepository';
 import {AddContact} from './AddContact';
 

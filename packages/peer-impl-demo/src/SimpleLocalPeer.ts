@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import {LocalPeer, LocalPeerStarted, LocalPeerStopped, PeerId} from '@dorders/peer-model';
-import {Logger, LoggerFactory} from '@dorders/fwk-model-core';
+import {Logger, LoggerFactory} from '@tmorin/ddd-fwk-model-core';
 
 export class SimpleLocalPeer implements LocalPeer {
 

@@ -1,5 +1,5 @@
 import {SimplePrivateProfile} from '@dorders/profile-impl-demo';
-import {Container} from '@dorders/fwk-model-core';
+import {Container} from '@tmorin/ddd-fwk-model-core';
 import {
   PrivateProfileFactory,
   PrivateProfileFactorySymbol,

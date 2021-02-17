@@ -1,4 +1,4 @@
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@tmorin/ddd-fwk-model-test';
 import {CreateProfile, GetProfileQuery, GetProfileResult, ProfileCreated} from '@dorders/profile-model';
 
 export class GetProfileValidator extends AbstractContainedValidator {

@@ -9,8 +9,8 @@ import {
   ProfileSynchronizerServiceSymbol
 } from '@dorders/profile-model';
 import {SimplePrivateProfile} from './private';
-import {Container} from '@dorders/fwk-model-core';
-import {waitForMany} from '@dorders/fwk-model-test';
+import {Container} from '@tmorin/ddd-fwk-model-core';
+import {waitForMany} from '@tmorin/ddd-fwk-model-test';
 
 describe('SimpleProfileSynchronizerService', function () {
 

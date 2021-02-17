@@ -1,7 +1,7 @@
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileId} from './Profile';
 import {ProfileDeleted} from './ProfileDeleted';
-import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 
 export type DeleteProfileBody = {
   profileId: ProfileId

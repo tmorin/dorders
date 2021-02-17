@@ -19,15 +19,18 @@
     "g:paper": "gdiag --wd=paper",
     "jest": "jest --runInBand --detectOpenHandles --coverage",
     "paper:build": "npm run g:paper && ./scripts/generate-paper.sh",
+    "pre:release": "lerna version prerelease --conventional-commits --no-changelog --no-git-tag-version --yes && git commit -a -m 'chore(release): bump preprelease version' && git push && lerna publish from-package --yes",
+    "release": "lerna version --conventional-commits --conventional-graduate --yes",
+    "reset": "lerna run clean --parallel && lerna exec rimraf node_modules && rimraf node_modules coverage",
     "test": "lerna run test --stream --concurrency=1"
   },
   "devDependencies": {
-    "@tmorin/plantuml-libs": "^2.6.0",
+    "@tmorin/plantuml-libs": "^2.8.0",
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3",
     "lerna": "^3.22.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^26.4.4",
-    "typescript": "^4.1.3"
+    "ts-jest": "^26.5.1",
+    "typescript": "^4.1.5"
   }
 }

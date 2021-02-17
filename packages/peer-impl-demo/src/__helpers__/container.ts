@@ -1,9 +1,9 @@
 import {ModelPeerModule} from '@dorders/peer-model';
-import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
-import {Container, Module} from '@dorders/fwk-model-core';
+import {ConsoleLogger, Level} from '@tmorin/ddd-fwk-infra-logger-console';
+import {Container, Module} from '@tmorin/ddd-fwk-model-core';
 import {InfraPeerModule} from '../';
-import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';
-import {StartOptions} from '@dorders/fwk-model-test';
+import {FwkInfraTestContainers} from '@tmorin/ddd-fwk-infra-test';
+import {StartOptions} from '@tmorin/ddd-fwk-model-test';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;
 

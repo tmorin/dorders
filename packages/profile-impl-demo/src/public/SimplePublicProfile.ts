@@ -1,6 +1,6 @@
 import {ProfileCard, ProfileId, PublicProfile, PublicProfileReference} from '@dorders/profile-model';
 import {SimplePublicProfileReference} from './SimplePublicProfileReference';
-import {valueAsString} from '@dorders/fwk-model-core';
+import {valueAsString} from '@dorders/fwk-model-schema';
 import {ProfileMap, ProfileMapKey} from '../map';
 
 export class SimplePublicProfile implements PublicProfile {

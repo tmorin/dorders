@@ -1,4 +1,4 @@
-import {Container} from '@dorders/fwk-model-core';
+import {Container} from '@tmorin/ddd-fwk-model-core';
 import {DemoContainers} from './__helpers__/containers';
 import {ContactFactory, ContactFactorySymbol} from '@dorders/contact-model';
 import {createPrivateProfile} from './__helpers__/utilities';

@@ -1,4 +1,4 @@
-import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileCard, ProfileId} from './Profile';
 import {ProfileCardUpdated} from './ProfileCardUpdated';

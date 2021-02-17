@@ -1,6 +1,6 @@
 import {ProfileDeleted} from '@dorders/profile-model';
 import {ContactsCleared} from './ContactsCleared';
-import {Component, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
+import {Component, LoggerFactory, MessageBus} from '@tmorin/ddd-fwk-model-core';
 import {ContactRepository} from './ContactRepository';
 import {ContactDeleted} from './ContactDeleted';
 

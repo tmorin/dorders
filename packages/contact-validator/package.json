@@ -1,6 +1,6 @@
 {
   "name": "@dorders/contact-validator",
-  "version": "0.0.0-alpha.0",
+  "version": "0.1.0-alpha.0",
   "publishConfig": {
     "access": "public"
   },
@@ -12,10 +12,10 @@
     "skip.test": "jest --runInBand --detectOpenHandles"
   },
   "dependencies": {
-    "@dorders/fwk-model-core": "0.0.0-alpha.0",
-    "@dorders/fwk-model-test": "0.0.0-alpha.0",
-    "@dorders/profile-model": "0.0.0-alpha.0",
-    "@dorders/contact-model": "0.0.0-alpha.0"
+    "@tmorin/ddd-fwk-model-core": "^0.1.0",
+    "@tmorin/ddd-fwk-model-test": "^0.1.0",
+    "@dorders/profile-model": "0.1.0-alpha.0",
+    "@dorders/contact-model": "0.1.0-alpha.0"
   },
   "peerDependencies": {
     "jest": "*"

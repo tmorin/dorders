@@ -1,6 +1,6 @@
 import {LocalPeer, LocalPeerFactory} from '@dorders/peer-model';
 import {SimpleLocalPeer} from './SimpleLocalPeer';
-import {LoggerFactory} from '@dorders/fwk-model-core';
+import {LoggerFactory} from '@tmorin/ddd-fwk-model-core';
 
 export class SimpleLocalPeerFactory implements LocalPeerFactory {
 

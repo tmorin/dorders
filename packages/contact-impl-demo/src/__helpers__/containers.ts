@@ -1,13 +1,13 @@
-import {ConsoleLogger, Level} from '@dorders/fwk-infra-logger-console';
-import {Container} from '@dorders/fwk-model-core';
+import {ConsoleLogger, Level} from '@tmorin/ddd-fwk-infra-logger-console';
+import {Container} from '@tmorin/ddd-fwk-model-core';
 import {ModelContactModule} from '@dorders/contact-model';
 import {InfraContactModule} from '../InfraContactModule';
 import {ModelProfileModule} from '@dorders/profile-model';
 import {InfraProfileModule} from '@dorders/profile-impl-demo';
 import {ModelPeerModule} from '@dorders/peer-model';
 import {InfraPeerModule} from '@dorders/peer-impl-demo';
-import {FwkInfraTestContainers} from '@dorders/fwk-infra-test';
-import {StartOptions} from '@dorders/fwk-model-test';
+import {FwkInfraTestContainers} from '@tmorin/ddd-fwk-infra-test';
+import {StartOptions} from '@tmorin/ddd-fwk-model-test';
 
 ConsoleLogger.DEFAULT_LEVEL = Level.warn;
 

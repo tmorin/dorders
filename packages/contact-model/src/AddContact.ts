@@ -1,4 +1,4 @@
-import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 import {ProfileId, PublicProfileReferenceDeserializer, SerializedPublicProfileReference} from '@dorders/profile-model';
 import {ContactCreated} from './ContactCreated';
 import {ContactFactory} from './ContactFactory';

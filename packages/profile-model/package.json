@@ -1,6 +1,6 @@
 {
   "name": "@dorders/profile-model",
-  "version": "0.0.0-alpha.0",
+  "version": "0.1.0-alpha.0",
   "publishConfig": {
     "access": "public"
   },
@@ -11,8 +11,8 @@
     "clean": "rimraf lib tmp coverage"
   },
   "dependencies": {
-    "@dorders/fwk-model-core": "0.0.0-alpha.0",
-    "@dorders/peer-model": "0.0.0-alpha.0",
+    "@tmorin/ddd-fwk-model-core": "^0.1.0",
+    "@dorders/peer-model": "0.1.0-alpha.0",
     "schema-dts": "^0.8.2"
   }
 }

@@ -1,4 +1,4 @@
-import {handleQueries, Query, QueryHandler, Result} from '@dorders/fwk-model-core';
+import {handleQueries, Query, QueryHandler, Result} from '@tmorin/ddd-fwk-model-core';
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileId} from './Profile';
 import {PrivateProfile} from './PrivateProfile';

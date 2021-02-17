@@ -1,4 +1,4 @@
-import {Container} from '@dorders/fwk-model-core';
+import {Container} from '@tmorin/ddd-fwk-model-core';
 import {
   CreateProfile,
   ImportProfile,
@@ -13,7 +13,7 @@ import {
   SerializedPublicProfileReference
 } from '@dorders/profile-model';
 import {AddContact, ContactCreated, ContactDeleted, ContactId, RemoveContact} from '@dorders/contact-model';
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@tmorin/ddd-fwk-model-test';
 
 export async function getPrivateReference(container: Container, profileId: ProfileId): Promise<PrivateProfileReference> {
   const repository = container.registry.resolve<PrivateProfileRepository>(PrivateProfileRepositorySymbol);

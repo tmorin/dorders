@@ -3,7 +3,7 @@ import {PrivateProfileFactory} from './PrivateProfileFactory';
 import {ProfileCreated} from './ProfileCreated';
 import {SerializedPrivateProfileReference} from './PrivateProfile';
 import {PrivateProfileReferenceDeserializer} from './PrivateProfileReferenceDeserializer';
-import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 
 export type ImportProfileBody = {
   serializedReference: SerializedPrivateProfileReference

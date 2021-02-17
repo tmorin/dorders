@@ -1,4 +1,4 @@
-import {Container} from '@dorders/fwk-model-core';
+import {Container} from '@tmorin/ddd-fwk-model-core';
 import {PrivateProfileReferenceDeserializer, PrivateProfileReferenceDeserializerSymbol} from '@dorders/profile-model';
 import {SimplePrivateProfileReference} from './SimplePrivateProfileReference';
 import {DemoContainers} from '../__helpers__/container';

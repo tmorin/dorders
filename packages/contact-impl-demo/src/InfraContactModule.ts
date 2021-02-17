@@ -4,7 +4,7 @@ import {
   LoggerFactorySymbol,
   MessageBus,
   MessageBusSymbol
-} from '@dorders/fwk-model-core';
+} from '@tmorin/ddd-fwk-model-core';
 import {
   ContactFactory,
   ContactFactorySymbol,

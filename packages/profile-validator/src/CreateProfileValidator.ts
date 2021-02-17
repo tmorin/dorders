@@ -1,4 +1,4 @@
-import {AbstractContainedValidator, Containers, waitForOnce} from '@dorders/fwk-model-test';
+import {AbstractContainedValidator, Containers, waitForOnce} from '@tmorin/ddd-fwk-model-test';
 import {
   CreateProfile,
   PrivateProfileRepository,

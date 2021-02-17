@@ -1,4 +1,4 @@
-import {Container} from '@dorders/fwk-model-core';
+import {Container} from '@tmorin/ddd-fwk-model-core';
 import {
   PrivateProfileFactory,
   PrivateProfileFactorySymbol,

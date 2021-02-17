@@ -1,6 +1,6 @@
 import {LocalPeerFactorySymbol} from '@dorders/peer-model';
 import {SimpleLocalPeerFactory} from './SimpleLocalPeerFactory';
-import {AbstractModule, LoggerFactory, LoggerFactorySymbol} from '@dorders/fwk-model-core';
+import {AbstractModule, LoggerFactory, LoggerFactorySymbol} from '@tmorin/ddd-fwk-model-core';
 
 export class InfraPeerModule extends AbstractModule {
 

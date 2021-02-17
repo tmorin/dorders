@@ -34,12 +34,8 @@ To get more details reading the [white paper](paper/README.adoc).
 
 ### Framework
 
-- [fwk-infra-bus-local](packages/fwk-infra-bus-local)
-- [fwk-infra-config-inmemory](packages/fwk-infra-config-inmemory)
-- [fwk-infra-logger-console](packages/fwk-infra-logger-console)
-- [fwk-infra-test](packages/fwk-infra-test)
-- [fwk-model-core](packages/fwk-model-core)
-- [fwk-model-test](packages/fwk-model-test)
+- [fwk-model-fs](packages/fwk-model-fs)
+- [fwk-model-schema](packages/fwk-model-schema)
 
 ## Build
 

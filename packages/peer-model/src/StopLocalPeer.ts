@@ -1,5 +1,5 @@
 import {LocalPeerStopped} from './LocalPeerStopped';
-import {Command, CommandHandler, EmptyResult, handleCommands} from '@dorders/fwk-model-core';
+import {Command, CommandHandler, EmptyResult, handleCommands} from '@tmorin/ddd-fwk-model-core';
 import {LocalPeerFactory} from './LocalPeerFactory';
 
 /**

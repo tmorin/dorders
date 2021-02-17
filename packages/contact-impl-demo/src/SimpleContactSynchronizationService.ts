@@ -7,7 +7,7 @@ import {
 } from '@dorders/contact-model';
 import {ProfileId} from '@dorders/profile-model';
 import {SimpleContact} from './SimpleContact';
-import {Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
+import {Logger, LoggerFactory, MessageBus} from '@tmorin/ddd-fwk-model-core';
 import {SimpleContactRepository} from './SimpleContactRepository';
 
 export class SimpleContactSynchronizationService implements ContactSynchronizationService {

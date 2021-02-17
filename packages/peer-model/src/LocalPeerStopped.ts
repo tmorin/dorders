@@ -1,4 +1,4 @@
-import {Event} from '@dorders/fwk-model-core';
+import {Event} from '@tmorin/ddd-fwk-model-core';
 import {PeerId} from './PeerId';
 
 export type PeerStoppedBody = {

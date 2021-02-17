@@ -1,7 +1,7 @@
 import {ProfileSynchronized} from '@dorders/profile-model';
 import {ContactsSynchronized} from './ContactsSynchronized';
 import {ContactSynchronizationService} from './ContactSynchronizationService';
-import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
+import {Component, Logger, LoggerFactory, MessageBus} from '@tmorin/ddd-fwk-model-core';
 
 /**
  * The process is responsible to synchronise the contacts list

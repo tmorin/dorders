@@ -1,4 +1,4 @@
-import {Event} from '@dorders/fwk-model-core';
+import {Event} from '@tmorin/ddd-fwk-model-core';
 import {ProfileId} from './Profile';
 
 export type ProfileCreatedBody = {

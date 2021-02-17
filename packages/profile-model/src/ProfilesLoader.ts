@@ -1,4 +1,4 @@
-import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
+import {Component, Logger, LoggerFactory, MessageBus} from '@tmorin/ddd-fwk-model-core';
 import {LocalPeerStarted} from '@dorders/peer-model';
 import {PrivateProfileRepository} from './PrivateProfileRepository';
 import {ProfileCreated} from './ProfileCreated';

@@ -7,7 +7,7 @@ import {
   MessageBus,
   MessageBusSymbol,
   QueryHandlerSymbol
-} from '@dorders/fwk-model-core';
+} from '@tmorin/ddd-fwk-model-core';
 import {CreateProfileHandler} from './CreateProfile';
 import {PrivateProfileFactory, PrivateProfileFactorySymbol} from './PrivateProfileFactory';
 import {PrivateProfileRepository, PrivateProfileRepositorySymbol} from './PrivateProfileRepository';

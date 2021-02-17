@@ -1,6 +1,6 @@
 import {ContactCreated} from './ContactCreated';
 import {ContactSynchronizationService} from './ContactSynchronizationService';
-import {Component, Logger, LoggerFactory, MessageBus} from '@dorders/fwk-model-core';
+import {Component, Logger, LoggerFactory, MessageBus} from '@tmorin/ddd-fwk-model-core';
 
 export class ContactSynchronizer extends Component {
 

@@ -1,4 +1,4 @@
-import {Containers, waitForMany, waitForOnce} from '@dorders/fwk-model-test';
+import {Containers, waitForMany, waitForOnce} from '@tmorin/ddd-fwk-model-test';
 import {AbstractContactValidator} from './AbstractContactValidator';
 import {
   ContactCreated,
