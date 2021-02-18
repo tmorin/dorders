@@ -218,18 +218,6 @@ image::concepts_contact.png[]
 * A contact belongs to only one profile.
 * A contact references another profile.
 
-[#concept_relationship]
-=== Relationship
-
-A relationship is a link between two profiles.
-It is an agreement to share mutual data.
-
-.The Concept Diagram of Relationship
-image::concepts_relationship.png[]
-
-* A relationship references two profiles.
-* A profile can be referenced by many relationships.
-
 [#concept_catalog]
 === Catalog
 
@@ -248,6 +236,18 @@ image::concepts_catalog.png[]
 * A catalog can create many products.
 * A product belongs to only one catalog.
 * A product can be marked by many labels.
+
+[#concept_relationship]
+=== Relationship
+
+A relationship is a link between two profiles.
+It is an agreement to share mutual data.
+
+.The Concept Diagram of Relationship
+image::concepts_relationship.png[]
+
+* A relationship references two profiles.
+* A profile can be referenced by many relationships.
 
 [#concept_order]
 === Order

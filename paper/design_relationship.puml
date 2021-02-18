@@ -1,7 +1,23 @@
 @startuml design_relationship_eventstorming_create
 !include common.eventstorming.puml
+package relationship {
+  Command('CreateRelationship')
+  Event('RelationshipCreated')
+  Aggregate('Relationship')
+}
+CreateRelationship -r-> Relationship : creates
+CreateRelationship --> RelationshipCreated : publishes
+RelationshipCreated -u-> Relationship: applies on
 @enduml
 
 @startuml design_relationship_eventstorming_delete
 !include common.eventstorming.puml
+package relationship {
+  Command('DeleteRelationship')
+  Event('RelationshipDeleted')
+  Aggregate('Relationship')
+}
+DeleteRelationship -r-> Relationship : deletes
+DeleteRelationship --> RelationshipDeleted : publishes
+RelationshipDeleted -u-> Relationship: applies on
 @enduml
