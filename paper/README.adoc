@@ -1,8 +1,8 @@
 = Dorders: A Decentralized Orders Management Platform
 :doctype: article
 :author: Thibault Morin
-:revnumber: 1.0.0-draft.0
-:revdate: 2020-10-06
+:revnumber: 1.0.0-draft.1
+:revdate: 2021-02-18
 :revremark: draft version
 :title-page: {title}
 ifndef::backend-pdf[]
@@ -19,8 +19,8 @@ The platform relies mostly on Internet embracing a decentralized system as well 
 == Introduction
 
 ////
-- The closure or unattractiveness of exchange places slows down the day to day economy.
-- The lack of fairness in Neoliberalism makes big fishes bigger whereas weaker are weakens.
+- The closure or unattractiveness of exchange places slows down the day-to-day economy.
+- The lack of fairness in Neoliberalism makes big fish bigger whereas weaker are weakens.
 --> act more locally, be more humanness
 - but WE are humans
 - so WE are part of the problems
@@ -44,11 +44,11 @@ Confined or crowded places should be avoided.
 Social distancing is encouraged.
 Hands have to be washed frequently to not contaminate goods or to not be contaminated by them.
 All those measures are welcome and required to preserve the health systems and to save lives too.
-However, all those changes have an impact on the day to day economy.
+However, all those changes have an impact on the day-to-day economy.
 They impact the local producers, the shops owners ... anyone which produces or sells locally goods and services.
 
 Basically, the usual places where to locally sell and buy goods are closed or unattractive.
-Nevertheless, those places are a key factor of the day to day economy.
+Nevertheless, those places are a key factor of the day-to-day economy.
 They are needed for sellers to show goods and buyers to be aware of them.
 They are the malls, the shops, the markets, the streets ...
 
@@ -60,7 +60,7 @@ Applying them, nations become inter-dependants about everything, even vital good
 Moreover, capabilities of nations to produce goods is being also affected by the offshoring practices which destroy locally the know-how and expertise.
 Finally, the model is mainly beneficial for big actors like multinationals and transnationals, especially when independents workers or small companies have to suspend their activities.
 
-The slow down of the day to day economy as well as the lack of fairness in Neoliberalism provide signals.
+The slow down of the day-to-day economy as well as the lack of fairness in Neoliberalism provide signals.
 Signals which could say: act more locally, be more humanness.
 
 We are humans and as humans, we are impacted by the pandemic.
@@ -68,11 +68,11 @@ We have to take care of us and others staying at home or going outside to work.
 We have to accept reduction of social interactions, unexpected delivery dates or lack of goods.
 We have to deal with our beliefs, fears and wishes.
 
-Front of a broken economy where big fishes become bigger whereas weaker are weakens, what could we do?
+Front of a broken economy where big fish become bigger whereas weaker are weakens, what could we do?
 Could we be able to act more locally?
 Could we be able to be more humanness?
 
-In fact, there is a place to boost local initiatives far from big fishes.
+In fact, there is a place to boost local initiatives far from big fish.
 As well as there is a place to transform self-interest to common-interest.
 This place is close, very close to us.
 It is already available at home, at work, in our smartphones or other connected devices.
@@ -150,7 +150,7 @@ This scenario regards exchanges with final customers beside a main activity.
 . Each Saturday afternoon, Alice publishes in `dorders` the catalog of the week and opens the order submissions.
 . Each Tuesday at noon, Alice closes the order submissions.
 . During the Tuesday afternoon, Alice reviews the orders and confirm them.
-. On Wednesday and Thursday, Alice processes the orders and notifies the counter parts (i.e. Bob).
+. On Wednesday and Thursday, Alice processes the orders and notifies the counterparts (i.e. Bob).
 . Therefore, Bob knows the status of the order, and he's can find missing articles somewhere else.
 . Finally, on Friday, coming back from his job, Bob can pick up his order at the point of sell.
 
@@ -380,13 +380,13 @@ image::characteristics_elastic_layered.svg[]
 A _relational_ or _public_ data cannot become _private_, because by essence shared with other actors.
 
 Due to the xref:characteristics_truthfulness[truthfulness characteristic], and especially its immutability about data, `dorders` can only `create` and `read` data physically (c.f. the CRUD functions).
-Therefore, append-only logs provide the illusion of mutations, i.e the `update` and `delete` functions.
+Therefore, append-only logs provide the illusion of mutations, i.e. the `update` and `delete` functions.
 That means, already committed data of the levels _relational_ and _public_ cannot be _deleted_ or _updated_.
 
 ==== Private
 
-Private data can only be get and mutated by their owner.
-For instance, the private part of a profile can only be get and mutates by its actor.
+Private data can only be got and mutated by their owner.
+For instance, the private part of a profile can only be got and mutated by its actor.
 
 A private data still remains at the _private_ scope as long as its actor makes it _relational_ or _public_.
 For instance, by default a created catalog is _private_ and hosted in the private profile.
@@ -394,7 +394,7 @@ Once published, the catalog becomes public and therefore hosted in the public pr
 
 ==== Relational
 
-Relational data can only be get and mutated by the participants of the underlying <<Relationship>>.
+Relational data can only be got and mutated by the participants of the underlying <<Relationship>>.
 For instance, a relationship hosts all data related to its orders.
 Only both sides of the relationship can get and mutate them.
 
@@ -439,7 +439,7 @@ At any time a peer can be available or unavailable.
 A peer is available because it has been _started_.
 On the other hand, a peer is unavailable because it has been _stopped_ or simply never started.
 
-According the point of view, a peer can be _local_ or _remote_.
+According to the point of view, a peer can be _local_ or _remote_.
 The present design focuses only on the _local peer_.
 
 ==== Start the local peer
@@ -576,7 +576,7 @@ THEN the event ProfileCardUpdated is published
 ....
 As user,
 I want to delete a profile on my current device
-So that, it won't be anymore available from the device
+So that, it won't be available anymore from the device
 ....
 
 The command `DeleteProfile` deletes a `Profile` on a `LocalPeer`.
@@ -808,9 +808,9 @@ The publication of the event `ContactsSynchronized` indicates the completion of 
 .EventStorming Diagram of Contact - synchronize the contact lists
 image::design_contact_eventstorming_contacts_synchronizer.png[]
 
-==== Clear contacts's data
+==== Clear contacts data
 
-Once a `PrivateProfile` aggregate is _deleted_, the related contacts's data have to be deleted as well.
+Once a `Private Profile` aggregate is deleted, the related contact data have to be deleted as well.
 
 The process starts on the event `ProfileDeleted`.
 For each contact related to the deleted profile, the process deletes the `Contact` aggregate and publishes the related event `ContactDeleted`.
